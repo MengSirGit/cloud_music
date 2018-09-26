@@ -1,0 +1,22 @@
+@charset "utf-8";
+.discover-nav{
+    display: flex;
+    justify-content: space-around;
+    padding: .5rem 1rem;
+    background-color: #313638;
+    box-sizing: border-box;
+}
+.discover-nav li{
+    position: relative;
+    color: #fff;
+    font-size: .5rem;
+}
+.discover-nav li.active:after{
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 100%;
+    height: 2px;
+    background-color: #fff;
+}
