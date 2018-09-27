@@ -20,3 +20,45 @@
     height: 2px;
     background-color: #fff;
 }
+.banner{
+    overflow: hidden;
+}
+.banner-box{
+    transition: margin .5s;
+}
+.banner-box .list{
+    float: left;
+}
+.banner-box .list img {
+    width: 100%;
+}
+
+/*快速导航*/
+.classify{
+    display: flex;
+    justify-content: space-around;
+    padding: 1rem 0;
+    border-bottom: 1px solid #f5f5f5;
+}
+.classify li{
+    text-align: center;
+}
+.classify li .arc-back{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    background-color: #313638;
+    border-radius: 50%;
+    margin: 0 auto;
+    overflow: hidden;
+}
+.classify li .arc-back i{
+    color: #fff;
+}
+.classify li .caption{
+    font-size: .5rem;
+    color: #232323;
+    margin-top: .5rem;
+}

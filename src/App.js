@@ -5,6 +5,7 @@ import './css/common.css'
 
 import Header from './components/Header'
 import Recommend from './views/discover/recommend'
+import PlayBar from './components/PlayBar'
 
 
 class App extends Component {
@@ -15,7 +16,12 @@ class App extends Component {
             <div>
                 <Header />
                 {/* 页面路由切换 */}
-                <Recommend />
+                <div className="main">
+                    {
+                        this.props.children
+                    }
+                </div>
+                <PlayBar />
             </div>
         )
     }
