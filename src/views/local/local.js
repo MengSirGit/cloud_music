@@ -1,7 +1,12 @@
 import React from 'react'
 
 const Local = () => (
-    <h1>local</h1>
+    <p style={{
+        color: '#8d8d8d',
+        fontSize: '.8rem',
+        textAlign: "center",
+        lineHeight: 2
+    }}>完善中...</p>
 )
 
 export default Local

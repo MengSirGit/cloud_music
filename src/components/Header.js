@@ -8,6 +8,9 @@ class Header extends Component {
     }
     handleClick(e){
         if(e.target.className.indexOf('active') <= -1){
+            Array.from(document.getElementById('header').getElementsByClassName('iconfont')).map(e => {
+                e.className = e.className.replace(' active', '')
+            })
             e.target.className += ' active'
         }
     }

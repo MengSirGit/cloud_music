@@ -125,4 +125,24 @@ textarea {
     padding: .5rem;
     box-sizing: border-box;
     background-color: #fff;
+    box-shadow: 0 0 5px rgba(0,0,0,.3);
+}
+.play-bar .music-title{
+    font-size: .5rem;
+}
+/* .play-bar .music-title p:nth-of-type(1){ } */
+.play-bar .music-title p:nth-of-type(2){
+    color: #8d8d8d;
+}
+.play-bar .music-btn{
+    position: absolute;
+    top: .7rem;
+    right: 0;
+    z-index: 10;
+}
+.play-bar .music-btn .play-ctrl,
+.play-bar .music-btn .collect
+{
+    display: inline-block;
+    margin: 0 .5rem;
 }

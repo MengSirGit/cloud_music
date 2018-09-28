@@ -62,3 +62,45 @@
     color: #232323;
     margin-top: .5rem;
 }
+
+/*推荐歌单*/
+.recommond-song{
+    box-sizing: border-box;
+    padding: 1rem .5rem;
+}
+.recommond-song h3{
+    color: #333;
+    font-weight: bold;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+.recommond-song .song-list{
+    display: flex;
+    flex-wrap: wrap-reverse;
+    justify-content: space-around;
+    width: 100%;
+}
+.song-list li{
+    width: 32%;
+    margin-bottom: .8rem;
+}
+.song-list li .thum{
+    width: 100%;
+    border-radius: 3px;
+    margin-bottom: .2rem;
+    overflow: hidden;
+}
+.song-list li .thum img{
+    width: 100%;
+}
+.song-list li .title{
+    font-size: .5rem;
+    color: #767676;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    /* autoprefixer: off */
+    -webkit-box-orient: vertical;
+    /* autoprefixer: on */
+    -webkit-line-clamp: 2;
+}

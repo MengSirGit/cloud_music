@@ -9,7 +9,8 @@ class Recommend extends Component {
     constructor(props){
         super(props)
         this.state = {
-            banners: []
+            banners: [],
+            recommondSong: []
         }
     }
     componentDidMount(){
@@ -21,14 +22,28 @@ class Recommend extends Component {
                 })
             }
         })
+        //获取推荐歌单
+        api.getRecommonSong().then(response => {
+            if(response.data.code === 200){
+                this.setState({
+                    recommondSong: response.data.result
+                })
+            }
+        })
     }
     render(){
         const {banners} = this.state
+        const {recommondSong} = this.state
         return (
             <React.Fragment>
+                {/* 导航 */}
                 <Nav />
+                {/* banner */}
                 <Banner banners={banners} />
+                {/* 快速导航 */}
                 <Classify />
+                {/* 推荐歌单 */}
+                <RecommonSongList recommondSong={recommondSong} />
             </React.Fragment>
         )
     }
@@ -80,7 +95,7 @@ class Banner extends Component{
         }
         return (
             <div className="banner">
-                <ul className="banner-box" 
+                <ul className="banner-box clearfix" 
                 style={{
                     width: imgWidth * banners.length + 'px',
                     marginLeft: -(imgWidth * this.state.sIndex) + 'px'
@@ -131,6 +146,34 @@ class Classify extends Component{
                     })
                 }
             </ul>
+        )
+    }
+}
+
+//推荐歌单
+class RecommonSongList extends Component {
+    render(){
+        const {recommondSong} = this.props
+        let songList = null
+        if(recommondSong.length > 0){
+            songList = recommondSong.map((data, i) => {
+                if(i < 6){
+                    return (
+                        <li key={i}>
+                            <p className="thum"><img src={data.picUrl} alt="" /></p>
+                            <p className="title">{data.name}</p>
+                        </li>
+                    )
+                }
+            })
+        }
+        return (
+            <div className="recommond-song">
+                <h3>推荐歌单</h3>
+                <ul className="song-list clearfix">
+                    {songList}
+                </ul>
+            </div>
         )
     }
 }
