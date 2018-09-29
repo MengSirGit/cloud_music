@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 
 import './css/common.css'
 
+import SideNav from './components/SideNav'
 import Header from './components/Header'
-import Recommend from './views/discover/recommend'
 import PlayBar from './components/PlayBar'
 
 
@@ -14,6 +14,7 @@ class App extends Component {
         window.scrollTo(0, 0)
         return (
             <div>
+                <SideNav />
                 <Header />
                 {/* 页面路由切换 */}
                 <div className="main">
@@ -27,7 +28,7 @@ class App extends Component {
     }
 }
 
-App.PropTypes = {
+App.propTypes = {
     children: PropTypes.element
 }
 

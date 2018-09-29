@@ -1,12 +1,7 @@
 import {createStore, applyMiddleware, combineReducers} from 'redux'
 import thunk from 'redux-thunk';
-import {currMusic} from './reducers'
+import * as reducers from './reducers'
 
-
-let reducers = combineReducers({
-    currMusic
-})
-
-let store = createStore(reducers, applyMiddleware(thunk))
+let store = createStore(combineReducers(reducers), applyMiddleware(thunk))
 
 export default store

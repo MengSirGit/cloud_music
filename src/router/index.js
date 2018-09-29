@@ -38,9 +38,9 @@ const router = (
     <Router>
         <App history={history}>
             <Switch>
-            {routes.map((route, i) => (
-                <ExtendRoute key={i} {...route} />
-            ))}
+                {routes.map((route, i) => (
+                    <ExtendRoute key={i} {...route} />
+                ))}
             </Switch>
         </App>
     </Router>

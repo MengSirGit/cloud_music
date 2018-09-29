@@ -94,7 +94,6 @@ textarea {
     font-size: 1.2rem;
 }
 
-
 #header{
     display: flex;
     justify-content: space-between;
@@ -116,6 +115,11 @@ textarea {
 .iconfont.active{
     color: #fff;
 }
+
+.main{
+    margin-bottom: 4rem;
+}
+
 /*底部播放栏*/
 .play-bar {
     position: fixed;
@@ -127,8 +131,20 @@ textarea {
     background-color: #fff;
     box-shadow: 0 0 5px rgba(0,0,0,.3);
 }
+.play-bar .music-img{
+    float: left;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 3px;
+    overflow: hidden;
+}
+.play-bar .music-img img{
+    width: 100%;
+}
 .play-bar .music-title{
+    margin-left: 3rem;
     font-size: .5rem;
+    line-height: 1.6;
 }
 /* .play-bar .music-title p:nth-of-type(1){ } */
 .play-bar .music-title p:nth-of-type(2){
@@ -136,7 +152,7 @@ textarea {
 }
 .play-bar .music-btn{
     position: absolute;
-    top: .7rem;
+    top: 1rem;
     right: 0;
     z-index: 10;
 }
@@ -145,4 +161,17 @@ textarea {
 {
     display: inline-block;
     margin: 0 .5rem;
+}
+/*侧导航*/
+.side-nav{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 18rem;
+    height: 100%;
+    background-color: #fff;
+    padding: 1rem;
+    box-shadow: 17px 0px 35px rgba(0,0,0,.3);
+    box-sizing: border-box;
+    z-index: 20;
 }

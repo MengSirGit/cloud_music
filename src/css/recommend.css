@@ -76,8 +76,8 @@
 }
 .recommond-song .song-list{
     display: flex;
-    flex-wrap: wrap-reverse;
-    justify-content: space-around;
+    flex-wrap: wrap;
+    justify-content: space-between;
     width: 100%;
 }
 .song-list li{
