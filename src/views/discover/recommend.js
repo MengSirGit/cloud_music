@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 
 import * as api from '../../api'
+import Header from '../../components/Header'
 import Nav from './nav'
 
 import '../../css/recommend.css'
@@ -215,6 +216,7 @@ class Recommend extends Component {
         const {banners, recommondSong, newSong, anchorRadio} = this.state
         return (
             <React.Fragment>
+                <Header />
                 {/* 导航 */}
                 <Nav />
                 {/* banner */}

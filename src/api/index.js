@@ -25,3 +25,23 @@ export const getAnchorRadio = () => axios.get(`personalized/djprogram`)
 
 //获取独家放送
 export const getExclusive = () => axios.get('personalized/privatecontent')
+
+//歌曲搜索
+export const getSearchCon = (keywords, offset=0, limit=30, type=1) => axios.get('search', {
+    params: {
+        keywords,
+        offset: offset * limit,
+        limit,
+        type
+    }
+})
+
+//搜索建议
+export const searchAdvise = (keywords, offset=0, limit=30, type=1) => axios.get('search/suggest', {
+    params: {
+        keywords,
+        offset: offset * limit,
+        limit,
+        type
+    }
+})

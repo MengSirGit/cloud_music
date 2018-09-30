@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 import './css/common.css'
 
 import SideNav from './components/SideNav'
-import Header from './components/Header'
 import PlayBar from './components/PlayBar'
 
 
@@ -15,7 +14,7 @@ class App extends Component {
         return (
             <div>
                 <SideNav />
-                <Header />
+                {/* <Header /> */}
                 {/* 页面路由切换 */}
                 <div className="main">
                     {

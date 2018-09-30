@@ -166,7 +166,7 @@ textarea {
 .side-nav{
     position: fixed;
     top: 0;
-    left: 0;
+    left: -20rem;
     width: 18rem;
     height: 100%;
     background-color: #fff;
@@ -174,4 +174,8 @@ textarea {
     box-shadow: 17px 0px 35px rgba(0,0,0,.3);
     box-sizing: border-box;
     z-index: 20;
+    transition: left .5s ease;
+}
+.side-nav.active{
+    left: 0;
 }
