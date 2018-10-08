@@ -23,7 +23,7 @@ class Search extends Component {
     }
     handleComposition(e){
         //中文输入结束，改变state
-        if(e.type == 'compositionend'){
+        if(e.type === 'compositionend'){
             isOnComposition = false
             if(!isOnComposition && isChrome){
                 this.changeEvent()

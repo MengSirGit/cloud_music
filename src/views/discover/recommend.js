@@ -13,14 +13,14 @@ import '../../css/recommend.css'
 class Banner extends Component{
     constructor(props){
         super(props)
+        this.timerID = null
         this.state = {
-            timerID: null,
             sIndex: 0
         }
         this.autoPlay = this.autoPlay.bind(this)
     }
     autoPlay(){
-        this.state.timerID = setInterval(() => {
+        this.timerID = setInterval(() => {
             if(this.state.sIndex >= 7){
                 this.setState({
                     sIndex: 0
@@ -34,7 +34,7 @@ class Banner extends Component{
         }, 5000)
     }
     componentWillUnmount(){
-        clearInterval(this.state.timerID)
+        clearInterval(this.timerID)
     }
     componentDidMount(){
         this.autoPlay()
@@ -121,7 +121,7 @@ const WrappedComponent = (WrappedWithComponent) => {
             if(songDatas.length > 0){
                 songList = songDatas.map((data, i) => {
                     if(i < 6){
-                        if(data.type == 4){
+                        if(data.type === 4){
                             return (
                                 <li key={i}>
                                     <p className="thum"><img src={data['song']['album']['picUrl']} alt="" /></p>

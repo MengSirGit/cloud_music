@@ -98,7 +98,7 @@ class SideNav extends Component {
     }
     render(){
         return (
-            <div id='side-nav' className="side-nav active">
+            <div id='side-nav' className="side-nav">
                 {/* 登录 */}
                 <Login />
                 {/* 推送 */}

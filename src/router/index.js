@@ -1,5 +1,5 @@
 import React from 'react'
-import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom'
+import {BrowserRouter as Router, Switch} from 'react-router-dom'
 import createBrowserHistory from 'history/createBrowserHistory'
 
 import ExtendRoute from '../components/ExtendRoute'
@@ -13,6 +13,8 @@ const Home = () => import('../views/home')
 const Video = () => import('../views/video')
 //搜索
 const Search = () => import('../views/search')
+//歌曲播放
+const PlayPage = () => import('../views/playPage')
 
 //路由
 const routes = [
@@ -36,7 +38,12 @@ const routes = [
     {
         path: '/search',
         component: Search
-    }
+    },
+    //歌曲播放页
+    {
+        path: '/playpage',
+        component: PlayPage
+    },
 ]
 
 //历史记录
