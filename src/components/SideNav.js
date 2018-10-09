@@ -19,7 +19,7 @@ class PushNew extends Component {
         return (
             <ul className="push-new">
                 <li><i className="iconfont news">&#xe6b3;</i><span>我的消息</span></li>
-                <li><i className="iconfont vip">&#xe603;</i><span>会员中心</span></li>
+                <li><i className="iconfont vip">&#xe604;</i><span>会员中心</span></li>
                 <li><i className="iconfont shop">&#xe60e;</i><span>商城</span></li>
                 <li><i className="iconfont beta">&#xe62c;</i><span>游戏推荐Beta</span></li>
                 <li><i className="iconfont up">&#xe689;</i><span>在线听歌免流量</span></li>

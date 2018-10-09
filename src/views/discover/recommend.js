@@ -79,7 +79,7 @@ const classify = [
     //歌单
     {
         name: '歌单',
-        icon: '\ue641'
+        icon: '\ue642'
     },
     //排行榜
     {

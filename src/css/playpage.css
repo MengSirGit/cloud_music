@@ -18,3 +18,159 @@
     filter: blur(30px);
     z-index: -1;
 }
+.page-box .page-up{
+    padding: .5rem;
+    border-bottom: 1px solid rgba(236, 236, 236, 0.5);
+    overflow: hidden;
+}
+.page-up i {
+    float: left;
+    color: #fff;
+    font-size: 1.1rem;
+    margin-right: 1rem;
+    line-height: 2;
+}
+.page-up .caption{
+    float: left;
+}
+.page-up .caption p:nth-of-type(1){
+    font-size: .9rem;
+    color: #fff;
+}
+.page-up .caption p:nth-of-type(2){
+    font-size: .6rem;
+    color: #adadad;
+}
+.page-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 65%;
+}
+.page-center .arc-back{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 18rem;
+    height: 18rem;
+    border-radius: 100%;
+    background: rgba(255,255,255,.3);
+}
+.page-center .arc-back.active{
+    animation: anirotate 30s linear infinite;
+}
+.page-center .film{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 17rem;
+    height: 17rem;
+    border-radius: 100%;
+    background-color: #272727;
+}
+.page-center .song-thum{
+    width: 12rem;
+    height: 12rem;
+    border-radius: 100%;
+    overflow: hidden;
+}
+.page-center .song-thum img{
+    width: 100%;
+}
+@keyframes anirotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}
+.page-down{
+    position: absolute;
+    bottom: 1.5rem;
+    left: 0;
+    width: 100%;
+    z-index: 20;
+}
+.song-handle{
+    width: 16rem;
+    margin: 0 auto;
+}
+.song-handle i {
+    font-size: 1.3rem;
+    color: #ececec;
+    margin: 0 1.4rem;
+}
+.song-contrl{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.song-contrl i {
+    font-size: 1.2rem;
+    color: #ececec;
+    margin: 0 1.4rem;
+}
+.song-contrl .play{
+    font-size: 3rem;
+    color: #ececec;
+}
+.song-contrl .list{
+    font-size: 1.6rem;
+}
+.song-contrl .prev{
+    transform: rotate(180deg);
+}
+.song-contrl .prev,
+.song-contrl .next{
+    font-size: 1.3rem;
+    color: #ececec;
+}
+.page-down i {
+    text-shadow: 0px 2px 3px rgba(0,0,0,.3);
+}
+.time-base{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1.5rem 0;
+}
+.time-base span{
+    font-size: .5rem;
+    color: #ececec;
+}
+#time-line{
+    position: relative;
+    width: 16rem;
+    height: 1px;
+    margin: 0 .8rem;
+}
+#time-back{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ececec;
+    z-index: 1;
+}
+#time-front{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background-color: #f30;
+    z-index: 2;
+}
+#time-arc{
+    position: absolute;
+    top: -.25rem;
+    left: 0;
+    width: .6rem;
+    height: .6rem;
+    border-radius: 100%;
+    background-color: #fff;
+    box-shadow: 0px 2px 2px rgba(0,0,0,.3);
+    z-index: 3;
+}

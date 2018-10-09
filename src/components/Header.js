@@ -38,7 +38,7 @@ class Header extends Component {
             <header id="header">
                 {/* 侧边导航 */}
                 <div className="left-nav">
-                    <i id="nav-btn" className="iconfont">&#xe610;</i>
+                    <i id="nav-btn" className="iconfont">&#xe611;</i>
                 </div>
                 {/*中部tab*/}
                 <ul className="tab-center">

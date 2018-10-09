@@ -57,7 +57,7 @@ class PlayBar extends Component {
     }
 
     componentWillMount(){
-        this.props.cutMusic(2425837049)
+        this.props.cutMusic(360062344)
     }
 
     //组件卸载发送当前歌曲信息
@@ -66,7 +66,7 @@ class PlayBar extends Component {
     }
 
     render(){
-        let id = 2425837049,
+        let id = 360062344,
             data = this.props.data
         if(data){
             return (
@@ -91,6 +91,7 @@ class PlayBar extends Component {
                 </div> 
             )
         }else{
+            //体验可升级
             return (
                 <p>加载中...</p>
             )
