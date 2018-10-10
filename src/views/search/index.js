@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import * as api from '../../api'
 import { withRouter } from 'react-router-dom'
 
+import Back from '../../components/Back'
 import '../../css/search.css'
 
 let isOnComposition = false
@@ -19,7 +20,6 @@ class Search extends Component {
         this.inputValue = null
         this.changeEvent = this.changeEvent.bind(this)
         this.handleComposition = this.handleComposition.bind(this)
-        this.handleBack = this.handleBack.bind(this)
     }
     handleComposition(e){
         //中文输入结束，改变state
@@ -31,9 +31,6 @@ class Search extends Component {
         }else{
             isOnComposition = true
         }
-    }
-    handleBack(){
-        this.props.history.goBack()
     }
     changeEvent(){
 
@@ -64,7 +61,9 @@ class Search extends Component {
         return (
             <React.Fragment>
                 <div className="search-input">
-                    <div className="search-back" onClick={this.handleBack}><i className="iconfont">&#xe62e;</i></div>
+                    <div className="search-back">
+                        <Back />
+                    </div>
                     <input type="text" name="k" ref='search' autoFocus placeholder="请输入歌名/歌手/歌单名"
                         onChange={this.changeEvent}
                         onCompositionStart={this.handleComposition}

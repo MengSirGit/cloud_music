@@ -1,11 +1,12 @@
-import React, { Component } from 'react'
-import {withRouter} from 'react-router-dom'
+import React, { PureComponent } from 'react'
 import {connect} from 'react-redux'
 
 import * as api from '../../api'
+import TabHead from './head'
+import Film from './film'
 import '../../css/playpage.css'
 
-class PlayPage extends Component {
+class PlayPage extends PureComponent {
     constructor(props){
         super(props)
         this.state = {
@@ -22,10 +23,24 @@ class PlayPage extends Component {
             //当前时间分
             Mclock: '00',
             //当前时间秒
-            Sclock: '00'
+            Sclock: '00',
+            //当前播放状态
+            playStatus: false,
+            auto: true
         }
         this.timerID = null
-        this.handleBack = this.handleBack.bind(this)
+        //音频总时长
+        this.sumTime = 0
+        this.min = 0
+        this.sec = 0
+        this.duration = 0
+        this.DISTANCE = 0
+        this.arcBack = null
+        this.audio = null
+
+        this.handlePlayStatus = this.handlePlayStatus.bind(this)
+        this.songClock = this.songClock.bind(this)
+        this.animationTimeBase = this.animationTimeBase.bind(this)
     }
     componentWillMount(){
         let id = this.props.data
@@ -46,66 +61,88 @@ class PlayPage extends Component {
             }
         })
     }
-    handleBack(){
-        this.props.history.goBack()
+    //时间轴动画
+    animationTimeBase = () => {
+        if(this.state.init < 100)
+            this.setState({
+                init: this.state.init + this.DISTANCE
+            })
+    }
+    //歌曲时间进度
+    songClock = () => {
+        if(this.state.second < 60){
+            this.setState({
+                second: this.state.second + 1
+            })
+        }else{
+            this.setState({
+                minute: this.state.minute + 1,
+                second: 0
+            })
+        }
+        this.state.minute >= 10 ? this.setState({Mclock: this.state.minute.toString()}) : this.setState({Mclock: `0${this.state.minute}`})
+        this.state.second >= 10 ? this.setState({Sclock: this.state.second.toString()}) : this.setState({Sclock: `0${this.state.second}`})
+    }
+    //切换播放状态
+    handlePlayStatus(){
+        this.state.playStatus ? this.setState({playStatus: false}) : this.setState({playStatus: true})
+        if(this.state.playStatus){
+            this.audio.pause()
+            clearInterval(this.timerID)
+            this.timerID = null
+        }else{
+            this.audio.play()
+            this.timerID = setInterval(()=>{
+                if((this.state.minute * 60 + this.state.second) < this.duration){
+                    this.songClock()
+                    this.animationTimeBase()
+                }else{
+                    clearInterval(this.timerID)
+                    this.setState({playStatus: false})
+                }
+            }, 1000)
+        }
     }
     componentDidMount(){
         //歌曲时长
-        let audio = document.querySelector('#audio'),
-            timeEnd = document.querySelector('#time-end'),
-            sumTime, min, sec
+        this.audio = document.querySelector('#audio')
+        let timeEnd = document.querySelector('#time-end')
 
-        audio.addEventListener('canplay', () => {
-            sumTime = parseInt(audio.duration) / 60
-            min = Math.floor(sumTime)
-            sec = Math.floor((sumTime.toFixed(2) * 1 - min) * 60)
+        this.audio.addEventListener('canplay', () => {
+            this.sumTime = parseInt(this.audio.duration) / 60
+            this.min = Math.floor(this.sumTime)
+            this.sec = Math.floor((this.sumTime.toFixed(2) * 1 - this.min) * 60)
             //歌曲总时长
-            timeEnd.innerText = (min >= 10 ? min.toString() : `0${min}` )+ ':' + (sec >= 10 ? sec.toString() : `0${sec}`)
+            timeEnd.innerText = (this.min >= 10 ? this.min.toString() : `0${this.min}` )+ ':' + (this.sec >= 10 ? this.sec.toString() : `0${this.sec}`)
         })
 
         //播放状态
-        audio.addEventListener('playing', () => {
-            let duration = min * 60 + sec,
-                DISTANCE = (100 / duration).toFixed(2) * 1,
-                arcBack = document.querySelector('.arc-back')
-            
-            if(arcBack.className.indexOf('active') <= -1) arcBack.className += ' active'
+        this.audio.addEventListener('playing', () => {
+            if(this.state.auto){
+                //更改播放状态
+                this.setState({playStatus: true})
 
-            //时间轴动画
-            const animationTimeBase = () => {
-                if(this.state.init < 100)
-                    this.setState({
-                        init: this.state.init + DISTANCE
-                    })
+                this.duration = this.min * 60 + this.sec
+                this.DISTANCE = (100 / this.duration).toFixed(2) * 1
+                this.arcBack = document.querySelector('.arc-back')
+                
+                if(this.arcBack.className.indexOf('active') <= -1) this.arcBack.className += ' active'
+                
+                this.timerID = setInterval(()=>{
+                    if((this.state.minute * 60 + this.state.second) < this.duration){
+                        this.songClock()
+                        this.animationTimeBase()
+                    }else{
+                        clearInterval(this.timerID)
+                        this.setState({playStatus: false})
+                    }
+                }, 1000)
+                this.setState({auto: false})
             }
-            //歌曲时间进度
-            const songClock = () => {
-                if(this.state.second < 60){
-                    this.setState({
-                        second: this.state.second + 1
-                    })
-                }else{
-                    this.setState({
-                        minute: this.state.minute + 1,
-                        second: 0
-                    })
-                }
-                this.state.minute >= 10 ? this.setState({Mclock: this.state.minute.toString()}) : this.setState({Mclock: `0${this.state.minute}`})
-                this.state.second >= 10 ? this.setState({Sclock: this.state.second.toString()}) : this.setState({Sclock: `0${this.state.second}`})
-            }
-            
-            this.timerID = setInterval(()=>{
-                if((this.state.minute * 60 + this.state.second) < duration){
-                    songClock()
-                    animationTimeBase()
-                }else{
-                    clearInterval(this.timerID)
-                }
-            }, 1000)
         })
 
         //暂停状态
-        audio.addEventListener('paused', () => {
+        this.audio.addEventListener('paused', () => {
             console.log('paused')
         })
     }
@@ -118,39 +155,15 @@ class PlayPage extends Component {
             url = this.state.url,
             bg = null,
             audio = null
-
         if(infor.length > 0) bg = infor[0]['al']['picUrl']
         if(url.length > 0) audio = url[0]['url']
 
         return (
             <article className="page-box">
-                {/* 界面背景 */}
-                <div className="play-page" style={{
-                    background: `url(${bg}) repeat-y center`,
-                }}>
-                </div>
-                {/* 界面头部 */}
-                <div className="page-up">
-                    <i className="iconfont back" onClick={this.handleBack}>&#xe62e;</i>
-                    {
-                        infor.map((data, i) => {
-                            return (
-                                <div className="caption" key={i}>
-                                    <p>{data.name}</p>
-                                    <p>{data.ar[0].name}</p>
-                                </div>
-                            )
-                        })
-                    }
-                </div>
+                {/* 标签 */}
+                <TabHead bg={bg} infor={infor}/>
                 {/* 唱片 */}
-                <div className="page-center">
-                    <div className="arc-back">
-                        <div className="film">
-                            <div className="song-thum"><img src={bg} alt="" /></div>
-                        </div>
-                    </div>
-                </div>
+                <Film bg={bg} playStatus={this.state.playStatus}/>   
                 {/* 音频 */}
                 <audio id="audio" src={audio} autoPlay></audio>
                 {/* 操作按钮 */}
@@ -159,7 +172,7 @@ class PlayPage extends Component {
                         <i className="iconfont">&#xe617;</i>
                         <i className="iconfont">&#xe890;</i>
                         <i className="iconfont">&#xe63d;</i>
-                        <i className="iconfont">&#xe60f;</i>
+                        <i className="iconfont">&#xe783;</i>
                     </div>
                     <div className="time-base">
                         <span id="time-now">{this.state.Mclock}:{this.state.Sclock}</span>
@@ -177,7 +190,9 @@ class PlayPage extends Component {
                     <div className="song-contrl">
                         <i className="iconfont">&#xe603;</i>
                         <i className="iconfont prev">&#xe61f;</i>
-                        <i className="iconfont play">&#xe602;</i>
+                        <i className="iconfont play"
+                            onClick={this.handlePlayStatus}
+                        >{!this.state.playStatus ? '\ue602' : '\ue501'}</i>
                         <i className="iconfont next">&#xe61f;</i>
                         <i className="iconfont list">&#xe610;</i>
                     </div>
@@ -193,6 +208,4 @@ const mapStateProps = (state) => {
     }
 }
 
-const PlayPage2 = connect(mapStateProps)(PlayPage)
-
-export default withRouter(PlayPage2)
+export default connect(mapStateProps)(PlayPage)

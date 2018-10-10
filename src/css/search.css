@@ -7,14 +7,6 @@
     box-sizing: border-box;
     background-color: #313638;
 }
-.search-input .search-back{
-    width: 2rem;
-    line-height: 2;
-}
-.search-back i{
-    color: #fff;
-    font-size: 1.2rem;
-}
 .search-input input {
     width: 100%;
     color: #fff;

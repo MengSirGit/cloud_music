@@ -15,6 +15,8 @@ const Video = () => import('../views/video')
 const Search = () => import('../views/search')
 //歌曲播放
 const PlayPage = () => import('../views/playPage')
+//歌单详情
+const SongSheet = () => import('../views/songsheet')
 
 //路由
 const routes = [
@@ -43,6 +45,11 @@ const routes = [
     {
         path: '/playpage',
         component: PlayPage
+    },
+    //歌单详情页
+    {
+        path: '/songsheet',
+        component: SongSheet
     },
 ]
 

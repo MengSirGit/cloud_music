@@ -66,6 +66,7 @@ class PlayBar extends Component {
     }
 
     render(){
+        console.log(this.props)
         let id = 360062344,
             data = this.props.data
         if(data){
