@@ -204,7 +204,7 @@ class PlayPage extends PureComponent {
 
 const mapStateProps = (state) => {
     return {
-        data: state.playMusic
+        data: state.playMusicReducer
     }
 }
 

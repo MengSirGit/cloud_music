@@ -1,7 +1,8 @@
 import {
     CHANGE_CURR_LIST,
     PLAY_MUSIC_LIST,
-    SEARCH_SONGS
+    SEARCH_SONGS,
+    SONG_SHEET_DETAIL
 } from './actionTypes'
 import * as api from '../api'
 
@@ -48,3 +49,17 @@ export const searchSongs = (result) => {
 
 //歌曲检索
 export const searchSongsReducer = () => {}
+
+//歌单详情
+export const songSheet = (id, _type) => {
+    return {
+        type: SONG_SHEET_DETAIL,
+        id: id,
+        _type: _type
+    }
+}
+
+//歌单详情
+export const getSongSheet = (id, type) => {
+    return songSheet(id, type)
+}

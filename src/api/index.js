@@ -45,3 +45,18 @@ export const searchAdvise = (keywords, offset=0, limit=30, type=1) => axios.get(
         type
     }
 })
+
+//新碟上架(专辑)
+export const newPlate = (id, offset=0, limit=6) => axios.get('top/album', {
+    params: {
+        id,
+        offset: offset * limit,
+        limit
+    }
+})
+
+//获取专辑内容
+export const getAlbumCon = (id) => axios.get(`album?id=${id}`)
+
+//电台推荐
+export const djRecommend = () => axios.get('dj/recommend')

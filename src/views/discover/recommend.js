@@ -1,4 +1,7 @@
 import React, {Component} from 'react'
+import {Link} from 'react-router-dom'
+import {connect} from 'react-redux'
+import {getSongSheet} from '../../store/actions'
 
 import * as api from '../../api'
 import Header from '../../components/Header'
@@ -115,27 +118,34 @@ class Classify extends Component{
  */
 const WrappedComponent = (WrappedWithComponent) => {
     return class NewComponent extends Component {
+        constructor(props){
+            super(props)
+            this.id = null
+            this.type = null
+            this.handleSendSheet = this.handleSendSheet.bind(this)
+        }
+        handleSendSheet(id, type){
+            this.id = id
+            this.type = type
+            this.props.onSendSheet(this.id, this.type)
+        }
         render(){
             const {songDatas, title} = this.props
             let songList = null
             if(songDatas.length > 0){
                 songList = songDatas.map((data, i) => {
                     if(i < 6){
-                        if(data.type === 4){
-                            return (
-                                <li key={i}>
-                                    <p className="thum"><img src={data['song']['album']['picUrl']} alt="" /></p>
-                                    <p className="title">{data.name}</p>
-                                </li>
-                            ) 
-                        }else{
-                            return (
-                                <li key={i}>
+                        return (
+                            <li key={i}>
+                                <Link to="/songsheet" onClick={() => this.handleSendSheet(data.id, data.type)}>
                                     <p className="thum"><img src={data.picUrl} alt="" /></p>
                                     <p className="title">{data.name}</p>
-                                </li>
-                            )
-                        }
+                                    {
+                                        data.type !== 0 && data.type !== undefined ? <p className="artist">{data.artist.name}</p>  : false
+                                    }
+                                </Link>
+                            </li>
+                        )
                     }
                 })
             }
@@ -158,7 +168,17 @@ class CreateComponet extends Component {
     }
 }
 
-const HighOrderMusic = WrappedComponent(CreateComponet)
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onSendSheet: (id, type) => {
+            dispatch(getSongSheet(id, type))
+        }
+    }
+}
+
+const BeforeHighOrderMusic = WrappedComponent(CreateComponet)
+
+const HighOrderMusic = connect(null, mapDispatchToProps)(BeforeHighOrderMusic)
 
 //推荐页面整合
 const pageMenu = {
@@ -196,18 +216,18 @@ class Recommend extends Component {
             }
         })
         //获取最新音乐
-        api.getNewMusic().then(response => {
+        api.newPlate().then(response => {
             if(response.data.code === 200){
                 this.setState({
-                    newSong: response.data.result
+                    newSong: response.data.albums
                 })
             }
         })
         //获取主播电台
-        api.getAnchorRadio().then(response => {
+        api.djRecommend().then(response => {
             if(response.data.code === 200){
                 this.setState({
-                    anchorRadio: response.data.result
+                    anchorRadio: response.data.djRadios
                 })
             }
         })
