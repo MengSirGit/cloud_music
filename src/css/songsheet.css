@@ -1,11 +1,18 @@
 @charset "utf-8";
 .sheet-box{
     width: 100%;
-    background-color: #3a3e39;
+    /* background-color: #3a3e39; */
+    background-size: 100%;
 }
 .sheet-box .sheet-head{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0,0,0,.3);
     padding: .3rem .8rem;
     box-sizing: border-box;
+    z-index: 8;
 }
 .sheet-head a,
 .sheet-head i,
@@ -20,9 +27,9 @@
     float: right;
 }
 .sheet-head .sheet-more{
-    line-height: 1.8;
+    line-height: 2.2;
     margin-left: 1rem;
-    font-size: 1.3rem;
+    font-size: 1.1rem;
 }
 .sheet-head a i{
     font-size: 1rem;
@@ -30,8 +37,9 @@
 }
 .sheet-summary{
     width: 100%;
-    padding: 1rem;
+    padding: 4.5rem 1rem 1rem 1rem;
     box-sizing: border-box;
+    background-color: rgba(0,0,0,.6);
 }
 /* .sheet-summary .sheet-summary-show{
 } */
@@ -99,6 +107,7 @@
 .inventory{
     width: 100%;
     min-height: 10rem;
+    margin-top: -.5rem;
     background-color: #fff;
     border-top-left-radius: 12px;
     border-top-right-radius: 12px;
@@ -120,6 +129,7 @@
 }
 .inventory-box .inventory-caption{
     line-height: 1.6;
+    overflow: hidden;
 }
 .inventory-box .inventory-name{
     color: #333;
@@ -137,7 +147,7 @@
     color: #b7b7b7;
     font-size: 1.1rem;
     line-height: 2.3;
-    margin-right: .5rem;
+    margin-right: .8rem;
 }
 .inventory-box .caption-line{
     float: left;
@@ -148,4 +158,31 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+.inventory-detail{
+    border-bottom: 1px solid #f5f5f5;
+}
+.inventory-detail .detail-left{
+    float: left;
+    padding: .5rem;
+    font-size: .85rem;
+}
+.inventory-detail .detail-left .iconfont{
+    font-size: 1.2rem;
+    margin-right: .7rem;
+}
+.inventory-detail .detail-left em {
+    font-style: normal;
+}
+.inventory-detail .detail-left em span:nth-of-type(2) {
+    color: #b7b7b7;
+}
+.inventory-detail .detail-right{
+    float: right;
+    background-color: #2b2b2b;
+    color: #fff;
+}
+.inventory-detail .detail-right p{
+    font-size: .85rem;
+    padding: .6rem .8rem;
 }

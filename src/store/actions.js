@@ -2,11 +2,12 @@ import {
     CHANGE_CURR_LIST,
     PLAY_MUSIC_LIST,
     SEARCH_SONGS,
-    SONG_SHEET_DETAIL
+    SONG_SHEET_DETAIL,
+    SHEET_DISCUSS
 } from './actionTypes'
 import * as api from '../api'
 
-//播放歌单
+//播放歌曲
 export const playMusicList = (id) => {
     return {
         type: PLAY_MUSIC_LIST,
@@ -14,7 +15,7 @@ export const playMusicList = (id) => {
     }
 }
 
-//播放歌单
+//播放歌曲
 export const playMusic = (id) => {
     //获取基本信息
     return playMusicList(id)
@@ -62,4 +63,18 @@ export const songSheet = (id, _type) => {
 //歌单详情
 export const getSongSheet = (id, type) => {
     return songSheet(id, type)
+}
+
+//歌单评论
+export const sheetDiscuss = (id, intro) => {
+    return {
+        type: SHEET_DISCUSS,
+        id: id, 
+        intro: intro
+    }
+}
+
+//歌单评论
+export const getSheetDiscuss = (id, intro) => {
+    return sheetDiscuss(id, intro)
 }

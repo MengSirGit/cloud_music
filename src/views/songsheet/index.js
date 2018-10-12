@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, {PureComponent} from 'react'
 import {connect} from 'react-redux'
 import * as api from '../../api'
 
@@ -8,7 +8,7 @@ import Inventory from './inventory'
 import '../../css/songsheet.css'
 
 
-class SongSheetDetail extends Component {
+class SongSheetDetail extends PureComponent {
     constructor(props){
         super(props)
         this.state = {
@@ -17,6 +17,7 @@ class SongSheetDetail extends Component {
     }
     componentWillMount(){
         let data = this.props.data
+        // console.log(data)
         if(Object.keys(data).length > 0){
             api.getDetail(data.id).then(res => {
                 if(res.data.code === 200){
@@ -29,12 +30,15 @@ class SongSheetDetail extends Component {
         }
     }
     render(){
+        if(Object.keys(this.state.summary).length === 0) return false
         return (
-            <div className="sheet-box">
+            <div className="sheet-box" style={{
+                background: `url(${this.state.summary.creator.backgroundUrl}) no-repeat 50% 0`
+            }}>
                 {/* 标签 */}
                 <Head />
                 {/* 封面 */}
-                <Summary data={this.state.summary} />
+                <Summary data={this.state.summary} id_discuss={this.props.data.id} />
                 {/* 列表 */}
                 <Inventory data={this.state.summary} />
             </div>

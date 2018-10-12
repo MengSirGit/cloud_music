@@ -101,7 +101,7 @@ class PlayBar extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        data: state.currMusic.event
+        data: state.currMusicReducer.event
     }
 }
 

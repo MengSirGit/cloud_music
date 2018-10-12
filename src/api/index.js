@@ -60,3 +60,32 @@ export const getAlbumCon = (id) => axios.get(`album?id=${id}`)
 
 //电台推荐
 export const djRecommend = () => axios.get('dj/recommend')
+
+//歌单评论
+export const getSheetDiscuss = (id, limit=20) => axios.get(`comment/playlist?id=${id}`, {
+    params: {
+        limit
+    }
+})
+
+//歌曲评论
+export const getSongDiscuss = (id, limit=20) => axios.get(`comment/music?id=${id}`, {
+    params: {
+        limit
+    }
+})
+
+//热门评论
+/**
+ * 0 歌曲
+ * 1 MV
+ * 2 歌单
+ * 3 专辑
+ * 4 电台
+ * 5 视频 
+ */
+export const getHotDiscuss = (id, type=0) => axios.get(`comment/hot?id=${id}`, {
+    params: {
+        type
+    }
+})

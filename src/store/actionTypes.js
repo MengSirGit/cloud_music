@@ -13,3 +13,6 @@ export const SEARCH_SONGS = 'SEARCH_SONGS'
 
 //歌单详情
 export const SONG_SHEET_DETAIL = 'SONG_SHEET_DETAIL'
+
+//歌单评论
+export const SHEET_DISCUSS = 'SHEET_DISCUSS'

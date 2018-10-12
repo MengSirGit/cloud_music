@@ -1,0 +1,96 @@
+@charset "utf-8";
+.discuss-head {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    color: #fff;
+    background-color: #3e3e3e;
+    padding: .3rem .8rem;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    z-index: 8;
+}
+.discuss-head span{
+    font-size: .94rem;
+}
+.discuss-head .discuss-share{
+    float: right;
+    color: #fff;
+    font-size: 1.2rem;
+    line-height: 2;
+}
+.discuss-title-w {
+    font-size: .6rem;
+    background-color: #f5f5f5;
+    padding: .4rem 0 .4rem .5rem;
+}
+.discuss-box {
+    width: 100%;
+    padding-left: .5rem;
+    box-sizing: border-box;
+}
+.discuss-box li{
+    margin: .4rem 0;
+}
+.discuss-box .head-port{
+    float: left;
+    width: 2rem;
+    height: 2rem;
+    margin-top: .5rem;
+    border-radius: 50%;
+    background-color: #f5f5f5;
+    overflow: hidden;
+}
+.discuss-box .head-port img{
+    width: 100%;
+}
+.discuss-box .discuss-body{
+    margin-left: 3rem;
+    border-bottom: 1px solid #f5f5f5;
+    padding-bottom: 0;
+    padding-right: .5rem;
+}
+.discuss-box .discuss-body .discuss-up{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: .5rem;
+}
+.discuss-up .discuss-author p:nth-of-type(1){
+    font-size: .78rem;
+    color: #464646;
+    line-height: 1.8;
+}
+.discuss-up .discuss-author p:nth-of-type(2){
+    font-size: .5rem;
+    color: #8d8d8d;
+}
+.discuss-down .content{
+    margin-bottom: .5rem;
+}
+.discuss-down .content p{
+    font-size: .89rem;
+    line-height: 1.6;
+}
+.discuss-down .replay{
+    border: 1px solid #f5f5f5;
+    border-radius: 3px;
+    padding: .5rem .3rem;
+    box-sizing: border-box;
+    font-size: .8rem;
+}
+.discuss-down .replay span{
+    color: #317ed0;
+}
+.discuss-down .replay p{
+    color: #8d8d8d;
+}
+.discuss-like .list-count{
+    font-size: .5rem;
+    color: #c7c7c7;
+}
+.discuss-like .iconfont{
+    color: #c7c7c7;
+    font-size: 1.2rem;
+}

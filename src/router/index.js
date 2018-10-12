@@ -17,6 +17,8 @@ const Search = () => import('../views/search')
 const PlayPage = () => import('../views/playPage')
 //歌单详情
 const SongSheet = () => import('../views/songsheet')
+//评论
+const Discuss = () => import('../views/discuss')
 
 //路由
 const routes = [
@@ -50,6 +52,11 @@ const routes = [
     {
         path: '/songsheet',
         component: SongSheet
+    },
+    //评论
+    {
+        path: '/discuss',
+        component: Discuss
     },
 ]
 

@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
+import { withRouter, Link } from 'react-router-dom'
+import {connect} from 'react-redux'
+import {playMusic} from '../../store/actions'
 import * as api from '../../api'
-import { withRouter } from 'react-router-dom'
 
 import Back from '../../components/Back'
 import '../../css/search.css'
@@ -20,6 +22,10 @@ class Search extends Component {
         this.inputValue = null
         this.changeEvent = this.changeEvent.bind(this)
         this.handleComposition = this.handleComposition.bind(this)
+        this.handleSendSongId = this.handleSendSongId.bind(this)
+    }
+    handleSendSongId(id){
+        this.props.onHandleSendSongId(id)
     }
     handleComposition(e){
         //中文输入结束，改变state
@@ -54,7 +60,8 @@ class Search extends Component {
         if(data['code'] === 200){
             searchResult = data['result']['songs'].map((e, i) => {
                 return (
-                    <li key={i} className="result-list"><i className="iconfont">&#xe607;</i><span>{e.name}</span>-<span>{e.artists[0].name}</span></li>
+                    // **搜索跳转暂定播放页**
+                    <li key={i} className="result-list" onClick={() => this.handleSendSongId(e.id)}><Link to="/playpage"><i className="iconfont">&#xe607;</i><span>{e.name}</span>-<span>{e.artists[0].name}</span></Link></li>
                 )
             })
         }
@@ -79,4 +86,12 @@ class Search extends Component {
     }
 }
 
-export default withRouter(Search)
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onHandleSendSongId: (id) => {
+            dispatch(playMusic(id))
+        }
+    }
+}
+
+export default connect(null, mapDispatchToProps)(withRouter(Search))
