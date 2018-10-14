@@ -79,6 +79,7 @@
     padding: .5rem .3rem;
     box-sizing: border-box;
     font-size: .8rem;
+    margin-bottom: .5rem;
 }
 .discuss-down .replay span{
     color: #317ed0;

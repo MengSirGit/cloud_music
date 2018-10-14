@@ -6,23 +6,34 @@ import {getSongSheet} from '../../store/actions'
 
 import DiscussTarget from './discussTarget'
 import WonderfulDiscuss from './wonderful'
+import Newest from './newest'
 import '../../css/discuss.css'
 
 class Discuss extends PureComponent {
     constructor(props){
         super(props)
         this.state = {
-            con: null
+            con: null,
+            newCon: null
         }
     }
     componentWillMount(){
         let id = this.props._discuss_id
         console.log(id)
-        api.getSheetDiscuss(id).then(res => {
+        //热门评论
+        api.getHotDiscuss(id, 2).then(res => {
             if(res.data.code === 200){
                 console.log(res.data)
                 this.setState({
                     con: res.data
+                })
+            }
+        })
+        //最新评论
+        api.getSheetDiscuss(id, 10, 1).then(res => {
+            if(res.data.code === 200){
+                this.setState({
+                    newCon: res.data
                 })
             }
         })
@@ -32,9 +43,14 @@ class Discuss extends PureComponent {
         if(!_props._discuss_intro) return false
         return (
             <React.Fragment>
+                {/* 标签 */}
                 <TabHead comment={_props._discuss_intro.commentCount}/>
+                {/* 歌单标题及创建者 */}
                 <DiscussTarget />
+                {/* 精彩评论 */}
                 <WonderfulDiscuss con={this.state.con}/>
+                {/* 最新评论 */}
+                <Newest con={this.state.newCon} />
             </React.Fragment>
         )
     }

@@ -69,9 +69,10 @@ export const getSheetDiscuss = (id, limit=20) => axios.get(`comment/playlist?id=
 })
 
 //歌曲评论
-export const getSongDiscuss = (id, limit=20) => axios.get(`comment/music?id=${id}`, {
+export const getSongDiscuss = (id, limit=20, offset=1) => axios.get(`comment/music?id=${id}`, {
     params: {
-        limit
+        limit: offset * limit,
+        offset
     }
 })
 
