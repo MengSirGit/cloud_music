@@ -1,4 +1,4 @@
-import { CHANGE_CURR_LIST, PLAY_MUSIC_LIST, SONG_SHEET_DETAIL, SHEET_DISCUSS } from './actionTypes'
+import { CHANGE_CURR_LIST, PLAY_MUSIC_LIST, SONG_SHEET_DETAIL, SHEET_DISCUSS} from './actionTypes'
 
 //切换音乐
 export const currMusicReducer = (state=[], action) => {

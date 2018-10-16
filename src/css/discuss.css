@@ -95,3 +95,36 @@
     color: #c7c7c7;
     font-size: 1.2rem;
 }
+.discuss-target {
+    width: 100%;
+    padding: .5rem;
+    margin-top: 3rem;
+    box-sizing: border-box;
+}
+.discuss-target .discuss-thum{
+    float: left;
+    width: 4.5rem;
+    height: 4.5rem;
+    border-radius: 5px;
+    overflow: hidden;
+}
+.discuss-target .discuss-thum img{
+    width: 100%;
+}
+.discuss-target .discuss-line{
+    float: left;
+    max-width: 78%;
+    padding-left: .5rem;
+    margin-top: .8rem;
+}
+
+.discuss-target .discuss-line p {
+    font-size: .78rem;
+}
+.discuss-target .discuss-line .author{
+    color: #8d8d8d;
+    line-height: 2;
+}
+.discuss-target .discuss-line .author span{
+    color: #69a4d0;
+}

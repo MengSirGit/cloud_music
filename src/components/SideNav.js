@@ -72,6 +72,12 @@ class Setting extends Component {
 }
 
 //侧导航
+const contrlOpen = (obj) => {
+    if(obj.className.indexOf('active') <= -1) obj.className += ' active'
+}
+const contrlOpen2 = (obj) => {
+    if(obj.className.indexOf('active') > -1) obj.className = obj.className.replace(' active', '')
+}
 class SideNav extends Component {
     constructor(props){
         super(props)
@@ -82,12 +88,12 @@ class SideNav extends Component {
         let sideNav = document.querySelector('#side-nav')
         switch(e.target.id){
             case 'nav-btn':
-                sideNav.className.indexOf('active') > -1 ? false : sideNav.className += ' active'
+                contrlOpen(sideNav)
                 break
             case 'side-nav':
                 break
             default:
-                sideNav.className.indexOf('active') > -1 ? sideNav.className = sideNav.className.replace(' active', '') : false
+                contrlOpen2(sideNav)
         }
     }
     componentDidMount(){

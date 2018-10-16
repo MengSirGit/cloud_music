@@ -2,9 +2,6 @@ import React, {Component} from 'react'
 import RenderDiscuss from './renderDiscuss'
 
 class WonderfulDiscuss extends Component {
-    constructor(props){
-        super(props)
-    }
     render(){
         let con = this.props.con
         if(con === null) return false

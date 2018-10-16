@@ -46,7 +46,7 @@ class Discuss extends PureComponent {
                 {/* 标签 */}
                 <TabHead comment={_props._discuss_intro.commentCount}/>
                 {/* 歌单标题及创建者 */}
-                <DiscussTarget />
+                <DiscussTarget id={this.props._discuss_id} con={this.props._discuss_intro}/>
                 {/* 精彩评论 */}
                 <WonderfulDiscuss con={this.state.con}/>
                 {/* 最新评论 */}

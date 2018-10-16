@@ -9,7 +9,7 @@ export const getBanner = () => axios.get(`banner`)
 export const getRecommonSong = () => axios.get(`personalized`)
 
 //获取音乐地址
-export const getMusicUrl = (id) => axios.get(`music/url?id=${id}`)
+export const getMusicUrl = (id) => axios.get(`song/url?id=${id}`)
 
 //获取歌单详情
 export const getDetail = (id) => axios.get(`playlist/detail?id=${id}`)

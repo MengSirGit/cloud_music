@@ -6,7 +6,7 @@ import ExtendRoute from '../components/ExtendRoute'
 import App from '../App'
 
 //推荐页
-const Recommend = () => import('../views/discover/recommend')
+const Recommend = () => import('../views/discover')
 //本地页
 const Home = () => import('../views/home')
 //短视频

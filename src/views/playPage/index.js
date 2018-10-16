@@ -109,7 +109,7 @@ class PlayPage extends PureComponent {
         let timeEnd = document.querySelector('#time-end')
 
         this.audio.addEventListener('canplay', () => {
-            this.sumTime = parseInt(this.audio.duration) / 60
+            this.sumTime = parseInt(this.audio.duration, 10) / 60
             this.min = Math.floor(this.sumTime)
             this.sec = Math.floor((this.sumTime.toFixed(2) * 1 - this.min) * 60)
             //歌曲总时长
