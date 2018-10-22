@@ -1,6 +1,7 @@
 import React from 'react'
 
 const RenderDiscuss = (props) => {
+    console.log(props)
     return (
         <ul className="discuss-box">
             {

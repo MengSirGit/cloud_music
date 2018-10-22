@@ -1,5 +1,7 @@
 import React, { PureComponent } from 'react'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
+import {getSheetDiscuss} from '../../store/actions'
 
 import * as api from '../../api'
 import TabHead from './head'
@@ -107,7 +109,6 @@ class PlayPage extends PureComponent {
         //歌曲时长
         this.audio = document.querySelector('#audio')
         let timeEnd = document.querySelector('#time-end')
-
         this.audio.addEventListener('canplay', () => {
             this.sumTime = parseInt(this.audio.duration, 10) / 60
             this.min = Math.floor(this.sumTime)
@@ -171,7 +172,7 @@ class PlayPage extends PureComponent {
                     <div className="song-handle">
                         <i className="iconfont">&#xe617;</i>
                         <i className="iconfont">&#xe890;</i>
-                        <i className="iconfont">&#xe63d;</i>
+                        <Link to="/discuss"><i className="iconfont" onClick={() => this.props.onSendSongDiscuss(this.props.data, 0)}>&#xe63d;</i></Link>
                         <i className="iconfont">&#xe783;</i>
                     </div>
                     <div className="time-base">
@@ -202,10 +203,18 @@ class PlayPage extends PureComponent {
     }
 }
 
-const mapStateProps = (state) => {
+const mapStateToProps = (state) => {
     return {
         data: state.playMusicReducer
     }
 }
 
-export default connect(mapStateProps)(PlayPage)
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onSendSongDiscuss: (id, type) => {
+            dispatch(getSheetDiscuss(id, type))
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PlayPage)

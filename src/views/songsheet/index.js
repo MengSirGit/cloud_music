@@ -11,6 +11,7 @@ import '../../css/songsheet.css'
 class SongSheetDetail extends PureComponent {
     constructor(props){
         super(props)
+        this.ID = null
         this.state = {
             summary: {}
         }
@@ -19,7 +20,8 @@ class SongSheetDetail extends PureComponent {
         let data = this.props.data
         // console.log(data)
         if(Object.keys(data).length > 0){
-            api.getDetail(data.id).then(res => {
+            this.ID = data.id
+            api.getDetail(this.ID).then(res => {
                 if(res.data.code === 200){
                     // console.log(res.data.playlist.tracks)
                     this.setState({
@@ -40,7 +42,7 @@ class SongSheetDetail extends PureComponent {
                 {/* 封面 */}
                 <Summary data={this.state.summary} id_discuss={this.props.data.id} />
                 {/* 列表 */}
-                <Inventory data={this.state.summary} />
+                <Inventory data={this.state.summary} ID={this.ID} />
             </div>
         )
     }

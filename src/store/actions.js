@@ -22,19 +22,20 @@ export const playMusic = (id) => {
 }
 
 //切换歌曲
-export const changeCurrMusic = (event) => {
+export const changeCurrMusic = (event, index) => {
     return {
         type: CHANGE_CURR_LIST,
-        event
+        event: event,
+        index: index
     }
 }
 
 //切换歌曲
-export const currMusic = (id) => {
+export const currMusic = (id, index) => {
     return (dispatch) => {
         api.getDetail(id).then(res => {
             if(res.data.code === 200){
-                dispatch(changeCurrMusic(res.data.playlist.tracks))
+                dispatch(changeCurrMusic(res.data.playlist.tracks, index))
             }
         })
     }
@@ -66,15 +67,16 @@ export const getSongSheet = (id, type) => {
 }
 
 //歌单评论
-export const sheetDiscuss = (id, intro) => {
+export const sheetDiscuss = (id, _type, intro) => {
     return {
         type: SHEET_DISCUSS,
         id: id, 
+        _type: _type,
         intro: intro
     }
 }
 
 //歌单评论
-export const getSheetDiscuss = (id, intro) => {
-    return sheetDiscuss(id, intro)
+export const getSheetDiscuss = (id, _type, intro) => {
+    return sheetDiscuss(id, _type, intro)
 }

@@ -15,12 +15,11 @@ class PlayBar extends Component {
         this.audio = 0
         //判断是否已切歌
         this.isCut = true
+        this.prevChooseId = null
         //歌曲索引
         this.index = 0
         this.state = {
             play_id: null,
-            //歌曲信息
-            infor: [],
             //音频地址
             url: [],
             play_status: false,
@@ -61,15 +60,6 @@ class PlayBar extends Component {
 
     //api请求
     apiAsk(id){
-        //获取歌曲详情
-        api.getSongDetail(id).then(res => {
-            // console.log('c')
-            if(res.data.code === 200){
-                this.setState({
-                    infor: res.data.songs
-                })
-            }
-        })
         //获取音频链接
         api.getMusicUrl(id).then(res => {
             if(res.data.code === 200){
@@ -82,8 +72,6 @@ class PlayBar extends Component {
 
     //播放点击歌曲
     handleSaveMusic(id){
-        //组件卸载发送当前歌曲信息
-        this.props.saveMusic(id)
         if(this.isCut){
             this.apiAsk(id)
             this.isCut = false
@@ -93,22 +81,30 @@ class PlayBar extends Component {
         const handlePause = () => this.setState({play_status: false})
         this.refs.audio.onplaying = handlePlay
         this.refs.audio.onpause = handlePause
-        !this.state.play_status ? this.refs.audio.play() : this.refs.audio.pause()
+        setTimeout(() => {
+            !this.state.play_status ? this.refs.audio.play() : this.refs.audio.pause()
+        }, 100)
     }
     componentWillReceiveProps(nextProps){
         this.apiAsk(nextProps.data[0].id)
     }
     render(){
         let data = this.props.data,
+            chooseId = this.props.id,
             audio = null
+
         if(this.state.url.length > 0) audio = this.state.url[0].url
+        //歌单列表选歌
+        if(this.props._index != undefined && chooseId !== this.prevChooseId){
+            this.index = this.props._index
+            this.prevChooseId = chooseId
+        } 
         return (
             <React.Fragment>
                 {
                     data ? 
                         <div className="play-bar">
-                            <audio id="audio" src={audio} ref="audio"></audio>
-                            {/* <Link to="/playpage"> */}
+                            <audio id="audio" src={audio} ref="audio"></audio>  
                                 <div className="music-news clearfix" 
                                     onTouchStart={(e) => this.handleTouchStart(e)}
                                     onTouchMove={() => {
@@ -134,14 +130,17 @@ class PlayBar extends Component {
                                     }
                                 }>
                                     <div className="music-img"><img src={data[this.index]['al']['picUrl']} alt="" /></div>
-                                    <div className="music-title">
-                                        <p>{data[this.index]['name']}</p>
-                                        <p>{data[this.index]['ar'][0]['name']}</p>
-                                    </div>
+                                    <Link to="/playpage" onClick={() => {this.props.saveMusic(data[this.index].id)}}>
+                                        <div className="music-title">
+                                            <p>{data[this.index]['name']}</p>
+                                            <p>{data[this.index]['ar'][0]['name']}</p>
+                                        </div>
+                                    </Link>
                                 </div>
                                 <div className="music-btn">
                                     <div className="play-ctrl"><i className="iconfont" onClick={(e) => {
-                                            this.handleSaveMusic(data[this.index]['id'])
+                                        console.log(this.index)
+                                        this.handleSaveMusic(data[this.index]['id'])
                                     }}>
                                         {
                                             this.state.play_status ? '\ue501' : '\ue602'
@@ -149,7 +148,6 @@ class PlayBar extends Component {
                                     </i></div>
                                     <div className="collect"><i className="iconfont">&#xe610;</i></div>
                                 </div>
-                            {/* </Link> */}
                         </div> 
                         :
                         <p style={{textAlign: 'center', fontSize: '.8rem', color: '#8d8d8d'}}>加载中...</p>
@@ -161,7 +159,8 @@ class PlayBar extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        data: state.currMusicReducer.event
+        data: state.currMusicReducer.event,
+        _index: state.currMusicReducer.index
     }
 }
 

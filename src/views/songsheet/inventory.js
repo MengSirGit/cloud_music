@@ -1,16 +1,15 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
-import {playMusic} from '../../store/actions'
+import {currMusic} from '../../store/actions'
 
 class Inventory extends Component{
     constructor(props){
         super(props)
         this.handleSendId = this.handleSendId.bind(this)
     }
-    handleSendId(id){
+    handleSendId(id, index){
         // console.log(id)
-        this.props.onHandleSendId(id)
+        this.props.onHandleSendId(id, index)
     }
     render(){
         const _data = this.props.data
@@ -32,23 +31,21 @@ class Inventory extends Component{
                     {
                         _data.tracks.map((e, i) => {
                             return (
-                                <li className="clearfix" key={i} onClick={() => this.handleSendId(e.id)}>
-                                    <Link to="/playpage">
-                                        <div className="index">{i + 1}</div>
-                                        <div className="inventory-box">
-                                            <div className="inventory-caption">
-                                                <div className="caption-line">
-                                                    <p className="inventory-name">{e.name}
-                                                        {
-                                                            e.alia.length > 0 ? <span>({e.alia[0]})</span> : false
-                                                        }
-                                                    </p>
-                                                    <p className="inventory-artist">{e.ar[0].name}-{e.al.name}</p>
-                                                </div>
-                                                <i className="iconfont">&#xe783;</i>
+                                <li className="clearfix" key={i} onClick={() => this.handleSendId(this.props.ID, i)}>
+                                    <div className="index">{i + 1}</div>
+                                    <div className="inventory-box">
+                                        <div className="inventory-caption">
+                                            <div className="caption-line">
+                                                <p className="inventory-name">{e.name}
+                                                    {
+                                                        e.alia.length > 0 ? <span>({e.alia[0]})</span> : false
+                                                    }
+                                                </p>
+                                                <p className="inventory-artist">{e.ar[0].name}-{e.al.name}</p>
                                             </div>
+                                            <i className="iconfont">&#xe783;</i>
                                         </div>
-                                    </Link>
+                                    </div>
                                 </li>
                             )
                         })
@@ -61,8 +58,8 @@ class Inventory extends Component{
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onHandleSendId: (id) => {
-            dispatch(playMusic(id))
+        onHandleSendId: (id, index) => {
+            dispatch(currMusic(id, index))
         }
     }
 }

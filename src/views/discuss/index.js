@@ -18,25 +18,35 @@ class Discuss extends PureComponent {
         }
     }
     componentWillMount(){
-        let id = this.props._discuss_id
-        console.log(id)
+        let id = this.props._discuss_id,
+            type = this.props._discuss_type
         //热门评论
-        api.getHotDiscuss(id, 2).then(res => {
+        api.getHotDiscuss(id, type).then(res => {
             if(res.data.code === 200){
-                console.log(res.data)
                 this.setState({
                     con: res.data
                 })
             }
         })
-        //最新评论
-        api.getSheetDiscuss(id, 10, 1).then(res => {
-            if(res.data.code === 200){
-                this.setState({
-                    newCon: res.data
-                })
-            }
-        })
+        if(type === 2){
+            //最新歌单评论
+            api.getSheetDiscuss(id, 10, 1).then(res => {
+                if(res.data.code === 200){
+                    this.setState({
+                        newCon: res.data
+                    })
+                }
+            })
+        }else if(type === 0){
+            //最新歌单评论
+            api.getSongDiscuss(id, 10, 1).then(res => {
+                if(res.data.code === 200){
+                    this.setState({
+                        newCon: res.data
+                    })
+                }
+            })
+        }
     }
     render(){
         const _props = this.props
@@ -59,6 +69,7 @@ class Discuss extends PureComponent {
 const mapStateToProps = (state) => {
     return {
         _discuss_id: state.sheetDiscussReducer.id,
+        _discuss_type: state.sheetDiscussReducer._type,
         _discuss_intro: state.sheetDiscussReducer.intro
     }
 }

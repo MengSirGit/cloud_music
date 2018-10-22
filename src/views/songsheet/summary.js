@@ -8,8 +8,8 @@ class Summary extends Component{
         super(props)
         this.handleSendToId = this.handleSendToId.bind(this)
     }
-    handleSendToId(id, intro){
-        this.props.onHandleSendToId(id, intro)
+    handleSendToId(id, _type, intro){
+        this.props.onHandleSendToId(id, _type, intro)
     }
     render(){
         const _data = this.props.data
@@ -29,7 +29,7 @@ class Summary extends Component{
                 </div>
                 <ul className="sheet-summary-contrl">
                     <li><Link to="/discuss"><i className="iconfont discuss" onClick={
-                        () => this.handleSendToId(id_discuss, _data)
+                        () => this.handleSendToId(id_discuss, 2, _data)
                         }>&#xe63d;</i><p>{_data.commentCount}</p></Link></li>
                     <li><i className="iconfont share">&#xe8b8;</i><p>{_data.shareCount}</p></li>
                     <li><i className="iconfont down">&#xe890;</i><p>下载</p></li>
@@ -42,8 +42,8 @@ class Summary extends Component{
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onHandleSendToId: (id, intro) => {
-            dispatch(getSheetDiscuss(id, intro))
+        onHandleSendToId: (id, _type, intro) => {
+            dispatch(getSheetDiscuss(id, _type, intro))
         }
     }
 }
