@@ -3,7 +3,8 @@ import {
     PLAY_MUSIC_LIST,
     SEARCH_SONGS,
     SONG_SHEET_DETAIL,
-    SHEET_DISCUSS
+    SHEET_DISCUSS,
+    SONG_DISCUSS
 } from './actionTypes'
 import * as api from '../api'
 
@@ -22,20 +23,21 @@ export const playMusic = (id) => {
 }
 
 //切换歌曲
-export const changeCurrMusic = (event, index) => {
+export const changeCurrMusic = (event, index, mark) => {
     return {
         type: CHANGE_CURR_LIST,
         event: event,
-        index: index
+        index: index,
+        mark: mark
     }
 }
 
 //切换歌曲
-export const currMusic = (id, index) => {
+export const currMusic = (id, index, mark) => {
     return (dispatch) => {
         api.getDetail(id).then(res => {
             if(res.data.code === 200){
-                dispatch(changeCurrMusic(res.data.playlist.tracks, index))
+                dispatch(changeCurrMusic(res.data.playlist.tracks, index, mark))
             }
         })
     }
@@ -79,4 +81,17 @@ export const sheetDiscuss = (id, _type, intro) => {
 //歌单评论
 export const getSheetDiscuss = (id, _type, intro) => {
     return sheetDiscuss(id, _type, intro)
+}
+
+//歌曲评论
+export const songDiscuss = (infor) => {
+    return {
+        type: SONG_DISCUSS,
+        infor: infor
+    }
+}
+
+//歌曲评论
+export const getSongDiscuss = (infor) => {
+    return songDiscuss(infor)
 }

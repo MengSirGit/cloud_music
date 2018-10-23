@@ -1,4 +1,4 @@
-import { CHANGE_CURR_LIST, PLAY_MUSIC_LIST, SONG_SHEET_DETAIL, SHEET_DISCUSS} from './actionTypes'
+import { CHANGE_CURR_LIST, PLAY_MUSIC_LIST, SONG_SHEET_DETAIL, SHEET_DISCUSS, SONG_DISCUSS} from './actionTypes'
 
 //切换音乐
 export const currMusicReducer = (state=[], action) => {
@@ -34,6 +34,16 @@ export const songSheetReducer= (state={}, action) => {
 export const sheetDiscussReducer = (state=[], action) => {
     switch(action.type){
         case SHEET_DISCUSS:
+            return action
+        default:
+            return state
+    }
+}
+
+//歌曲评论
+export const songDiscussReducer = (state=[], action) => {
+    switch(action.type){
+        case SONG_DISCUSS:
             return action
         default:
             return state

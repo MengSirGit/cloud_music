@@ -16,3 +16,6 @@ export const SONG_SHEET_DETAIL = 'SONG_SHEET_DETAIL'
 
 //歌单评论
 export const SHEET_DISCUSS = 'SHEET_DISCUSS'
+
+//歌曲评论
+export const SONG_DISCUSS = 'SONG_DISCUSS'

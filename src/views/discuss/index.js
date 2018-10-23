@@ -18,8 +18,8 @@ class Discuss extends PureComponent {
         }
     }
     componentWillMount(){
-        let id = this.props._discuss_id,
-            type = this.props._discuss_type
+        let id = this.props._discuss_sheet_id,
+            type = this.props._discuss_sheet_type
         //热门评论
         api.getHotDiscuss(id, type).then(res => {
             if(res.data.code === 200){
@@ -50,13 +50,13 @@ class Discuss extends PureComponent {
     }
     render(){
         const _props = this.props
-        if(!_props._discuss_intro) return false
+        // console.log(this.props)
         return (
             <React.Fragment>
                 {/* 标签 */}
-                <TabHead comment={_props._discuss_intro.commentCount}/>
+                <TabHead comment={_props._discuss_intro ? _props._discuss_intro.commentCount : (this.state.newCon ? this.state.newCon.total : 0)} />
                 {/* 歌单标题及创建者 */}
-                <DiscussTarget id={this.props._discuss_id} con={this.props._discuss_intro}/>
+                <DiscussTarget {..._props} />
                 {/* 精彩评论 */}
                 <WonderfulDiscuss con={this.state.con}/>
                 {/* 最新评论 */}
@@ -68,9 +68,10 @@ class Discuss extends PureComponent {
 
 const mapStateToProps = (state) => {
     return {
-        _discuss_id: state.sheetDiscussReducer.id,
-        _discuss_type: state.sheetDiscussReducer._type,
-        _discuss_intro: state.sheetDiscussReducer.intro
+        _discuss_sheet_id: state.sheetDiscussReducer.id,
+        _discuss_sheet_type: state.sheetDiscussReducer._type,
+        _discuss_sheet_intro: state.sheetDiscussReducer.intro,
+        _discuss_song_infor: state.songDiscussReducer.infor
     }
 }
 

@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {getSheetDiscuss} from '../../store/actions'
+import {getSongDiscuss, getSheetDiscuss} from '../../store/actions'
 
 import * as api from '../../api'
 import TabHead from './head'
@@ -158,7 +158,6 @@ class PlayPage extends PureComponent {
             audio = null
         if(infor.length > 0) bg = infor[0]['al']['picUrl']
         if(url.length > 0) audio = url[0]['url']
-
         return (
             <article className="page-box">
                 {/* 标签 */}
@@ -172,7 +171,7 @@ class PlayPage extends PureComponent {
                     <div className="song-handle">
                         <i className="iconfont">&#xe617;</i>
                         <i className="iconfont">&#xe890;</i>
-                        <Link to="/discuss"><i className="iconfont" onClick={() => this.props.onSendSongDiscuss(this.props.data, 0)}>&#xe63d;</i></Link>
+                        <Link to="/discuss"><i className="iconfont" onClick={() => this.props.onSendSongDiscuss(this.props.data, 0, infor)}>&#xe63d;</i></Link>
                         <i className="iconfont">&#xe783;</i>
                     </div>
                     <div className="time-base">
@@ -211,8 +210,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onSendSongDiscuss: (id, type) => {
+        onSendSongDiscuss: (id, type, infor) => {
             dispatch(getSheetDiscuss(id, type))
+            dispatch(getSongDiscuss(infor))
         }
     }
 }

@@ -18,12 +18,13 @@ class PlayBar extends Component {
         this.prevChooseId = null
         //歌曲索引
         this.index = 0
+        this.mark = 0
         this.state = {
             play_id: null,
             //音频地址
             url: [],
             play_status: false,
-            audio_url : null
+            audio_url : null,
         }
         this.handleTouchEnd = this.handleTouchEnd.bind(this)
         this.handleTouchStart = this.handleTouchStart.bind(this)
@@ -50,11 +51,11 @@ class PlayBar extends Component {
 
     changeMusic(){
         if(this.dir === true && this.index <= this.props.data.length - 2){
-            return this.index++
+            this.index = this.index + 1
         }else if(this.dir === false && this.index >= 1 ){
-            return this.index--
+            this.index = this.index - 1
         }else if(this.dir === null){
-            return this.index = this.index
+            this.index = this.index
         }
     }
 
@@ -77,28 +78,29 @@ class PlayBar extends Component {
             this.isCut = false
         }
         //播放控制
-        const handlePlay = () => this.setState({play_status: true})
-        const handlePause = () => this.setState({play_status: false})
-        this.refs.audio.onplaying = handlePlay
-        this.refs.audio.onpause = handlePause
-        setTimeout(() => {
-            !this.state.play_status ? this.refs.audio.play() : this.refs.audio.pause()
-        }, 100)
+        if(this.refs.audio.paused){
+            this.setState({play_status: true})
+            setTimeout(()=>{
+                this.refs.audio.play()
+            }, 200)
+        }else{
+            this.setState({play_status: false})
+            this.refs.audio.pause()
+        }
     }
     componentWillReceiveProps(nextProps){
         this.apiAsk(nextProps.data[0].id)
     }
     render(){
         let data = this.props.data,
-            chooseId = this.props.id,
             audio = null
-
         if(this.state.url.length > 0) audio = this.state.url[0].url
         //歌单列表选歌
-        if(this.props._index != undefined && chooseId !== this.prevChooseId){
+        if(this.mark !== this.props.mark && this.props.mark !== undefined){  
             this.index = this.props._index
-            this.prevChooseId = chooseId
-        } 
+            this.mark = this.props.mark
+            this.apiAsk(data[this.index]['id'])
+        }
         return (
             <React.Fragment>
                 {
@@ -106,7 +108,7 @@ class PlayBar extends Component {
                         <div className="play-bar">
                             <audio id="audio" src={audio} ref="audio"></audio>  
                                 <div className="music-news clearfix" 
-                                    onTouchStart={(e) => this.handleTouchStart(e)}
+                                    onTouchStart={(e) => {this.handleTouchStart(e)}}
                                     onTouchMove={() => {
                                         this.isCut = true
                                         this.refs.audio.pause()
@@ -116,6 +118,7 @@ class PlayBar extends Component {
                                         this.handleTouchEnd(e)
                                         //切歌
                                         this.changeMusic()
+                                        console.log(this.index)
                                         //请求音频地址
                                         this.apiAsk(data[this.index]['id']) 
                                         //切歌自动播放
@@ -139,7 +142,7 @@ class PlayBar extends Component {
                                 </div>
                                 <div className="music-btn">
                                     <div className="play-ctrl"><i className="iconfont" onClick={(e) => {
-                                        console.log(this.index)
+                                        console.log('click')
                                         this.handleSaveMusic(data[this.index]['id'])
                                     }}>
                                         {
@@ -160,7 +163,8 @@ class PlayBar extends Component {
 const mapStateToProps = (state) => {
     return {
         data: state.currMusicReducer.event,
-        _index: state.currMusicReducer.index
+        _index: state.currMusicReducer.index,
+        mark: state.currMusicReducer.mark
     }
 }
 

@@ -5,6 +5,8 @@ import createBrowserHistory from 'history/createBrowserHistory'
 import ExtendRoute from '../components/ExtendRoute'
 import App from '../App'
 
+//登录页
+const Login = () => import('../views/login')
 //推荐页
 const Recommend = () => import('../views/discover')
 //本地页
@@ -22,6 +24,11 @@ const Discuss = () => import('../views/discuss')
 
 //路由
 const routes = [
+    //登录
+    {
+        path: '/login',
+        component: Login
+    },
     //推荐
     {
         path: '/',
