@@ -118,7 +118,6 @@ class PlayBar extends Component {
                                         this.handleTouchEnd(e)
                                         //切歌
                                         this.changeMusic()
-                                        console.log(this.index)
                                         //请求音频地址
                                         this.apiAsk(data[this.index]['id']) 
                                         //切歌自动播放
@@ -141,8 +140,7 @@ class PlayBar extends Component {
                                     </Link>
                                 </div>
                                 <div className="music-btn">
-                                    <div className="play-ctrl"><i className="iconfont" onClick={(e) => {
-                                        console.log('click')
+                                    <div className="play-ctrl"><i className="iconfont" onClick={() => {
                                         this.handleSaveMusic(data[this.index]['id'])
                                     }}>
                                         {

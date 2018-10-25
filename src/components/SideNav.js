@@ -1,4 +1,6 @@
 import React, {Component} from 'react'
+import { Link } from 'react-router-dom'
+import * as api from '../api'
 
 //登录
 class Login extends Component {
@@ -7,7 +9,7 @@ class Login extends Component {
             <div className="left-login">
                 <p>登录网易云音乐</p>
                 <p>320k高音质无限下载，手机电脑多端同步</p>
-                <button className="login-btn">立即登录</button>
+                <Link to="/login"><button className="login-btn">立即登录</button></Link>
             </div>
         )
     }
@@ -60,12 +62,23 @@ class Extra extends Component {
 
 //app操作
 class Setting extends Component {
+    constructor(props){
+        super(props)
+        this.handleToLogout = this.handleToLogout.bind(this)
+    }
+    handleToLogout(){
+        api.logout().then(res => {
+            if(res.data.code === 200){
+                console.log('登出')
+            }
+        })
+    }
     render(){
         return (
             <ul className="setting">
                 <li><i className="iconfont">&#xe609;</i><span>夜间模式</span></li>
                 <li><i className="iconfont">&#xe674;</i><span>设置</span></li>
-                <li><i className="iconfont">&#xe64c;</i><span>退出</span></li>
+                <li onClick={this.handleToLogout}><i className="iconfont">&#xe64c;</i><span>退出</span></li>
             </ul>
         )
     }

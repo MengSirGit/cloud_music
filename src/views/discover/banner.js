@@ -18,6 +18,7 @@ class Banner extends Component{
                 this.setState({
                     sIndex: 0
                 })
+                
             }else{
                 this.setState({
                     sIndex: this.state.sIndex + 1
@@ -49,7 +50,7 @@ class Banner extends Component{
         if(banners.length > 0){
             bannerList = banners.map((e, i) => {
                 return (
-                    <li className="list" key={i} style={{width: imgWidth + 'px'}}><img src={e.picUrl} alt="" /></li>
+                    <li className="list" key={i} style={{width: imgWidth + 'px'}}><img src={e.imageUrl} alt="" /></li>
                 )
             })
         }

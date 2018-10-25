@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
-import { withRouter, Link } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import {connect} from 'react-redux'
-import {playMusic} from '../../store/actions'
+import {currMusic} from '../../store/actions'
 import * as api from '../../api'
 
 import Back from '../../components/Back'
@@ -61,7 +61,7 @@ class Search extends Component {
             searchResult = data['result']['songs'].map((e, i) => {
                 return (
                     // **搜索跳转暂定播放页**
-                    <li key={i} className="result-list" onClick={() => this.handleSendSongId(e.id)}><Link to="/playpage"><i className="iconfont">&#xe607;</i><span>{e.name}</span>-<span>{e.artists[0].name}</span></Link></li>
+                    <li key={i} className="result-list" onClick={() => this.handleSendSongId(e.id)}><i className="iconfont">&#xe607;</i><span>{e.name}</span>-<span>{e.artists[0].name}</span></li>
                 )
             })
         }
@@ -89,7 +89,7 @@ class Search extends Component {
 const mapDispatchToProps = (dispatch) => {
     return {
         onHandleSendSongId: (id) => {
-            dispatch(playMusic(id))
+            dispatch(currMusic(id))
         }
     }
 }

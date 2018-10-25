@@ -205,6 +205,9 @@ textarea {
     margin-top: .8rem;
     outline: none;
 }
+.left-login .login-btn a{
+    color: #fff;
+}
 .side-nav ul {
     background-color: #fff;
     margin-bottom: .3rem;
@@ -233,4 +236,46 @@ textarea {
     justify-content: space-between;
     z-index: 10;
     margin-bottom: 0;
+}
+
+.login-main {
+    text-align: center;
+}
+.login-main .login-logo{
+    width: 4rem;
+    height: 4rem;
+    margin: 5rem auto;
+    border-radius: 5px;
+    overflow: hidden;
+}
+.login-main .login-logo img{
+    width: 100%;
+}
+.login-main input{
+    display: block;
+    min-width: 17rem;
+    border: 1px solid #f5f5f5;
+    padding: .8rem 1rem;
+    border-radius: 5px;
+    margin: 1rem auto;
+    color: #8d8d8d;
+    background: none;
+}
+.login-main input:focus{
+    box-shadow: 0 1px 12px rgb(216, 30, 6, .2);
+}
+.login-main input::-webkit-input-placeholder {
+    color: #dadada;
+}
+.login-main input:-webkit-autofill {
+    background: none;
+}
+.login-main button {
+    min-width: 17rem;
+    border: 0;
+    padding: .6rem 1rem;
+    border-radius: 5px;
+    margin-top: 1rem;
+    color: #fff;
+    background-color: #d81e06;
 }

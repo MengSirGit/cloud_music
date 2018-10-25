@@ -18,7 +18,6 @@ class SongSheetDetail extends PureComponent {
     }
     componentWillMount(){
         let data = this.props.data
-        // console.log(data)
         if(Object.keys(data).length > 0){
             this.ID = data.id
             api.getDetail(this.ID).then(res => {

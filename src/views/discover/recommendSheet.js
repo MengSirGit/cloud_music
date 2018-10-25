@@ -16,13 +16,13 @@ class RecommendSheet extends Component {
     }
     componentWillMount(){
         //获取推荐歌单
-        api.getRecommonSong().then(response => {
+        api.getDayRecommonSheet().then(response => {
             if(response.data.code === 200){
                 this.setState({
-                    recommondSong: response.data.result
+                    recommondSong: response.data.recommend
                 })
                 //底部默认播放推荐歌单第一个
-                this.props.onCurrMusic(response.data.result[1].id)
+                this.props.onCurrMusic(response.data.recommend[1].id)
             }
         })
     }
@@ -47,9 +47,6 @@ class RecommendSheet extends Component {
                                             <Link to="/songsheet" onClick={() => this.handleSendSheet(data.id, data.type)}>
                                                 <p className="thum"><img src={data.picUrl} alt="" /></p>
                                                 <p className="title">{data.name}</p>
-                                                {
-                                                    data.type !== 0 && data.type !== undefined ? <p className="artist">{data.artist.name}</p>  : false
-                                                }
                                             </Link>
                                         </li>
                                     )

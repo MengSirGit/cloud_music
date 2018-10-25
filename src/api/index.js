@@ -2,8 +2,37 @@ import axios from 'axios'
 
 axios.defaults.baseURL = `http://localhost:3000`
 
+//手机号登录
+export const loginPhone = (phone, password) => axios.get(`login/cellphone`, {
+    params: {
+        phone,
+        password
+    },
+    withCredentials: true
+})
+
+//刷新登录
+export const loginRefresh = () => axios.get(`login/refresh`, {
+    withCredentials: true
+})
+
+//退出登录
+export const logout = () => axios.get(`logout`, {
+    withCredentials: true
+})
+
+//登录状态
+export const loginStatus = () => axios.get(`login/status`, {
+    withCredentials: true
+})
+
 //banner
 export const getBanner = () => axios.get(`banner`) 
+
+//每日推荐歌单(登录)
+export const getDayRecommonSheet = () => axios.get(`recommend/resource`, {
+    withCredentials: true
+})
 
 //推荐歌单
 export const getRecommonSong = () => axios.get(`personalized`)
