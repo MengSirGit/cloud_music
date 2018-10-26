@@ -1,15 +1,30 @@
 import React, {Component} from 'react'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
 import * as api from '../api'
+import { getLoginValue } from '../store/actions'
 
 //登录
 class Login extends Component {
     render(){
+        let _props = this.props.user,
+            code = _props.code
+        // console.log(this.props.user)
         return (
             <div className="left-login">
-                <p>登录网易云音乐</p>
-                <p>320k高音质无限下载，手机电脑多端同步</p>
-                <Link to="/login"><button className="login-btn">立即登录</button></Link>
+                {
+                    code === 200 ?
+                        <div className="user-infor">
+                            <div className="user-appear"><img src={_props.profile.avatarUrl} alt="" /></div>
+                            <p className="user-name">{_props.profile.nickname}</p>
+                        </div>
+                        :
+                        <React.Fragment>
+                            <p>登录网易云音乐</p>
+                            <p>320k高音质无限下载，手机电脑多端同步</p>
+                            <Link to="/login"><button className="login-btn">立即登录</button></Link>
+                        </React.Fragment>
+                }
             </div>
         )
     }
@@ -110,16 +125,18 @@ class SideNav extends Component {
         }
     }
     componentDidMount(){
+        this.props.onLoginValue()
         document.addEventListener('touchend', this.toggleNav)
     }
     componentWillUnmount(){
         document.removeEventListener('touchend', this.toggleNav)
     }
     render(){
+        let user = this.props.value
         return (
             <div id='side-nav' className="side-nav">
                 {/* 登录 */}
-                <Login />
+                <Login user={user} />
                 {/* 推送 */}
                 <PushNew />
                 {/* 社交 */}
@@ -133,4 +150,18 @@ class SideNav extends Component {
     }
 }
 
-export default SideNav
+const mapStateToProps = (state) => {
+    return {
+        value: state.loginValueReducer
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onLoginValue: () => {
+            dispatch(getLoginValue())
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SideNav)

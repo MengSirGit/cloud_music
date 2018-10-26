@@ -34,6 +34,11 @@ export const getDayRecommonSheet = () => axios.get(`recommend/resource`, {
     withCredentials: true
 })
 
+//每日推荐歌曲(登录)
+export const getDayRecommonSong = () => axios.get(`recommend/songs`, {
+    withCredentials: true
+})
+
 //推荐歌单
 export const getRecommonSong = () => axios.get(`personalized`)
 

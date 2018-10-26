@@ -7,6 +7,8 @@ import App from '../App'
 
 //登录页
 const Login = () => import('../views/login')
+//每日推荐歌曲列表
+const DayRecommendSong = () => import('../views/recommendSong')
 //推荐页
 const Recommend = () => import('../views/discover')
 //本地页
@@ -28,6 +30,11 @@ const routes = [
     {
         path: '/login',
         component: Login
+    },
+    //每日推荐歌曲
+    {
+        path: '/recommendsong',
+        component: DayRecommendSong
     },
     //推荐
     {

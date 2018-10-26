@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import { withRouter } from 'react-router-dom'
-import {connect} from 'react-redux'
-import {currMusic} from '../../store/actions'
+import { connect } from 'react-redux'
+import { getMusicDetail } from '../../store/actions'
 import * as api from '../../api'
 
 import Back from '../../components/Back'
@@ -89,7 +89,7 @@ class Search extends Component {
 const mapDispatchToProps = (dispatch) => {
     return {
         onHandleSendSongId: (id) => {
-            dispatch(currMusic(id))
+            dispatch(getMusicDetail(id))
         }
     }
 }

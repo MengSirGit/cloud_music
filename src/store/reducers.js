@@ -1,4 +1,27 @@
-import { CHANGE_CURR_LIST, PLAY_MUSIC_LIST, SONG_SHEET_DETAIL, SHEET_DISCUSS, SONG_DISCUSS} from './actionTypes'
+import {
+        CHANGE_CURR_LIST,
+        PLAY_MUSIC_LIST, 
+        SONG_SHEET_DETAIL, 
+        MUSIC_DETAIL,
+        SHEET_DISCUSS, 
+        SONG_DISCUSS,
+        LOGIN_VALUE,
+        DAY_RECOMMEND_SONG
+    } from './actionTypes'
+
+//检测登录状态
+export const loginValueReducer = (state={
+    code: 0,
+    profile: {},
+    bindings: []
+}, action) => {
+    switch(action.type){
+        case LOGIN_VALUE:
+            return Object.assign({}, state, action.data)
+        default: 
+            return state
+    }
+}
 
 //切换音乐
 export const currMusicReducer = (state=[], action) => {
@@ -45,6 +68,26 @@ export const songDiscussReducer = (state=[], action) => {
     switch(action.type){
         case SONG_DISCUSS:
             return action
+        default:
+            return state
+    }
+}
+
+//歌曲详情
+export const musicDetailReducer = (state={}, action) => {
+    switch(action.type){
+        case MUSIC_DETAIL:
+            return action
+        default:
+            return state
+    }
+}
+
+//每日推荐歌曲
+export const dayRecommendReducer = (state=[], action) => {
+    switch(action.type){
+        case DAY_RECOMMEND_SONG:
+            return action.data.recommend
         default:
             return state
     }

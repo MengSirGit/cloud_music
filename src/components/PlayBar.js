@@ -61,6 +61,7 @@ class PlayBar extends Component {
 
     //api请求
     apiAsk(id){
+        console.log(id)
         //获取音频链接
         api.getMusicUrl(id).then(res => {
             if(res.data.code === 200){
@@ -89,11 +90,16 @@ class PlayBar extends Component {
         }
     }
     componentWillReceiveProps(nextProps){
-        this.apiAsk(nextProps.data[0].id)
+        // this.apiAsk(nextProps.data[0].id)
+        if(nextProps.single !== undefined) this.apiAsk(nextProps.single.songs[0].id)
     }
     render(){
         let data = this.props.data,
+            singleData = this.props.single,
             audio = null
+        //continued...
+        let control = false
+        if(singleData === undefined) return false
         if(this.state.url.length > 0) audio = this.state.url[0].url
         //歌单列表选歌
         if(this.mark !== this.props.mark && this.props.mark !== undefined){  
@@ -104,44 +110,21 @@ class PlayBar extends Component {
         return (
             <React.Fragment>
                 {
-                    data ? 
+                    !control ?
                         <div className="play-bar">
                             <audio id="audio" src={audio} ref="audio"></audio>  
-                                <div className="music-news clearfix" 
-                                    onTouchStart={(e) => {this.handleTouchStart(e)}}
-                                    onTouchMove={() => {
-                                        this.isCut = true
-                                        this.refs.audio.pause()
-                                    }}
-                                    onTouchEnd={(e) => {
-                                        // console.log(this.index)
-                                        this.handleTouchEnd(e)
-                                        //切歌
-                                        this.changeMusic()
-                                        //请求音频地址
-                                        this.apiAsk(data[this.index]['id']) 
-                                        //切歌自动播放
-                                        if(this.isCut && this.refs.audio.paused){
-                                            setTimeout(() => {
-                                                this.refs.audio.play()
-                                                this.setState({
-                                                    play_status: true
-                                                })
-                                            }, 300)
-                                        } 
-                                    }
-                                }>
-                                    <div className="music-img"><img src={data[this.index]['al']['picUrl']} alt="" /></div>
-                                    <Link to="/playpage" onClick={() => {this.props.saveMusic(data[this.index].id)}}>
+                                <div className="music-news clearfix">
+                                    <div className="music-img"><img src={singleData.songs[0].al.picUrl} alt="" /></div>
+                                    <Link to="/playpage" onClick={() => {this.props.saveMusic(singleData.songs[0].id)}}>
                                         <div className="music-title">
-                                            <p>{data[this.index]['name']}</p>
-                                            <p>{data[this.index]['ar'][0]['name']}</p>
+                                            <p>{singleData.songs[0].name}</p>
+                                            <p>{singleData.songs[0].ar[0].name}</p>
                                         </div>
                                     </Link>
                                 </div>
                                 <div className="music-btn">
                                     <div className="play-ctrl"><i className="iconfont" onClick={() => {
-                                        this.handleSaveMusic(data[this.index]['id'])
+                                        this.handleSaveMusic()
                                     }}>
                                         {
                                             this.state.play_status ? '\ue501' : '\ue602'
@@ -151,7 +134,54 @@ class PlayBar extends Component {
                                 </div>
                         </div> 
                         :
-                        <p style={{textAlign: 'center', fontSize: '.8rem', color: '#8d8d8d'}}>加载中...</p>
+                        (data ? 
+                            <div className="play-bar">
+                                <audio id="audio" src={audio} ref="audio"></audio>  
+                                    <div className="music-news clearfix" 
+                                        onTouchStart={(e) => {this.handleTouchStart(e)}}
+                                        onTouchMove={() => {
+                                            this.isCut = true
+                                            this.refs.audio.pause()
+                                        }}
+                                        onTouchEnd={(e) => {
+                                            // console.log(this.index)
+                                            this.handleTouchEnd(e)
+                                            //切歌
+                                            this.changeMusic()
+                                            //请求音频地址
+                                            this.apiAsk(data[this.index]['id']) 
+                                            //切歌自动播放
+                                            if(this.isCut && this.refs.audio.paused){
+                                                setTimeout(() => {
+                                                    this.refs.audio.play()
+                                                    this.setState({
+                                                        play_status: true
+                                                    })
+                                                }, 300)
+                                            } 
+                                        }
+                                    }>
+                                        <div className="music-img"><img src={data[this.index]['al']['picUrl']} alt="" /></div>
+                                        <Link to="/playpage" onClick={() => {this.props.saveMusic(data[this.index].id)}}>
+                                            <div className="music-title">
+                                                <p>{data[this.index]['name']}</p>
+                                                <p>{data[this.index]['ar'][0]['name']}</p>
+                                            </div>
+                                        </Link>
+                                    </div>
+                                    <div className="music-btn">
+                                        <div className="play-ctrl"><i className="iconfont" onClick={() => {
+                                            this.handleSaveMusic(data[this.index]['id'])
+                                        }}>
+                                            {
+                                                this.state.play_status ? '\ue501' : '\ue602'
+                                            }
+                                        </i></div>
+                                        <div className="collect"><i className="iconfont">&#xe610;</i></div>
+                                    </div>
+                            </div> 
+                            :
+                            <p style={{textAlign: 'center', fontSize: '.8rem', color: '#8d8d8d'}}>加载中...</p>)
                 }
             </React.Fragment>
         )
@@ -162,7 +192,8 @@ const mapStateToProps = (state) => {
     return {
         data: state.currMusicReducer.event,
         _index: state.currMusicReducer.index,
-        mark: state.currMusicReducer.mark
+        mark: state.currMusicReducer.mark,
+        single: state.musicDetailReducer.data
     }
 }
 
