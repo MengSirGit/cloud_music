@@ -45,10 +45,10 @@ export const playMusic = (id) => {
 }
 
 //切换歌曲
-export const changeCurrMusic = (event, index, mark) => {
+export const changeCurrMusic = (data, index, mark) => {
     return {
         type: CHANGE_CURR_LIST,
-        event: event,
+        data: data,
         index: index,
         mark: mark
     }

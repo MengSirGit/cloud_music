@@ -28,6 +28,8 @@ export const currMusicReducer = (state=[], action) => {
     switch(action.type){
         case CHANGE_CURR_LIST:
             return action
+        case MUSIC_DETAIL:
+            return action
         default:
             return state
     }
@@ -67,16 +69,6 @@ export const sheetDiscussReducer = (state=[], action) => {
 export const songDiscussReducer = (state=[], action) => {
     switch(action.type){
         case SONG_DISCUSS:
-            return action
-        default:
-            return state
-    }
-}
-
-//歌曲详情
-export const musicDetailReducer = (state={}, action) => {
-    switch(action.type){
-        case MUSIC_DETAIL:
             return action
         default:
             return state

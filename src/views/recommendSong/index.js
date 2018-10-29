@@ -11,6 +11,7 @@ class DayRecommendSong extends Component {
     componentWillMount(){
         this.props.onDayRecommendSong()
     }
+    
     render(){
         return (
             <div className="sheet-box">

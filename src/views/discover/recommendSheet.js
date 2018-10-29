@@ -44,7 +44,9 @@ class RecommendSheet extends Component {
                                 if(i < 6){
                                     return (
                                         <li key={i}>
-                                            <Link to="/songsheet" onClick={() => this.handleSendSheet(data.id, data.type)}>
+                                            <Link to="/songsheet" onClick={() => {
+                                                this.handleSendSheet(data.id, data.type)
+                                            }}>
                                                 <p className="thum"><img src={data.picUrl} alt="" /></p>
                                                 <p className="title">{data.name}</p>
                                             </Link>

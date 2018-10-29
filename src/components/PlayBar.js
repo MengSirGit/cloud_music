@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {playMusic} from '../store/actions'
+import {CHANGE_CURR_LIST, MUSIC_DETAIL} from '../store/actionTypes'
 
 import * as api from '../api'
 
@@ -19,6 +20,9 @@ class PlayBar extends Component {
         //歌曲索引
         this.index = 0
         this.mark = 0
+        //判断是单曲还是歌单
+        this.shape = true
+        
         this.state = {
             play_id: null,
             //音频地址
@@ -61,15 +65,16 @@ class PlayBar extends Component {
 
     //api请求
     apiAsk(id){
-        console.log(id)
-        //获取音频链接
-        api.getMusicUrl(id).then(res => {
-            if(res.data.code === 200){
-                this.setState({
-                    url: res.data.data
-                })
-            }
-        })
+        if(id !== undefined) {
+            //获取音频链接
+            api.getMusicUrl(id).then(res => {
+                if(res.data.code === 200){
+                    this.setState({
+                        url: res.data.data
+                    })
+                }
+            })
+        }
     }
 
     //播放点击歌曲
@@ -90,16 +95,21 @@ class PlayBar extends Component {
         }
     }
     componentWillReceiveProps(nextProps){
-        // this.apiAsk(nextProps.data[0].id)
-        if(nextProps.single !== undefined) this.apiAsk(nextProps.single.songs[0].id)
+        if(nextProps._type === CHANGE_CURR_LIST){
+            this.apiAsk(nextProps.data[0].id)
+        }else if(nextProps._type === MUSIC_DETAIL){
+            this.apiAsk(nextProps.data.songs[0].id)
+        }
     }
     render(){
         let data = this.props.data,
-            singleData = this.props.single,
             audio = null
-        //continued...
-        let control = false
-        if(singleData === undefined) return false
+        if(data === undefined) return false
+        if(this.props._type === CHANGE_CURR_LIST){
+            this.shape = true
+        }else if(this.props._type === MUSIC_DETAIL){
+            this.shape = false
+        }
         if(this.state.url.length > 0) audio = this.state.url[0].url
         //歌单列表选歌
         if(this.mark !== this.props.mark && this.props.mark !== undefined){  
@@ -110,15 +120,15 @@ class PlayBar extends Component {
         return (
             <React.Fragment>
                 {
-                    !control ?
+                    !this.shape ?
                         <div className="play-bar">
                             <audio id="audio" src={audio} ref="audio"></audio>  
                                 <div className="music-news clearfix">
-                                    <div className="music-img"><img src={singleData.songs[0].al.picUrl} alt="" /></div>
-                                    <Link to="/playpage" onClick={() => {this.props.saveMusic(singleData.songs[0].id)}}>
+                                    <div className="music-img"><img src={data.songs[0].al.picUrl} alt="" /></div>
+                                    <Link to="/playpage" onClick={() => {this.props.saveMusic(data.songs[0].id)}}>
                                         <div className="music-title">
-                                            <p>{singleData.songs[0].name}</p>
-                                            <p>{singleData.songs[0].ar[0].name}</p>
+                                            <p>{data.songs[0].name}</p>
+                                            <p>{data.songs[0].ar[0].name}</p>
                                         </div>
                                     </Link>
                                 </div>
@@ -190,10 +200,10 @@ class PlayBar extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        data: state.currMusicReducer.event,
+        _type: state.currMusicReducer.type,
+        data: state.currMusicReducer.data,
         _index: state.currMusicReducer.index,
         mark: state.currMusicReducer.mark,
-        single: state.musicDetailReducer.data
     }
 }
 

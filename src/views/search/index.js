@@ -26,6 +26,11 @@ class Search extends Component {
     }
     handleSendSongId(id){
         this.props.onHandleSendSongId(id)
+        //清空搜索结果
+        this.setState({
+            data: []
+        })
+        this.refs.search.value = ''
     }
     handleComposition(e){
         //中文输入结束，改变state
@@ -45,9 +50,8 @@ class Search extends Component {
 
         let inputValue = this.inputValue
 
-        if(inputValue != null){
+        if(inputValue != null && inputValue !== ''){
             api.searchAdvise(inputValue).then(res => {
-                // console.log(res['data'])
                 this.setState({
                     data: res['data']
                 })
@@ -60,8 +64,10 @@ class Search extends Component {
         if(data['code'] === 200){
             searchResult = data['result']['songs'].map((e, i) => {
                 return (
-                    // **搜索跳转暂定播放页**
-                    <li key={i} className="result-list" onClick={() => this.handleSendSongId(e.id)}><i className="iconfont">&#xe607;</i><span>{e.name}</span>-<span>{e.artists[0].name}</span></li>
+                    <li key={i} className="result-list" onClick={() => {
+                        this.handleSendSongId(e.id)
+                    }
+                    }><i className="iconfont">&#xe607;</i><span>{e.name}</span>-<span>{e.artists[0].name}</span></li>
                 )
             })
         }
