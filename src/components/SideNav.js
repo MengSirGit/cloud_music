@@ -103,9 +103,11 @@ class Setting extends Component {
 const contrlOpen = (obj) => {
     if(obj.className.indexOf('active') <= -1) obj.className += ' active'
 }
+
 const contrlOpen2 = (obj) => {
     if(obj.className.indexOf('active') > -1) obj.className = obj.className.replace(' active', '')
 }
+
 class SideNav extends Component {
     constructor(props){
         super(props)

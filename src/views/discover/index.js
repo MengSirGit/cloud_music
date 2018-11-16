@@ -1,4 +1,6 @@
-import React from 'react'
+import React, {Component} from 'react'
+import { Redirect, withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
 
 import Header from '../../components/Header'
 import Nav from './nav'
@@ -17,24 +19,41 @@ const pageMenu = {
     exclusive: '独家放送',
     radio: '主播电台'
 }
-const Recommend = () => {
-    return (
-        <React.Fragment>
-            <Header />
-            {/* 导航 */}
-            <Nav />
-            {/* banner */}
-            <Banner />
-            {/* 快速导航 */}
-            <Classify />
-            {/* 推荐歌单 */}
-            <RecommendSheet title={pageMenu.recomm}/>
-            {/* 最新音乐 */}
-            <NewMusic  title={pageMenu.new}/>
-            {/* 主播电台 */}
-            <RecommendDj title={pageMenu.radio}/>
-        </React.Fragment>
-    )
+
+class Recommend extends Component {
+    render() {
+        console.log(this.props.code)
+        return (
+            <React.Fragment>
+                {
+                    this.props.code !== 200 ?
+                        <Redirect to="/login"></Redirect>
+                    :
+                        [
+                            <Header key={'header'} />,
+                            //导航 
+                            <Nav key={'nav'} />,
+                            //banner
+                            <Banner key={'banner'} />,
+                            //快速导航
+                            <Classify key={'classify'} />,
+                            //推荐歌单
+                            <RecommendSheet title={pageMenu.recomm} key={'recommend'} />,
+                            //最新音乐
+                            <NewMusic  title={pageMenu.new} key={'newmusic'} />,
+                            //主播电台
+                            <RecommendDj title={pageMenu.radio} key={'recommendDj'}/>
+                        ]
+                }
+            </React.Fragment>
+        )
+    }
 }
 
-export default Recommend
+const mapStateToProps = (state) => {
+    return {
+        code: state.loginValueReducer.code
+    }
+}
+
+export default connect(mapStateToProps)(withRouter(Recommend))

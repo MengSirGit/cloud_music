@@ -11,27 +11,26 @@ class Header extends Component {
             video: false
         }
     }
-    shouldComponentUpdate(nextProps, nextState){
-        return  this.state.index !== nextState.index && 
-                this.state.home  !== nextState.home  &&
-                this.state.video !== nextState.video
-    }
-    componentWillMount(){
+
+    componentDidMount() {
         let href = window.location.href
-        if(href.indexOf('home') > -1){
+        if (href.indexOf('home') > -1) {
             this.setState({
                 home: true
             })
-        }else if(href.indexOf('video') > -1){
+        }
+        else if (href.indexOf('video') > -1) {
             this.setState({
                 video: true
             })
-        }else{
+        }
+        else {
             this.setState({
                 index: true
             })
         }
     }
+
     render(){
         let tab = this.state
         return (

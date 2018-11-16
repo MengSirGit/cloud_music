@@ -14,7 +14,7 @@ class RecommendSheet extends Component {
         }
         this.handleSendSheet = this.handleSendSheet.bind(this)
     }
-    componentWillMount(){
+    componentDidMount(){
         //获取推荐歌单
         api.getDayRecommonSheet().then(response => {
             if(response.data.code === 200){

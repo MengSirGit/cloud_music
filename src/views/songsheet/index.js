@@ -16,12 +16,13 @@ class SongSheetDetail extends PureComponent {
             summary: {}
         }
     }
-    componentWillMount(){
+
+    componentDidMount(){
         let data = this.props.data
-        if(Object.keys(data).length > 0){
+        if (Object.keys(data).length > 0) {
             this.ID = data.id
             api.getDetail(this.ID).then(res => {
-                if(res.data.code === 200){
+                if (res.data.code === 200) {
                     // console.log(res.data.playlist.tracks)
                     this.setState({
                         summary: res.data.playlist
@@ -30,8 +31,9 @@ class SongSheetDetail extends PureComponent {
             })
         }
     }
+
     render(){
-        if(Object.keys(this.state.summary).length === 0) return false
+        if (Object.keys(this.state.summary).length === 0) return false
         return (
             <div className="sheet-box" style={{
                 background: `url(${this.state.summary.creator.backgroundUrl}) no-repeat 50% 0`

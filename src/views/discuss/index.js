@@ -17,7 +17,7 @@ class Discuss extends PureComponent {
             newCon: null
         }
     }
-    componentWillMount(){
+    componentDidMount(){
         let id = this.props._discuss_sheet_id,
             type = this.props._discuss_sheet_type
         //热门评论

@@ -8,7 +8,8 @@ import Inventory from './inventory'
 import '../../css/songsheet.css'
 
 class DayRecommendSong extends Component {
-    componentWillMount(){
+
+    componentDidMount(){
         this.props.onDayRecommendSong()
     }
     

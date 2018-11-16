@@ -24,17 +24,32 @@ class PlayBar extends Component {
         this.shape = true
         
         this.state = {
+            //当前歌曲id
+            id: 0,
             play_id: null,
             //音频地址
             url: [],
             play_status: false,
             audio_url : null,
+            apiAsk: (id, currentID) => {
+                if (id !== undefined) {
+                    //获取音频链接
+                    api.getMusicUrl(id).then(res => {
+                        // console.log('request')
+                        if (res.data.code === 200) {
+                            this.setState({
+                                url: res.data.data,
+                                id: currentID || 0
+                            })
+                        }
+                    })
+                }
+            }
         }
         this.handleTouchEnd = this.handleTouchEnd.bind(this)
         this.handleTouchStart = this.handleTouchStart.bind(this)
         this.changeMusic = this.changeMusic.bind(this)
         this.handleSaveMusic = this.handleSaveMusic.bind(this)
-        this.apiAsk = this.apiAsk.bind(this)
     }
 
     handleTouchStart(e){
@@ -44,79 +59,85 @@ class PlayBar extends Component {
     handleTouchEnd(e){
         let end = e.changedTouches[0].pageX
         // console.log([this.start, end])
-        if(end > this.start){
+        if (end > this.start) {
             this.dir = false
-        }else if(end < this.start){
+        }
+        else if (end < this.start) {
             this.dir = true
-        }else{
+        }
+        else {
             this.dir = null
         }
     }
 
     changeMusic(){
-        if(this.dir === true && this.index <= this.props.data.length - 2){
+        if (this.dir === true && this.index <= this.props.data.length - 2) {
             this.index = this.index + 1
-        }else if(this.dir === false && this.index >= 1 ){
-            this.index = this.index - 1
-        }else if(this.dir === null){
-            this.index = this.index
         }
-    }
-
-    //api请求
-    apiAsk(id){
-        if(id !== undefined) {
-            //获取音频链接
-            api.getMusicUrl(id).then(res => {
-                if(res.data.code === 200){
-                    this.setState({
-                        url: res.data.data
-                    })
-                }
-            })
+        else if (this.dir === false && this.index >= 1 ) {
+            this.index = this.index - 1
+        }
+        else if (this.dir === null) {
+            this.index = this.index
         }
     }
 
     //播放点击歌曲
     handleSaveMusic(id){
-        if(this.isCut){
-            this.apiAsk(id)
+        if (this.isCut) {
+            this.state.apiAsk(id)
             this.isCut = false
         }
         //播放控制
-        if(this.refs.audio.paused){
+        if (this.refs.audio.paused) {
             this.setState({play_status: true})
             setTimeout(()=>{
                 this.refs.audio.play()
             }, 200)
-        }else{
+        }
+        else {
             this.setState({play_status: false})
             this.refs.audio.pause()
         }
     }
-    componentWillReceiveProps(nextProps){
-        if(nextProps._type === CHANGE_CURR_LIST){
-            this.apiAsk(nextProps.data[0].id)
-        }else if(nextProps._type === MUSIC_DETAIL){
-            this.apiAsk(nextProps.data.songs[0].id)
+
+    //react V16 生命周期getDerivedStateFromProps, 不能调用this
+    static getDerivedStateFromProps(nextProps, prevState) {
+
+        if (nextProps._type === undefined) return null
+
+        if (nextProps._type === MUSIC_DETAIL) {
+            if (prevState.id !== nextProps.data.songs[0].id) { 
+                prevState.apiAsk(nextProps.data.songs[0].id, nextProps.data.songs[0].id)
+            }
         }
+
+        return null
     }
+
     render(){
+
         let data = this.props.data,
             audio = null
-        if(data === undefined) return false
-        if(this.props._type === CHANGE_CURR_LIST){
+
+        if (data === undefined) return false
+
+        if (this.props._type === CHANGE_CURR_LIST) {
             this.shape = true
-        }else if(this.props._type === MUSIC_DETAIL){
+        }
+        else if (this.props._type === MUSIC_DETAIL) {
             this.shape = false
         }
-        if(this.state.url.length > 0) audio = this.state.url[0].url
+
+        if (this.state.url.length > 0) audio = this.state.url[0].url
+
         //歌单列表选歌
-        if(this.mark !== this.props.mark && this.props.mark !== undefined){  
+        if (this.mark !== this.props.mark && this.props.mark !== undefined) {  
             this.index = this.props._index
             this.mark = this.props.mark
-            this.apiAsk(data[this.index]['id'])
+            this.state.apiAsk(data[this.index]['id'])
         }
+
         return (
             <React.Fragment>
                 {
@@ -159,7 +180,7 @@ class PlayBar extends Component {
                                             //切歌
                                             this.changeMusic()
                                             //请求音频地址
-                                            this.apiAsk(data[this.index]['id']) 
+                                            this.state.apiAsk(data[this.index]['id']) 
                                             //切歌自动播放
                                             if(this.isCut && this.refs.audio.paused){
                                                 setTimeout(() => {

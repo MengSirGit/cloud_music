@@ -27,7 +27,10 @@ class Banner extends Component{
             // setTimeout(fn, 5000)
         }, 5000)
     }
-    componentWillMount(){
+    componentWillUnmount(){
+        clearInterval(this.timerID)
+    }
+    componentDidMount(){
         //获取banner信息
         api.getBanner().then(response => {
             if(response.data.code === 200){
@@ -36,11 +39,7 @@ class Banner extends Component{
                 })
             }
         })
-    }
-    componentWillUnmount(){
-        clearInterval(this.timerID)
-    }
-    componentDidMount(){
+
         this.autoPlay()
     }
     render(){

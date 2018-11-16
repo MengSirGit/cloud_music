@@ -11,7 +11,7 @@ class RecommendDj extends Component {
             anchorRadio: []
         }
     }
-    componentWillMount(){
+    componentDidMount(){
         //获取主播电台
         api.djRecommend().then(response => {
             if(response.data.code === 200){

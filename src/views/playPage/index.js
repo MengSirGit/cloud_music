@@ -45,30 +45,25 @@ class PlayPage extends PureComponent {
         this.songClock = this.songClock.bind(this)
         this.animationTimeBase = this.animationTimeBase.bind(this)
     }
-    componentWillMount(){
-        let id = this.props.data
-        //获取歌曲详情
-        api.getSongDetail(id).then(res => {
-            if(res.data.code === 200){
-                this.setState({
-                    infor: res.data.songs
-                })
-            }
-        })
-    }
     //时间轴动画
     animationTimeBase = () => {
         let _init = this.init.toFixed(2) * 1
-        if(_init < 100) this.init = _init + this.DISTANCE
+        if (_init < 100) this.init = _init + this.DISTANCE
     }
     //歌曲时间进度
     songClock = (time) => {
-        if(time > 0){
+        if (time > 0) {
             let _time = Math.round(time),
                 _floor = Math.floor(_time / 60),
                 _second = _time - _floor * 60
-            // time < 60 ? this.setState({ second: _second }) : this.setState({ minute: _floor, second: _second })
-            time < 60 ? this.second = _second : (this.minute = _floor, this.second = _second)
+            // time < 60 ? this.second = _second : (this.minute = _floor, this.second = _second)
+            if (time < 60) {
+                this.second = _second
+            }
+            else {
+                this.minute = _floor
+                this.second = _second
+            }
             this.minute >= 10 ? this.setState({Mclock: this.minute.toString()}) : this.setState({Mclock: `0${this.minute}`})
             this.second >= 10 ? this.setState({Sclock: this.second.toString()}) : this.setState({Sclock: `0${this.second}`})
         }
@@ -76,17 +71,19 @@ class PlayPage extends PureComponent {
     //切换播放状态
     handlePlayStatus(){
         this.state.playStatus ? this.setState({playStatus: false}) : this.setState({playStatus: true})
-        if(this.state.playStatus){
+        if (this.state.playStatus) {
             this.audio.pause()
             clearInterval(this.timerID)
             this.timerID = null
-        }else{
+        }
+        else {
             this.audio.play()
             this.timerID = setInterval(()=>{
-                if((this.minute * 60 + this.second) < this.duration){
+                if ((this.minute * 60 + this.second) < this.duration) {
                     this.songClock(this.audio.currentTime)
                     this.animationTimeBase()
-                }else{
+                }
+                else {
                     clearInterval(this.timerID)
                     this.setState({playStatus: false})
                 }
@@ -94,6 +91,17 @@ class PlayPage extends PureComponent {
         }
     }
     componentDidMount(){
+
+        let id = this.props.data
+        //获取歌曲详情
+        api.getSongDetail(id).then(res => {
+            if (res.data.code === 200) {
+                this.setState({
+                    infor: res.data.songs
+                })
+            }
+        })
+
         //歌曲时长
         this.audio = document.querySelector('#audio')
         let timeEnd = document.querySelector('#time-end'),
@@ -101,7 +109,8 @@ class PlayPage extends PureComponent {
         this.duration = _duration
         this.DISTANCE = (100 / _duration).toFixed(2) * 1
         this.init =  (this.DISTANCE * Math.round(this.audio.currentTime))
-        if(!this.audio.paused){
+
+        if (!this.audio.paused) {
             this.sumTime = parseInt(_duration, 10) / 60
             this.min = Math.floor(this.sumTime)
             this.sec = Math.floor((this.sumTime.toFixed(2) * 1 - this.min) * 60)
@@ -110,12 +119,15 @@ class PlayPage extends PureComponent {
             //更改播放状态
             this.setState({playStatus: true})
             this.arcBack = document.querySelector('.arc-back')
-            if(this.arcBack.className.indexOf('active') <= -1) this.arcBack.className += ' active'
+
+            if (this.arcBack.className.indexOf('active') <= -1) this.arcBack.className += ' active'
+
             this.timerID = setInterval(()=>{
-                if((this.minute * 60 + this.second) < _duration){
+                if ((this.minute * 60 + this.second) < _duration) {
                     this.songClock(this.audio.currentTime)
                     this.animationTimeBase()
-                }else{
+                }
+                else {
                     clearInterval(this.timerID)
                     this.setState({playStatus: false})
                 }
@@ -129,7 +141,7 @@ class PlayPage extends PureComponent {
     render(){
         let infor = this.state.infor,
             bg = null
-        if(infor.length > 0) bg = infor[0]['al']['picUrl']
+        if (infor.length > 0) bg = infor[0]['al']['picUrl']
         return (
             <article className="page-box">
                 {/* 标签 */}

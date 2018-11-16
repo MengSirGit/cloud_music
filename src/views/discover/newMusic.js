@@ -11,7 +11,7 @@ class NewMusic extends Component {
             newSong: []
         }
     }
-    componentWillMount(){
+    componentDidMount(){
         //获取最新音乐
         api.newPlate().then(response => {
             if(response.data.code === 200){
