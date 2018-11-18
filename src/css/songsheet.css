@@ -41,6 +41,44 @@
     box-sizing: border-box;
     background-color: rgba(0,0,0,.6);
 }
+.sheet-summary .calender {
+    position: relative;
+    width: 4rem;
+    height: 4rem;
+    margin-bottom: 1rem;
+    border: 2.5px solid #fff;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #fff;
+}
+.sheet-summary .calender p {
+    margin-top: .9rem;
+    border-top: 2.5px solid #fff;
+    line-height: 1.7;
+}
+.sheet-summary .calender::before,
+.sheet-summary .calender::after {
+    content: "";
+    position: absolute;
+    width: 4px;
+    height: 10px;
+    top: -6px;
+    border-radius: 3px;
+    background-color: #fff;
+}
+.sheet-summary .calender::before {
+    left: .7rem;
+}
+.sheet-summary .calender::after {
+    left: 2.7rem;
+}
+.sheet-summary .prompt {
+    margin-bottom: 1rem;
+    font-size: .6rem;
+    color: #b8b8b8;
+}
 /* .sheet-summary .sheet-summary-show{
 } */
 .sheet-summary-show .sheet-summary-thum{

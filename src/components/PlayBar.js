@@ -158,7 +158,7 @@ class PlayBar extends Component {
                                         this.handleSaveMusic()
                                     }}>
                                         {
-                                            this.state.play_status ? '\ue501' : '\ue602'
+                                            this.state.play_status ? '\ue602' : '\ue605'
                                         }
                                     </i></div>
                                     <div className="collect"><i className="iconfont">&#xe610;</i></div>
@@ -205,7 +205,7 @@ class PlayBar extends Component {
                                             this.handleSaveMusic(data[this.index]['id'])
                                         }}>
                                             {
-                                                this.state.play_status ? '\ue501' : '\ue602'
+                                                this.state.play_status ? '\ue602' : '\ue605'
                                             }
                                         </i></div>
                                         <div className="collect"><i className="iconfont">&#xe610;</i></div>

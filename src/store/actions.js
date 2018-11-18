@@ -22,7 +22,7 @@ export const loginValue = (data) => {
 //登录信息
 export const getLoginValue = () => {
     return (dispatch) => {
-        api.loginRefresh().then(res => {
+        api.loginStatus().then(res => {
             if(res.data.code === 200){
                 dispatch(loginValue(res.data))
             }

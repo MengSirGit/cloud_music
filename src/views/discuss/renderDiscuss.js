@@ -17,7 +17,7 @@ const RenderDiscuss = (props) => {
                                     </div>
                                     <div className="discuss-like">
                                         <span className="list-count">{e.likedCount > 0 ? e.likedCount : false}</span>
-                                        <i className="iconfont">&#xe503;</i>
+                                        <i className="iconfont">&#xe604;</i>
                                     </div>
                                 </div>
                                 <div className="discuss-down">

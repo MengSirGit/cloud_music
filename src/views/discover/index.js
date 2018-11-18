@@ -22,11 +22,11 @@ const pageMenu = {
 
 class Recommend extends Component {
     render() {
-        console.log(this.props.code)
+        // console.log(this.props.code)
         return (
             <React.Fragment>
                 {
-                    this.props.code !== 200 ?
+                    false ?
                         <Redirect to="/login"></Redirect>
                     :
                         [

@@ -174,7 +174,7 @@ class PlayPage extends PureComponent {
                         <i className="iconfont prev">&#xe61f;</i>
                         <i className="iconfont play"
                             onClick={this.handlePlayStatus}
-                        >{!this.state.playStatus ? '\ue602' : '\ue501'}</i>
+                        >{!this.state.playStatus ? '\ue605' : '\ue602'}</i>
                         <i className="iconfont next">&#xe61f;</i>
                         <i className="iconfont list">&#xe610;</i>
                     </div>
