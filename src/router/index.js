@@ -23,6 +23,8 @@ const PlayPage = () => import('../views/playPage')
 const SongSheet = () => import('../views/songsheet')
 //评论
 const Discuss = () => import('../views/discuss')
+//排行榜
+const TopList = () => import('../views/topList')
 
 //路由
 const routes = [
@@ -71,6 +73,11 @@ const routes = [
     {
         path: '/discuss',
         component: Discuss
+    },
+    //排行榜
+    {
+        path: '/toplist',
+        component: TopList
     },
 ]
 

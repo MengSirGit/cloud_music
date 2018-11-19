@@ -208,8 +208,10 @@
 .inventory-detail .detail-left .iconfont{
     font-size: 1.2rem;
     margin-right: .7rem;
+    vertical-align: bottom;
 }
 .inventory-detail .detail-left em {
+    line-height: 20px;
     font-style: normal;
 }
 .inventory-detail .detail-left em span:nth-of-type(2) {

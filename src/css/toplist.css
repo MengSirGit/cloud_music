@@ -1,0 +1,68 @@
+@charset "utf-8";
+
+.top {
+    padding: 0 .5rem;
+}
+.top .sheet-head {
+    background-color: rgba(0,0,0,.8);
+}
+.official-rank {
+    margin-top: 3rem;
+}
+.world-rank .rank-node {
+    float: left;
+    width: 6rem;
+}
+.world-rank .rank-list {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.official-rank h3,
+.world-rank h3 {
+    font-size: 1rem;
+    line-height: 3;
+}
+.rank-node {
+    margin-bottom: .5rem;
+}
+.rank-node .rank-thum,
+.rank-node .world-rank-thum  {
+    position: relative;
+    float: left;
+    width: 6rem;
+    border-radius: 3px;
+    overflow: hidden;
+}
+.world-rank .rank-node p {
+    font-size: .7rem;
+    line-height: 1.7;
+}
+.rank-node .intro {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding-left: .5rem;
+    background-image: -webkit-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,.2));
+    box-sizing: border-box;
+    font-size: .5rem;
+    color: #fff;
+    line-height: 1.8;
+}
+.rank-node .rank-thum img,
+.rank-node .world-rank-thum img {
+    width: 100%;
+}
+.rank-node .rank-tracks {
+    margin-left: 6.5rem;
+    border-bottom: 1px solid #f7f7f7;
+}
+.rank-node .rank-tracks .track-node {
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    line-height: 2.7;
+    font-size: .7rem;
+}

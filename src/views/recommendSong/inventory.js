@@ -1,25 +1,24 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {currMusic} from '../../store/actions'
+import {getMusicDetail} from '../../store/actions'
 
 class Inventory extends Component {
     constructor(props){
         super(props)
         this.handleSendId = this.handleSendId.bind(this)
     }
-    handleSendId(id, index, mark){
+    handleSendId(id){
         // console.log(id)
-        this.props.onHandleSendId(id, index, mark)
+        this.props.onHandleSendId(id)
     }
     render(){
-        let data = this.props.props,
-            mark = 1
+        let data = this.props.props
         if(data.length === 0) return false
         return (
             <article className="inventory">
                     <div className="inventory-detail clearfix">
                         <div className="detail-left">
-                            <i className="iconfont">&#xe602;</i>
+                            <i className="iconfont">&#xe605;</i>
                             <em><span>播放全部</span></em>
                         </div>
                     </div>
@@ -28,8 +27,7 @@ class Inventory extends Component {
                             data.map((e, i) => {
                                 return (
                                     <li className="clearfix" key={i} onClick={ () => {
-                                        this.handleSendId(e.id, i, mark)
-                                        mark++
+                                        this.handleSendId(e.id)
                                     }}>
                                         <div className="index">{i + 1}</div>
                                         <div className="inventory-box">
@@ -57,8 +55,8 @@ class Inventory extends Component {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onHandleSendId: (id, index, mark) => {
-            dispatch(currMusic(id, index, mark))
+        onHandleSendId: (id) => {
+            dispatch(getMusicDetail(id))
         }
     }
 }

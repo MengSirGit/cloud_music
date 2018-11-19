@@ -18,8 +18,10 @@ const Classify = () => (
             <p className="caption">歌单</p>
         </li>
         <li>
-            <p className="arc-back"><i className="iconfont">&#xe68d;</i></p>
-            <p className="caption">排行榜</p>
+            <Link to="/toplist">
+                <p className="arc-back"><i className="iconfont">&#xe68d;</i></p>
+                <p className="caption">排行榜</p>
+            </Link>
         </li>
     </ul>
 )
