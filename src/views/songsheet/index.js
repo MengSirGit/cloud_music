@@ -33,7 +33,7 @@ class SongSheetDetail extends PureComponent {
     }
 
     render(){
-        if (Object.keys(this.state.summary).length === 0) return false
+        if (Object.keys(this.state.summary).length === 0) return null
         return (
             <div className="sheet-box" style={{
                 background: `url(${this.state.summary.creator.backgroundUrl}) no-repeat 50% 0`

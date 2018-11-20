@@ -92,6 +92,14 @@ export const newPlate = (id, offset=0, limit=6) => axios.get('top/album', {
 //获取专辑内容
 export const getAlbumCon = (id) => axios.get(`album?id=${id}`)
 
+//专辑评论
+export const getAlbumDiscuss = (id, limit=20, offset=1) => axios.get(`comment/album?id=${id}`, {
+    params: {
+        limit: offset * limit,
+        offset
+    }
+})
+
 //电台推荐
 export const djRecommend = () => axios.get('dj/recommend')
 

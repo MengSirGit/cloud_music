@@ -38,7 +38,7 @@ class Discuss extends PureComponent {
                 }
             })
         }else if(type === 0){
-            //最新歌单评论
+            //最新歌曲评论
             api.getSongDiscuss(id, 10, 1).then(res => {
                 if(res.data.code === 200){
                     this.setState({

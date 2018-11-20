@@ -1,6 +1,8 @@
-import React, {Component} from 'react'
-import {Link} from 'react-router-dom'
+import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
 import * as api from '../../api'
+import { getSongSheet } from '../../store/actions'
 
 class NewMusic extends Component {
     constructor(props){
@@ -10,8 +12,14 @@ class NewMusic extends Component {
         this.state = {
             newSong: []
         }
+        this.handleSendID = this.handleSendID.bind(this)
     }
-    componentDidMount(){
+
+    handleSendID(id) {
+        this.props.onHandleSendID(id)
+    }
+
+    componentDidMount() {
         //获取最新音乐
         api.newPlate().then(response => {
             if(response.data.code === 200){
@@ -21,9 +29,11 @@ class NewMusic extends Component {
             }
         })
     }
+
     render(){
         const {title} = this.props
         const {newSong} = this.state
+        
         return (
             <div className="recommond-song">
                 <h3>{title}</h3>
@@ -34,7 +44,7 @@ class NewMusic extends Component {
                                 if(i < 6){
                                     return (
                                         <li key={i}>
-                                            <Link to="/songsheet">
+                                            <Link to="/albumsheet" onClick={() => { this.handleSendID(data.id) }}>
                                                 <p className="thum"><img src={data.picUrl} alt="" /></p>
                                                 <p className="title">{data.name}</p>
                                                 {
@@ -44,10 +54,9 @@ class NewMusic extends Component {
                                         </li>
                                     )
                                 }
-                                return true
                             })
-                            :
-                            false
+                        :
+                            null
                     }
                 </ul>
             </div>
@@ -55,4 +64,12 @@ class NewMusic extends Component {
     }
 }
 
-export default NewMusic
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onHandleSendID: (id) => {
+            dispatch(getSongSheet(id))
+        }
+    }
+}
+
+export default connect(null, mapDispatchToProps)(NewMusic)

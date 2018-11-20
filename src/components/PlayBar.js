@@ -115,6 +115,12 @@ class PlayBar extends Component {
         return null
     }
 
+    //播放结束改变播放按钮状态
+    componentDidUpdate() {
+        let that = this
+        document.querySelector('#audio').onpause = () => that.setState({ play_status: false })
+    }
+
     render(){
 
         let data = this.props.data,

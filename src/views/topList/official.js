@@ -1,6 +1,18 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { getSongSheet } from '../../store/actions'
 
 class OfficialList extends Component {
+    constructor(props) {
+        super(props)
+        this.handleSendID = this.handleSendID.bind(this)
+    }
+
+    handleSendID(id) {
+        this.props.onHandleSendID(id)
+    }
+
     render() {
         const _list = this.props.data.list
         const _artist = this.props.data.artistToplist
@@ -14,21 +26,23 @@ class OfficialList extends Component {
                         _list.map((e, i) => {
                             if (i < 4) {
                                 return (
-                                    <li className="rank-node clearfix" key={i}>
-                                        <div className="rank-thum">
-                                            <div className="intro">{e.updateFrequency}</div>
-                                            <img src={e.coverImgUrl} alt="" />
-                                        </div>
-                                        <ul className="rank-tracks">
-                                            {
-                                                e.tracks.map((n, k) => {
-                                                    return (
-                                                        <li className="track-node" key={k}><span>{k + 1}.</span><span>{n.first}</span>-<span>{n.second}</span></li>
-                                                    )
-                                                })
-                                            }
-                                        </ul>
-                                    </li>
+                                    <Link to="/songsheet" onClick={() => {this.handleSendID(e.id)}}>
+                                        <li className="rank-node clearfix" key={i}>
+                                            <div className="rank-thum">
+                                                <div className="intro">{e.updateFrequency}</div>
+                                                <img src={e.coverImgUrl} alt="" />
+                                            </div>
+                                            <ul className="rank-tracks">
+                                                {
+                                                    e.tracks.map((n, k) => {
+                                                        return (
+                                                            <li className="track-node" key={k}><span>{k + 1}.</span><span>{n.first}</span>-<span>{n.second}</span></li>
+                                                        )
+                                                    })
+                                                }
+                                            </ul>
+                                        </li>
+                                    </Link>
                                 )
                             }
                         })
@@ -71,4 +85,12 @@ class OfficialList extends Component {
     }
 }
 
-export default OfficialList
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onHandleSendID: (id) => {
+            dispatch(getSongSheet(id))
+        }
+    }
+}
+
+export default connect(null, mapDispatchToProps)(OfficialList)

@@ -2,7 +2,7 @@
 .sheet-box{
     width: 100%;
     /* background-color: #3a3e39; */
-    background-size: 100%;
+    background-size: 100% !important;
 }
 .sheet-box .sheet-head{
     position: fixed;
@@ -99,6 +99,10 @@
     height: 30px;
     border-radius: 100%;
     overflow: hidden;
+}
+.album .sheet-summary-news .name {
+    margin-left: 0 !important;
+    line-height: 2;
 }
 .sheet-summary-show .sheet-summary-news .head img{
     width: 100%;

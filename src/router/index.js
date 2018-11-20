@@ -25,6 +25,8 @@ const SongSheet = () => import('../views/songsheet')
 const Discuss = () => import('../views/discuss')
 //排行榜
 const TopList = () => import('../views/topList')
+//专辑详情
+const AlbumSheet = () => import('../views/albumsheet')
 
 //路由
 const routes = [
@@ -78,6 +80,11 @@ const routes = [
     {
         path: '/toplist',
         component: TopList
+    },
+    //专辑详情
+    {
+        path: '/albumsheet',
+        component: AlbumSheet
     },
 ]
 

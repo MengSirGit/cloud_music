@@ -15,7 +15,7 @@ class Summary extends Component{
         const _data = this.props.data
         let id_discuss = this.props.id_discuss
 
-        if(Object.keys(_data).length === 0) return false
+        if(Object.keys(_data).length === 0) return null
         return(
             <div className="sheet-summary clearfix">
                 <div className="sheet-summary-show clearfix">

@@ -30,15 +30,7 @@ class DiscussTarget extends Component {
     render(){
         let {_discuss_sheet_id, _discuss_sheet_type} = this.props
         this.handleAssignment(_discuss_sheet_type, this.props)
-        // if(_discuss_sheet_type === 2){
-        //     img = this.props._discuss_sheet_intro.creator.avatarUrl,
-        //     name = this.props._discuss_sheet_intro.name,
-        //     nickname = this.props._discuss_sheet_intro.creator.nickname
-        // }else if(_discuss_sheet_type === 0){
-        //     img = this.props._discuss_song_infor[0].al.picUrl,
-        //     name = this.props._discuss_song_infor[0].name,
-        //     nickname = this.props._discuss_song_infor[0].ar[0].name
-        // }
+
         return (
             <div className="discuss-target clearfix">
                 <Link to="/songsheet" onClick={() => this.handleSendToSheet(_discuss_sheet_id)}>
