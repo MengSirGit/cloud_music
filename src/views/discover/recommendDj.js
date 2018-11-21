@@ -46,8 +46,8 @@ class RecommendDj extends Component {
                                 }
                                 return true
                             })
-                            :
-                            false
+                        :
+                            null
                     }
                 </ul>
             </div>

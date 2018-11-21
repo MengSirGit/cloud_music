@@ -3,18 +3,18 @@ import {connect} from 'react-redux'
 import {currMusic} from '../../store/actions'
 
 class Inventory extends Component{
-    constructor(props){
+    constructor(props) {
         super(props)
         this.handleSendId = this.handleSendId.bind(this)
     }
-    handleSendId(id, index, mark){
+    handleSendId(id, index, mark) {
         // console.log(id)
         this.props.onHandleSendId(id, index, mark)
     }
-    render(){
+    render() {
         const _data = this.props.data
         let mark = 1
-        if(Object.keys(_data).length === 0) return null
+        if (Object.keys(_data).length === 0) return null
         // console.log(_data)
         return (
             <article className="inventory">

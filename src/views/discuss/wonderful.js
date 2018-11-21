@@ -4,11 +4,11 @@ import RenderDiscuss from './renderDiscuss'
 class WonderfulDiscuss extends Component {
     render(){
         let con = this.props.con
-        if(con === null) return false
+        if(con === null) return null
         return (
             <React.Fragment>
                 <h5 className="discuss-title-w">精彩评论</h5>
-                <RenderDiscuss con={con.hotComments} />
+                <RenderDiscuss con={con} />
             </React.Fragment>
         )
     }

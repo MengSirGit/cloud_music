@@ -56,7 +56,7 @@ class RecommendSheet extends Component {
                                 return true
                             })
                         : 
-                        false
+                            null
                     }
                 </ul>
             </div>

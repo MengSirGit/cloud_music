@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {getSongDiscuss, getSheetDiscuss} from '../../store/actions'
+import { getDiscussArray, getDiscussDetail } from '../../store/actions'
 
 import * as api from '../../api'
 import TabHead from './head'
@@ -69,7 +69,7 @@ class PlayPage extends PureComponent {
         }
     }
     //切换播放状态
-    handlePlayStatus(){
+    handlePlayStatus() {
         this.state.playStatus ? this.setState({playStatus: false}) : this.setState({playStatus: true})
         if (this.state.playStatus) {
             this.audio.pause()
@@ -90,8 +90,8 @@ class PlayPage extends PureComponent {
             }, 1000)
         }
     }
-    componentDidMount(){
 
+    componentDidMount() {
         let id = this.props.data
         //获取歌曲详情
         api.getSongDetail(id).then(res => {
@@ -99,49 +99,63 @@ class PlayPage extends PureComponent {
                 this.setState({
                     infor: res.data.songs
                 })
+
+                 //歌曲时长
+                this.audio = document.querySelector('#audio')
+                let timeEnd = document.querySelector('#time-end'),
+                    _duration = this.audio.duration
+
+                this.duration = _duration
+                this.DISTANCE = (100 / _duration).toFixed(2) * 1
+                this.init =  (this.DISTANCE * Math.round(this.audio.currentTime))
+
+                if (!this.audio.paused) {
+                    this.sumTime = parseInt(_duration, 10) / 60
+                    this.min = Math.floor(this.sumTime)
+                    this.sec = Math.floor((this.sumTime.toFixed(2) * 1 - this.min) * 60)
+                    //歌曲总时长
+                    timeEnd.innerText = (this.min >= 10 ? this.min.toString() : `0${this.min}` )+ ':' + (this.sec >= 10 ? this.sec.toString() : `0${this.sec}`)
+                    //更改播放状态
+                    this.setState({playStatus: true})
+                    this.arcBack = document.querySelector('.arc-back')
+
+                    if (this.arcBack.className.indexOf('active') <= -1) this.arcBack.className += ' active'
+
+                    this.timerID = setInterval(()=>{
+                        if ((this.minute * 60 + this.second) < _duration) {
+                            this.songClock(this.audio.currentTime)
+                            this.animationTimeBase()
+                        }
+                        else {
+                            clearInterval(this.timerID)
+                            this.setState({playStatus: false})
+                        }
+                    }, 1000)
+                }
+
             }
         })
-
-        //歌曲时长
-        this.audio = document.querySelector('#audio')
-        let timeEnd = document.querySelector('#time-end'),
-            _duration = this.audio.duration
-        this.duration = _duration
-        this.DISTANCE = (100 / _duration).toFixed(2) * 1
-        this.init =  (this.DISTANCE * Math.round(this.audio.currentTime))
-
-        if (!this.audio.paused) {
-            this.sumTime = parseInt(_duration, 10) / 60
-            this.min = Math.floor(this.sumTime)
-            this.sec = Math.floor((this.sumTime.toFixed(2) * 1 - this.min) * 60)
-            //歌曲总时长
-            timeEnd.innerText = (this.min >= 10 ? this.min.toString() : `0${this.min}` )+ ':' + (this.sec >= 10 ? this.sec.toString() : `0${this.sec}`)
-            //更改播放状态
-            this.setState({playStatus: true})
-            this.arcBack = document.querySelector('.arc-back')
-
-            if (this.arcBack.className.indexOf('active') <= -1) this.arcBack.className += ' active'
-
-            this.timerID = setInterval(()=>{
-                if ((this.minute * 60 + this.second) < _duration) {
-                    this.songClock(this.audio.currentTime)
-                    this.animationTimeBase()
-                }
-                else {
-                    clearInterval(this.timerID)
-                    this.setState({playStatus: false})
-                }
-            }, 1000)
-        }
     }
+
     //路由跳转清除播放计时器
-    componentWillUnmount(){
+    componentWillUnmount() {
         clearInterval(this.timerID)
     }
-    render(){
+
+    render() {
         let infor = this.state.infor,
-            bg = null
-        if (infor.length > 0) bg = infor[0]['al']['picUrl']
+            bg = null,
+            discussDetail = {}
+        if (infor.length > 0) {
+            bg = infor[0]['al']['picUrl']
+            discussDetail.id = infor[0].id
+            discussDetail.name = infor[0].name
+            discussDetail.creator = { nickname: infor[0].ar[0].name }
+            discussDetail.coverImgUrl = infor[0].al.picUrl
+        }
+        else {
+            return null
+        }
         return (
             <article className="page-box">
                 {/* 标签 */}
@@ -153,7 +167,7 @@ class PlayPage extends PureComponent {
                     <div className="song-handle">
                         <i className="iconfont">&#xe617;</i>
                         <i className="iconfont">&#xe890;</i>
-                        <Link to="/discuss"><i className="iconfont" onClick={() => this.props.onSendSongDiscuss(this.props.data, 0, infor)}>&#xe63d;</i></Link>
+                        <Link to="/discuss"><i className="iconfont" onClick={() => this.props.onSendSongDiscuss(this.props.data, 0, discussDetail)}>&#xe63d;</i></Link>
                         <i className="iconfont">&#xe783;</i>
                     </div>
                     <div className="time-base">
@@ -192,9 +206,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onSendSongDiscuss: (id, type, infor) => {
-            dispatch(getSheetDiscuss(id, type))
-            dispatch(getSongDiscuss(infor))
+        onSendSongDiscuss: (id, type, intro) => {
+            dispatch(getDiscussArray(id, type))
+            dispatch(getDiscussDetail(type, intro))
         }
     }
 }

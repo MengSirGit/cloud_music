@@ -45,6 +45,7 @@ class OfficialList extends Component {
                                     </Link>
                                 )
                             }
+                            return true
                         })
                     }
                     {/* 赞赏榜 */}

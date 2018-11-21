@@ -5,7 +5,7 @@ import * as api from '../../api'
 import { getSongSheet } from '../../store/actions'
 
 class NewMusic extends Component {
-    constructor(props){
+    constructor(props) {
         super(props)
         this.id = null
         this.type = null
@@ -22,7 +22,7 @@ class NewMusic extends Component {
     componentDidMount() {
         //获取最新音乐
         api.newPlate().then(response => {
-            if(response.data.code === 200){
+            if (response.data.code === 200) {
                 this.setState({
                     newSong: response.data.albums
                 })
@@ -30,10 +30,10 @@ class NewMusic extends Component {
         })
     }
 
-    render(){
+    render() {
         const {title} = this.props
         const {newSong} = this.state
-        
+
         return (
             <div className="recommond-song">
                 <h3>{title}</h3>
@@ -41,7 +41,7 @@ class NewMusic extends Component {
                     {
                         newSong.length > 0 ? 
                             newSong.map((data, i) => {
-                                if(i < 6){
+                                if (i < 6) {
                                     return (
                                         <li key={i}>
                                             <Link to="/albumsheet" onClick={() => { this.handleSendID(data.id) }}>
@@ -54,6 +54,7 @@ class NewMusic extends Component {
                                         </li>
                                     )
                                 }
+                                return true
                             })
                         :
                             null

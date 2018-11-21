@@ -1,21 +1,21 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {getSheetDiscuss} from '../../store/actions'
+import { getDiscussArray } from '../../store/actions'
 
-class Summary extends Component{
-    constructor(props){
+class Summary extends Component {
+    constructor(props) {
         super(props)
         this.handleSendToId = this.handleSendToId.bind(this)
     }
-    handleSendToId(id, _type, intro){
-        this.props.onHandleSendToId(id, _type, intro)
+    handleSendToId(id, _type) {
+        this.props.onHandleSendToId(id, _type)
     }
-    render(){
+    render() {
         const _data = this.props.data
         let id_discuss = this.props.id_discuss
 
-        if(Object.keys(_data).length === 0) return null
+        if (Object.keys(_data).length === 0) return null
         return(
             <div className="sheet-summary clearfix">
                 <div className="sheet-summary-show clearfix">
@@ -29,7 +29,7 @@ class Summary extends Component{
                 </div>
                 <ul className="sheet-summary-contrl">
                     <li><Link to="/discuss"><i className="iconfont discuss" onClick={
-                        () => this.handleSendToId(id_discuss, 2, _data)
+                        () => this.handleSendToId(id_discuss, 2)
                         }>&#xe63d;</i><p>{_data.commentCount}</p></Link></li>
                     <li><i className="iconfont share">&#xe8b8;</i><p>{_data.shareCount}</p></li>
                     <li><i className="iconfont down">&#xe890;</i><p>下载</p></li>
@@ -42,8 +42,8 @@ class Summary extends Component{
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onHandleSendToId: (id, _type, intro) => {
-            dispatch(getSheetDiscuss(id, _type, intro))
+        onHandleSendToId: (id, _type) => {
+            dispatch(getDiscussArray(id, _type))
         }
     }
 }

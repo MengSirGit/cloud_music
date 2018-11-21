@@ -1,6 +1,7 @@
 import React, {PureComponent} from 'react'
 import {connect} from 'react-redux'
 import * as api from '../../api'
+import { getDiscussDetail } from '../../store/actions'
 
 import Head from './head'
 import Summary from './summary';
@@ -9,7 +10,7 @@ import '../../css/songsheet.css'
 
 
 class SongSheetDetail extends PureComponent {
-    constructor(props){
+    constructor(props) {
         super(props)
         this.ID = null
         this.state = {
@@ -17,19 +18,22 @@ class SongSheetDetail extends PureComponent {
         }
     }
 
-    componentDidMount(){
+    componentDidMount() {
         let data = this.props.data
         if (Object.keys(data).length > 0) {
             this.ID = data.id
             api.getDetail(this.ID).then(res => {
                 if (res.data.code === 200) {
-                    // console.log(res.data.playlist.tracks)
                     this.setState({
                         summary: res.data.playlist
                     })
                 }
             })
         }
+    }
+
+    componentWillUnmount() {
+        this.props.onSendDiscussDetail(2, this.state.summary)
     }
 
     render(){
@@ -55,4 +59,12 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(SongSheetDetail)
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onSendDiscussDetail: (model, intro) => {
+            dispatch(getDiscussDetail(model, intro))
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SongSheetDetail)

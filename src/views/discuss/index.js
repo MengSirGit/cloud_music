@@ -1,66 +1,31 @@
 import React, {PureComponent} from 'react'
 import {connect} from 'react-redux'
-import TabHead from './head'
-import * as api from '../../api'
-import {getSongSheet} from '../../store/actions'
 
+import TabHead from './head'
 import DiscussTarget from './discussTarget'
 import WonderfulDiscuss from './wonderful'
 import Newest from './newest'
+import Comment from './comment'
 import '../../css/discuss.css'
 
 class Discuss extends PureComponent {
-    constructor(props){
-        super(props)
-        this.state = {
-            con: null,
-            newCon: null
-        }
-    }
-    componentDidMount(){
-        let id = this.props._discuss_sheet_id,
-            type = this.props._discuss_sheet_type
-        //热门评论
-        api.getHotDiscuss(id, type).then(res => {
-            if(res.data.code === 200){
-                this.setState({
-                    con: res.data
-                })
-            }
-        })
-        if(type === 2){
-            //最新歌单评论
-            api.getSheetDiscuss(id, 10, 1).then(res => {
-                if(res.data.code === 200){
-                    this.setState({
-                        newCon: res.data
-                    })
-                }
-            })
-        }else if(type === 0){
-            //最新歌曲评论
-            api.getSongDiscuss(id, 10, 1).then(res => {
-                if(res.data.code === 200){
-                    this.setState({
-                        newCon: res.data
-                    })
-                }
-            })
-        }
-    }
     render(){
-        const _props = this.props
-        // console.log(this.props)
+        if (this.props._discuss_array.length === 0) return null
+        const discuss = this.props._discuss_array.data
+        const detail = this.props._discuss_detail
+        // console.log(detail)
         return (
             <React.Fragment>
                 {/* 标签 */}
-                <TabHead comment={_props._discuss_intro ? _props._discuss_intro.commentCount : (this.state.newCon ? this.state.newCon.total : 0)} />
+                <TabHead comment={discuss.total ? discuss.total : 0} />
                 {/* 歌单标题及创建者 */}
-                <DiscussTarget {..._props} />
+                <DiscussTarget {...detail} />
                 {/* 精彩评论 */}
-                <WonderfulDiscuss con={this.state.con}/>
+                <WonderfulDiscuss con={discuss.hotComments}/>
                 {/* 最新评论 */}
-                <Newest con={this.state.newCon} />
+                <Newest con={discuss.comments} />
+                {/* 评论发送 */}
+                <Comment id={detail.id} type={detail.type}/>
             </React.Fragment>
         )
     }
@@ -68,19 +33,9 @@ class Discuss extends PureComponent {
 
 const mapStateToProps = (state) => {
     return {
-        _discuss_sheet_id: state.sheetDiscussReducer.id,
-        _discuss_sheet_type: state.sheetDiscussReducer._type,
-        _discuss_sheet_intro: state.sheetDiscussReducer.intro,
-        _discuss_song_infor: state.songDiscussReducer.infor
+        _discuss_array: state.discussReducer,
+        _discuss_detail: state.discussDetailReducer
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        onSendSheet: (id) => {
-            dispatch(getSongSheet(id))
-        }
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Discuss)
+export default connect(mapStateToProps)(Discuss)

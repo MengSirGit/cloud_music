@@ -14,7 +14,7 @@ const isChrome = !!window.chrome && !!window.chrome.webstore
 
 //搜索框
 class Search extends Component {
-    constructor(props){
+    constructor(props) {
         super(props)
         this.state = {
             data: []
@@ -24,7 +24,7 @@ class Search extends Component {
         this.handleComposition = this.handleComposition.bind(this)
         this.handleSendSongId = this.handleSendSongId.bind(this)
     }
-    handleSendSongId(id){
+    handleSendSongId(id) {
         this.props.onHandleSendSongId(id)
         //清空搜索结果
         this.setState({
@@ -32,25 +32,26 @@ class Search extends Component {
         })
         this.refs.search.value = ''
     }
-    handleComposition(e){
+    handleComposition(e) {
         //中文输入结束，改变state
-        if(e.type === 'compositionend'){
+        if (e.type === 'compositionend') {
             isOnComposition = false
-            if(!isOnComposition && isChrome){
+            if (!isOnComposition && isChrome) {
                 this.changeEvent()
             }
-        }else{
+        }
+        else {
             isOnComposition = true
         }
     }
-    changeEvent(){
+    changeEvent() {
 
         !isOnComposition ? this.inputValue = this.refs.search.value : 
                            this.inputValue = null
 
         let inputValue = this.inputValue
 
-        if(inputValue != null && inputValue !== ''){
+        if (inputValue != null && inputValue !== '') {
             api.searchAdvise(inputValue).then(res => {
                 this.setState({
                     data: res['data']
@@ -58,10 +59,10 @@ class Search extends Component {
             })
         }
     }
-    render(){
+    render() {
         let searchResult = null,
             data = this.state.data
-        if(data['code'] === 200){
+        if (data['code'] === 200) {
             searchResult = data['result']['songs'].map((e, i) => {
                 return (
                     <li key={i} className="result-list" onClick={() => {

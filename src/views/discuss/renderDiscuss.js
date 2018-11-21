@@ -1,7 +1,7 @@
 import React from 'react'
 
 const RenderDiscuss = (props) => {
-    // console.log(props)
+    // console.log(props.con)
     return (
         <ul className="discuss-box">
             {
@@ -28,7 +28,7 @@ const RenderDiscuss = (props) => {
                                                 <p><span>@{e.beReplied[0].user.nickname}</span>:{e.beReplied[0].content}</p>
                                             </div>
                                         :
-                                            false
+                                            null
                                     }
                                 </div>
                             </div>

@@ -19,9 +19,7 @@ class Summary extends Component {
                     </div>
                 </div>
                 <ul className="sheet-summary-contrl">
-                    <li><Link to="/discuss"><i className="iconfont discuss" onClick={
-                        () => this.handleSendToId()
-                        }>&#xe63d;</i><p>{album.info.commentCount}</p></Link></li>
+                    <li><Link to="/discuss"><i className="iconfont discuss">&#xe63d;</i><p>{album.info.commentCount}</p></Link></li>
                     <li><i className="iconfont share">&#xe8b8;</i><p>{album.info.shareCount}</p></li>
                     <li><i className="iconfont down">&#xe890;</i><p>下载</p></li>
                     <li><i className="iconfont checkbox">&#xe6b4;</i><p>多选</p></li>

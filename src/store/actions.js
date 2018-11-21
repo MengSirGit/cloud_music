@@ -4,10 +4,10 @@ import {
     SEARCH_SONGS,
     SONG_SHEET_DETAIL,
     MUSIC_DETAIL,
-    SHEET_DISCUSS,
-    SONG_DISCUSS,
     LOGIN_VALUE,
-    DAY_RECOMMEND_SONG
+    DAY_RECOMMEND_SONG,
+    DISCUSS_ARRAY,
+    DISCUSS_DETAIL
 } from './actionTypes'
 import * as api from '../api'
 
@@ -109,34 +109,6 @@ export const getMusicDetail = (id) => {
     }
 }
 
-//歌单评论
-export const sheetDiscuss = (id, _type, intro) => {
-    return {
-        type: SHEET_DISCUSS,
-        id: id, 
-        _type: _type,
-        intro: intro
-    }
-}
-
-//歌单评论
-export const getSheetDiscuss = (id, _type, intro) => {
-    return sheetDiscuss(id, _type, intro)
-}
-
-//歌曲评论
-export const songDiscuss = (infor) => {
-    return {
-        type: SONG_DISCUSS,
-        infor: infor
-    }
-}
-
-//歌曲评论
-export const getSongDiscuss = (infor) => {
-    return songDiscuss(infor)
-}
-
 //每日推荐歌曲
 export const dayRecommendSong = (data) => {
     return {
@@ -154,4 +126,56 @@ export const getDayRecommendSong = () => {
             }
         })
     }
+}
+
+//评论
+export const discussArray = (data) => {
+    return {
+        type: DISCUSS_ARRAY,
+        data: data
+    }
+}
+
+//评论
+export const getDiscussArray = (id, _type) => {
+    return (dispatch) => {
+        if (_type === 0) {
+            //歌曲评论
+            api.getSongDiscuss(id).then(res => {
+                if (res.data.code === 200) { 
+                    dispatch(discussArray(res.data))
+                }
+            })
+        }
+        else if (_type === 2) {
+            //歌单评论
+            api.getSheetDiscuss(id).then(res => {
+                if (res.data.code === 200) { 
+                    dispatch(discussArray(res.data))
+                }
+            })
+        }
+        else if (_type === 3) {
+            //专辑评论
+            api.getAlbumDiscuss(id).then(res => {
+                if (res.data.code === 200) { 
+                    dispatch(discussArray(res.data))
+                }
+            })
+        }
+    }
+}
+
+//评论页详情
+export const discussDetail = (model, intro) => {
+    return {
+        type: DISCUSS_DETAIL,
+        model: model,
+        intro: intro
+    }
+}
+
+//评论页详情
+export const getDiscussDetail = (model, intro) => {
+    return discussDetail(model, intro)
 }

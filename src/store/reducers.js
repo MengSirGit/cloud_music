@@ -3,10 +3,10 @@ import {
         PLAY_MUSIC_LIST, 
         SONG_SHEET_DETAIL, 
         MUSIC_DETAIL,
-        SHEET_DISCUSS, 
-        SONG_DISCUSS,
         LOGIN_VALUE,
-        DAY_RECOMMEND_SONG
+        DAY_RECOMMEND_SONG,
+        DISCUSS_ARRAY,
+        DISCUSS_DETAIL
     } from './actionTypes'
 
 //检测登录状态
@@ -55,31 +55,37 @@ export const songSheetReducer= (state={}, action) => {
     }
 }
 
-//歌单评论
-export const sheetDiscussReducer = (state=[], action) => {
-    switch(action.type){
-        case SHEET_DISCUSS:
-            return action
-        default:
-            return state
-    }
-}
-
-//歌曲评论
-export const songDiscussReducer = (state=[], action) => {
-    switch(action.type){
-        case SONG_DISCUSS:
-            return action
-        default:
-            return state
-    }
-}
-
 //每日推荐歌曲
 export const dayRecommendReducer = (state=[], action) => {
     switch(action.type){
         case DAY_RECOMMEND_SONG:
             return action.data.recommend
+        default:
+            return state
+    }
+}
+
+//评论 
+export const discussReducer = (state=[], action) => {
+    switch(action.type) {
+        case DISCUSS_ARRAY:
+            return action
+        default:
+            return state
+    }
+}
+
+//评论页详情
+export const discussDetailReducer = (state={}, action) => {
+    switch(action.type) {
+        case DISCUSS_DETAIL:
+            return Object.assign({}, {
+                id: action.intro.id,
+                type: action.model,
+                name: action.intro.name,
+                creatorName: action.intro.creator.nickname,
+                coverImgUrl: action.intro.coverImgUrl
+            })
         default:
             return state
     }

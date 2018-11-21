@@ -111,10 +111,9 @@ export const getSheetDiscuss = (id, limit=20) => axios.get(`comment/playlist?id=
 })
 
 //歌曲评论
-export const getSongDiscuss = (id, limit=20, offset=1) => axios.get(`comment/music?id=${id}`, {
+export const getSongDiscuss = (id, limit=20) => axios.get(`comment/music?id=${id}`, {
     params: {
-        limit: offset * limit,
-        offset
+        limit
     }
 })
 
@@ -164,3 +163,18 @@ export const getTopList = (id) => axios.get(`top/list?idx=${id}`)
 
 //排行榜榜单摘要
 export const getTopListDetail = () => axios.get('toplist/detail')
+
+//发送评论
+/**
+ * t:1 发送
+ * tpye: 数字,资源类型,对应歌曲,mv,专辑,歌单,电台,视频对应以下类型
+ * 0: 歌曲
+ * 1: mv
+ * 2: 歌单
+ * 3: 专辑
+ * 4: 电台
+ * 5: 视频
+ */
+export const sendComment = (type=0, id, content) => axios.get(`comment?t=1&type=${type}&id=${id}&content=${content}`, {
+    withCredentials: true
+})
