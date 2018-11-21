@@ -11,7 +11,7 @@ import NewMusic from './newMusic'
 import RecommendDj from './recommendDj'
 
 import '../../css/recommend.css'
-import '../../less/demo.less'
+// import '../../less/demo.less'
 
 //推荐页面整合
 const pageMenu = {
