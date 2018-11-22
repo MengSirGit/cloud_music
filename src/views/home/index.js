@@ -2,7 +2,8 @@ import React, {Component} from 'react'
 
 import Header from '../../components/Header'
 import LocalFun from './localFun'
-import '../../css/local.css'
+
+import '../../less/local.less'
 
 class Local extends Component {
     render(){

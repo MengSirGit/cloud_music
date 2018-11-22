@@ -5,8 +5,9 @@ import * as api from '../../api'
 import Head from './head'
 import OfficialList from './official'
 import WorldList from './world'
-import '../../css/songsheet.css'
-import '../../css/toplist.css'
+
+import '../../less/songsheet.less'
+import '../../less/toplist.less'
 
 class TopList extends Component {
     constructor(props) {

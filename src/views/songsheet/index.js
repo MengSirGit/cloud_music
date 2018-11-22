@@ -6,7 +6,8 @@ import { getDiscussDetail } from '../../store/actions'
 import Head from './head'
 import Summary from './summary';
 import Inventory from './inventory'
-import '../../css/songsheet.css'
+
+import '../../less/songsheet.less'
 
 
 class SongSheetDetail extends PureComponent {

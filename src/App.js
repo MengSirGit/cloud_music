@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 
-import './css/common.css'
+import './less/common.less'
 
 import SideNav from './components/SideNav'
 import PlayBar from './components/PlayBar'

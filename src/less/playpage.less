@@ -1,0 +1,184 @@
+@import (reference) './public.less';
+
+.Position(@pos: fixed, @top: 0, @left: 0, @z: 8) {
+    position: @pos;
+    top: @top;
+    left: @left;
+    z-index: @z;
+}
+
+.page-box {
+    .Position(@z: 30);
+    @all-width();
+    height: 100%;
+    background-color: @tab-color;
+
+    .page-up {
+        padding: @half;
+        border-bottom: 1px solid rgba(236, 236, 236, .5);
+        @overflow();
+
+        i {
+            float: left;
+            color: @tab-color;
+            font-size: @one + .1;
+            margin-right: @one;
+            line-height: 2;
+        }
+
+        .caption {
+            float: left;
+            p:nth-of-type(1) {
+                font-size: @half + .4;
+                color: @tab-color;
+            }
+            p:nth-of-type(2) {
+                font-size: @half + .1;
+                color: #adadad;
+            }
+        }
+    }
+}
+.play-page {
+    .Position(@pos: absolute, @z: -1);
+    @all-width();
+    height: 100%;
+    -webkit-filter: blur(30px);
+    filter: blur(30px);
+}
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+@keyframes anirotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}
+.page-center {
+    .flex-center;
+    height: 65%;
+
+    .arc-back {
+        .flex-center;
+        width: @one * 18;
+        height: @one * 18;
+        border-radius: 100%;
+        background: rgba(255, 255, 255, .3);
+
+        &.active {
+            animation: anirotate 30s linear infinite;
+        }
+    }
+
+    .film {
+        .flex-center;
+        width: @one * 17;
+        height: @one * 17;
+        border-radius: 100%;
+        background-color: #272727;
+    }
+
+    .song-thum {
+        width: @one * 12;
+        height: @one * 12;
+        border-radius: 100%;
+        @overflow();
+
+        img {
+            @all-width();
+        }
+    }
+}
+.page-down {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 0;
+    @all-width();
+    z-index: 20;
+
+    i {
+        text-shadow: 0px 2px 3px rgba(0,0,0,.3);
+    }
+}
+.song-handle {
+    width: @one * 16;
+    margin: 0 auto;
+
+    i {
+        font-size: @one + .3;
+        color: #ececec;
+        margin: 0 @one + .4;
+    }
+}
+.song-contrl {
+    .flex-center;
+
+    i {
+        font-size: @one + .2;
+        color: #ececec;
+        margin: 0 @one + .4;
+    }
+
+    .play {
+        font-size: @one * 3;
+        color: #ececec;
+    }
+
+    .list {
+        font-size: @one + .6;
+    }
+
+    .next {
+        font-size: @one + .3;
+        color: #ececec;
+    }
+
+    .prev {
+        &:extend(.next);
+        transform: rotate(180deg);
+    }
+
+}
+.time-base {
+    .flex-center;
+    margin: @one + @half 0;
+
+    span {
+        font-size: @half;
+        color: #ececec;
+    }
+}
+#time-line {
+    position: relative;
+    width: @one * 16;
+    height: 1px;
+    margin: 0 @half + .3;
+}
+#time-back {
+    .Position(@pos: absolute, @z: 1);
+    @all-width();
+    height: 100%;
+    background-color: #ececec;
+}
+#time-front {
+    .Position(@pos: absolute, @z: 2);
+    width: 0;
+    height: 100%;
+    background-color: #f30;
+}
+#time-arc {
+    position: absolute;
+    top: -@half / 2;
+    left: 0;
+    width: @half + .1;
+    height: @half + .1;
+    background-color: @tab-color;
+    border-radius: 100%;
+    box-shadow: 0px 2px 2px rgba(0,0,0,.3);
+    z-index: 3;
+}

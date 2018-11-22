@@ -11,7 +11,7 @@
     color: #fff;
     font-size: .5rem;
 }
-.discover-nav li.active:after{
+.discover-nav li.active::after{
     content: '';
     position: absolute;
     left: 0;

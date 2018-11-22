@@ -6,7 +6,8 @@ import { getDiscussArray, getDiscussDetail } from '../../store/actions'
 import * as api from '../../api'
 import TabHead from './head'
 import Film from './film'
-import '../../css/playpage.css'
+
+import '../../less/playpage.less'
 
 /**
  * (!x _ x) 播放到两分钟后跳转,歌曲暂停bug

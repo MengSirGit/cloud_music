@@ -6,7 +6,8 @@ import DiscussTarget from './discussTarget'
 import WonderfulDiscuss from './wonderful'
 import Newest from './newest'
 import Comment from './comment'
-import '../../css/discuss.css'
+
+import '../../less/discuss.less'
 
 class Discuss extends PureComponent {
     render(){

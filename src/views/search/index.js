@@ -5,7 +5,8 @@ import { getMusicDetail } from '../../store/actions'
 import * as api from '../../api'
 
 import Back from '../../components/Back'
-import '../../css/search.css'
+
+import '../../less/search.less'
 
 let isOnComposition = false
 

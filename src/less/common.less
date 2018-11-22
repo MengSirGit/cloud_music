@@ -1,0 +1,349 @@
+@import (reference) './public.less';
+
+html, body, div, ul, li, h1, h2, h3, h4, h5, h6, p, dl, dt, dd, ol, form, input, textarea, th, td, select {
+    margin: 0;
+    padding: 0;
+}
+* { box-sizing: border-box; }
+html,
+body {
+    min-height: 100%;
+}
+body {
+    font-family: @font-family;
+    font-size: 100%;
+    color: #333;
+}
+h1, h2, h3, h4, h5, h6{font-weight:normal;}
+ul,ol {
+    list-style: none;
+}
+
+img {
+    border: none;
+    vertical-align: middle;
+}
+
+a {
+    text-decoration: none;
+    color: #232323;
+}
+
+table {
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+input, textarea {
+    outline: none;
+    border: none;
+}
+
+textarea {
+    resize: none;
+    overflow: auto;
+}
+
+.clearfix {
+    zoom: 1;
+    &::after {
+        content: ".";
+        width: 0;
+        height: 0;
+        visibility: hidden;
+        display: block;
+        clear: both;
+        @overflow();
+    }
+}
+
+.ellipse {
+    @overflow();
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.inline{
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+}
+
+@font-face {
+    font-family: 'iconfont';
+    src: url('../static/font_icon/iconfont.eot');
+    src: url('../static/font_icon/iconfont.eot?#iefix') format('embedded-opentype'),
+    url('../static/font_icon/iconfont.woff') format('woff'),
+    url('../static/font_icon/iconfont.ttf') format('truetype'),
+    url('../static/font_icon/iconfont.svg#iconfont') format('svg');
+}
+
+.iconfont{
+    font-family:"iconfont" !important;
+    font-size:16px;
+    font-style:normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
+    color: #989898;
+    font-size: 1.4rem;
+}
+
+/*头部*/
+.left-nav {
+    .iconfont {
+        color: @tab-color;
+        font-size: @one + .2;
+    }
+}
+.search {
+    .iconfont {
+        &:extend(.left-nav .iconfont);
+    }
+}
+.history-back {
+    color: @tab-color;
+    font-size: @one + .2;
+    line-height: 2;
+    padding-right: @half;
+}
+#header {
+    @flex-between();
+    padding: @one;
+    background-color: #313638;
+    box-sizing: border-box;
+
+    .tab-center {
+        li {
+            float: left;
+        }
+        .index {
+            margin: 0 @one + .6;
+        }
+        .video {
+            i {
+                font-size: @one + .2;
+                line-height: 1.4;
+            }
+        }
+    }
+}
+.iconfont {
+    &.active {
+        color: @tab-color;
+    }
+}
+.main {
+    margin-bottom: @one * 4;
+}
+
+/*底部播放栏*/
+.play-bar {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    @all-width();
+    padding: @half;
+    box-sizing: border-box;
+    background-color:  @tab-color;
+    box-shadow: 0 0 5px rgba(0,0,0,.3);
+
+    .music-img {
+        float: left;
+        width: (@one * 2) + .5;
+        height: (@one * 2) + .5;
+        border-radius: 3px;
+        @overflow();
+
+        img {
+            @all-width();
+        }
+    }
+
+    .music-title {
+        width: 67%;
+        margin-left: @one * 3;
+        font-size: @half;
+        line-height: 1.6;
+
+        p {
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            @overflow();
+        }
+        p:nth-of-type(2) {
+            color: #8d8d8d;
+        }
+    }
+
+    .music-btn {
+        position: absolute;
+        top: @one;
+        right: 0;
+        z-index: 10;
+
+        .play-ctrl {
+            display: inline-block;
+            margin: 0 @half;
+        }
+
+        .collect {
+            .play-ctrl;
+        }
+    }
+}
+
+/*侧导航*/
+.side-nav {
+    position: fixed;
+    top: 0;
+    left: -95%;
+    width: 85%;
+    height: 100%;
+    background-color: #f5f5f5;
+    box-shadow: 17px 0px 35px rgba(0,0,0,.3);
+    box-sizing: border-box;
+    z-index: 20;
+    transition: left .5s ease;
+
+    &.active {
+        left: 0;
+    }
+
+    ul {
+        background-color: @tab-color;
+        margin-bottom: @half - .2;
+        padding: 0 @half;
+
+        li {
+            font-size: @half;
+            color: #656565;
+
+            span {
+                line-height: 3;
+            }
+
+            i {
+                font-size: @one;
+                margin-right: @half + .2;
+
+                &.iconfont {
+                    &.up {
+                        font-size: @half;
+                    }
+                }
+            }
+        }
+    }
+
+    .setting {
+        @zero: 0;
+        position: absolute;
+        bottom: @zero;
+        left: @zero;
+        @flex-between();
+        @all-width();
+        z-index: 10;
+        margin-bottom: @zero;
+    }
+}
+.left-login {
+    background: url("@{url-img}/login.jpg") no-repeat center center;
+    text-align: center;
+    padding: @one *2  0 @one 0;
+
+    p {
+        color: #dcdcdc;
+        font-size: @half - .1;
+        line-height: 2;
+    }
+
+    .login-btn {
+        background: none;
+        border: 1px solid @tab-color;
+        border-radius: 20px;
+        color: @tab-color;
+        font-size: @half + .3;
+        padding: @half - .2 (@one * 2) + .2;
+        margin-top: @half + .3;
+        outline: none;
+
+        a {
+            color: @tab-color;
+        }
+    }
+
+    .user-infor {
+        padding-left: @one;
+
+        .user-appear {
+            width: @one * 3;
+            height: @one * 3;
+            border-radius: 50%;
+            @overflow();
+
+            img { 
+                @all-width();
+            }
+        }
+
+        .user-name {
+            text-align: left;
+            font-size: @one;
+            color: @tab-color;
+            margin-top: @half;
+        }
+    }
+}
+.login-main {
+    position: fixed;
+    @all-width();
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: @tab-color;
+    z-index: 20;
+    text-align: center;
+
+    .login-logo {
+        width: @one * 4;
+        height: @one * 4;
+        margin: @one * 5 auto;
+        border-radius: 5px;
+        @overflow();
+
+        img {
+            @all-width();
+        }
+    }
+
+    input {
+        display: block;
+        min-width: @one * 17;
+        border: 1px solid #f5f5f5;
+        padding: @half + .3 @one;
+        border-radius: 5px;
+        margin: @one auto;
+        color: #8d8d8d;
+        background: none;
+
+        &:focus {
+            box-shadow: 0 1px 12px rgb(216, 30, 6, .2);
+        }
+        &::-webkit-input-placeholder {
+            color: #dadada;
+        }
+        &::-webkit-autofill {
+            background: none;
+        }
+    }
+
+    button {
+        min-width: @one * 17;
+        border: 0;
+        padding: @half + .1 @one;
+        border-radius: 5px;
+        margin-top: @one;
+        color: @tab-color;
+        background-color: #d81e06;
+    }
+}

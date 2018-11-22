@@ -5,7 +5,7 @@ import * as api from '../../api'
 import Head from './head'
 import Summary from './summary'
 import Inventory from './inventory'
-import '../../css/songsheet.css'
+import '../../less/songsheet.less'
 
 class AlbumSheet extends Component {
     constructor(props) {
