@@ -46,7 +46,7 @@ export const getRecommonSong = () => axios.get(`personalized`)
 export const getMusicUrl = (id) => axios.get(`song/url?id=${id}`)
 
 //获取歌单详情
-export const getDetail = (id) => axios.get(`playlist/detail?id=${id}`)
+export const getSongSheetDetail = (id) => axios.get(`playlist/detail?id=${id}`)
 
 //获取歌曲详情
 export const getSongDetail = (id) => axios.get(`song/detail?ids=${id}`) 

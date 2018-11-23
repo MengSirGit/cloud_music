@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import * as api from '../../api'
-import {getSongSheet, currMusic} from '../../store/actions'
+import {getSongSheet, currMusic, getMusicPos} from '../../store/actions'
 
 class RecommendSheet extends Component {
     constructor(props){
@@ -25,6 +25,7 @@ class RecommendSheet extends Component {
                 this.props.onCurrMusic(response.data.recommend[1].id)
             }
         })
+        this.props.onSendMusicPos(0)
     }
     handleSendSheet(id, type){
         this.id = id
@@ -71,6 +72,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         onCurrMusic: (id) => {
             dispatch(currMusic(id))
+        },
+        onSendMusicPos: (num) => {
+            dispatch(getMusicPos(num))
         }
     }
 }

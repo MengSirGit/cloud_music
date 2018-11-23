@@ -9,9 +9,6 @@ import Film from './film'
 
 import '../../less/playpage.less'
 
-/**
- * (!x _ x) 播放到两分钟后跳转,歌曲暂停bug
- */
 class PlayPage extends PureComponent {
     constructor(props){
         super(props)
@@ -185,7 +182,7 @@ class PlayPage extends PureComponent {
                         <span id="time-end">00:00</span>
                     </div>
                     <div className="song-contrl">
-                        <i className="iconfont">&#xe603;</i>
+                        <i className="iconfont">&#xeaac;</i>
                         <i className="iconfont prev">&#xe61f;</i>
                         <i className="iconfont play"
                             onClick={this.handlePlayStatus}
@@ -200,6 +197,7 @@ class PlayPage extends PureComponent {
 }
 
 const mapStateToProps = (state) => {
+    console.log(state)
     return {
         data: state.playMusicReducer
     }

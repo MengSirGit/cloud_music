@@ -23,7 +23,7 @@ class SongSheetDetail extends PureComponent {
         let data = this.props.data
         if (Object.keys(data).length > 0) {
             this.ID = data.id
-            api.getDetail(this.ID).then(res => {
+            api.getSongSheetDetail(this.ID).then(res => {
                 if (res.data.code === 200) {
                     this.setState({
                         summary: res.data.playlist

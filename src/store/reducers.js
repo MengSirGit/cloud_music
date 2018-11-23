@@ -6,7 +6,9 @@ import {
         LOGIN_VALUE,
         DAY_RECOMMEND_SONG,
         DISCUSS_ARRAY,
-        DISCUSS_DETAIL
+        DISCUSS_DETAIL,
+        MUSIC_URL,
+        MUSIC_PLAY_POS
     } from './actionTypes'
 
 //检测登录状态
@@ -24,12 +26,18 @@ export const loginValueReducer = (state={
 }
 
 //切换音乐
-export const currMusicReducer = (state=[], action) => {
+export const currMusicReducer = (state={
+    sheet: [],
+    index: null,
+    mark: null
+}, action) => {
     switch(action.type){
         case CHANGE_CURR_LIST:
-            return action
-        case MUSIC_DETAIL:
-            return action
+            return {
+                sheet: action.data,
+                index: action.index,
+                mark: action.mark
+            }
         default:
             return state
     }
@@ -87,6 +95,36 @@ export const discussDetailReducer = (state={}, action) => {
                 coverImgUrl: action.intro.coverImgUrl
             })
         default:
+            return state
+    }
+}
+
+//歌曲url
+export const musicUrlReducer = (state='', action) => {
+    switch(action.type) {
+        case MUSIC_URL:
+            return action.data
+        default:
+            return state
+    }
+}
+
+//歌曲详情
+export const musicDetailReducer = (state={}, action) => {
+    switch(action.type) {
+        case MUSIC_DETAIL:
+            return action.data
+        default:
+            return state
+    }
+}
+
+//歌曲位置
+export const musicPlayPosReducer = (state=[], action) => {
+    switch(action.type) {
+        case MUSIC_PLAY_POS:
+            return action.num
+        default: 
             return state
     }
 }

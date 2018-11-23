@@ -28,3 +28,9 @@ export const DISCUSS_ARRAY = 'DISCUSS_ARRAY'
 
 //评论页详情
 export const DISCUSS_DETAIL = 'DISCUSS_DETAIL'
+
+//获取歌曲url
+export const MUSIC_URL = 'MUSIC_URL'
+
+//播放歌曲所处位置
+export const MUSIC_PLAY_POS = 'MUSIC_PLAY_POS'

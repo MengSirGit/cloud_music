@@ -6,7 +6,6 @@ import './less/common.less'
 import SideNav from './components/SideNav'
 import PlayBar from './components/PlayBar'
 
-
 class App extends Component {
     render(){
         //返回顶部

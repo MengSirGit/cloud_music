@@ -7,7 +7,9 @@ import {
     LOGIN_VALUE,
     DAY_RECOMMEND_SONG,
     DISCUSS_ARRAY,
-    DISCUSS_DETAIL
+    DISCUSS_DETAIL,
+    MUSIC_URL,
+    MUSIC_PLAY_POS
 } from './actionTypes'
 import * as api from '../api'
 
@@ -57,7 +59,7 @@ export const changeCurrMusic = (data, index, mark) => {
 //切换歌曲
 export const currMusic = (id, index, mark) => {
     return (dispatch) => {
-        api.getDetail(id).then(res => {
+        api.getSongSheetDetail(id).then(res => {
             if(res.data.code === 200){
                 dispatch(changeCurrMusic(res.data.playlist.tracks, index, mark))
             }
@@ -72,9 +74,6 @@ export const searchSongs = (result) => {
         result
     }
 }
-
-//歌曲检索
-export const searchSongsReducer = () => {}
 
 //歌单详情
 export const songSheet = (id, _type) => {
@@ -103,7 +102,7 @@ export const getMusicDetail = (id) => {
     return (dispatch) => {
         api.getSongDetail(id).then(res => {
             if(res.data.code === 200){
-                dispatch(musicDetail(res.data))
+                dispatch(musicDetail(res.data.songs))
             }
         })
     }
@@ -178,4 +177,44 @@ export const discussDetail = (model, intro) => {
 //评论页详情
 export const getDiscussDetail = (model, intro) => {
     return discussDetail(model, intro)
+}
+
+//获取歌曲url 
+export const getMusicUrl = (data) => {
+    return {
+        type: MUSIC_URL,
+        data: data
+    }
+}
+
+export const musicUrlAction = (id) => {
+    return (dispatch) => {
+        api.getMusicUrl(id).then(res => {
+            if (res.data.code === 200) {
+                dispatch(getMusicUrl(res.data.data[0].url))
+            }
+        })
+    }
+}
+
+//歌曲当前位置
+export const musicPos = (num) => {
+    return {
+        type: MUSIC_PLAY_POS,
+        num: num
+    }
+}
+
+export const getMusicPos =(num, max, ctrl) => {
+    let _num 
+    if (ctrl === true && num < max) {
+        _num = num + 1
+    }
+    else if (ctrl === false && num > 0) {
+        _num = num - 1
+    }
+    else {
+        _num = num
+    }
+    return musicPos(_num)
 }
