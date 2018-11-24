@@ -7,13 +7,12 @@ class Inventory extends Component{
         super(props)
         this.handleSendId = this.handleSendId.bind(this)
     }
-    handleSendId(id, index, mark, posID) {
+    handleSendId(id, index, posID) {
         // console.log(id)
-        this.props.onHandleSendId(id, index, mark, posID)
+        this.props.onHandleSendId(id, index, posID)
     }
     render() {
         const _data = this.props.data
-        let mark = 1
         if (Object.keys(_data).length === 0 ) return null
         // console.log(_data)
         return (
@@ -32,8 +31,8 @@ class Inventory extends Component{
                         _data.tracks.map((e, i) => {
                             return (
                                 <li className="clearfix" key={i} onClick={() => {
-                                    console.log(e)
-                                    this.handleSendId(this.props.ID, i, mark, e.id)
+                                    // console.log(e)
+                                    this.handleSendId(this.props.ID, i, e.id)
                                 }}>
                                     <div className="index">{i + 1}</div>
                                     <div className="inventory-box">
@@ -61,8 +60,8 @@ class Inventory extends Component{
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onHandleSendId: (id, index, mark, posID) => {
-            dispatch(currMusic(id, index, mark))
+        onHandleSendId: (id, index, posID) => {
+            dispatch(currMusic(id, index))
             dispatch(getMusicPos(index))
             dispatch(musicUrlAction(posID))
         }

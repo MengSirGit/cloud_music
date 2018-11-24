@@ -100,10 +100,16 @@ export const discussDetailReducer = (state={}, action) => {
 }
 
 //歌曲url
-export const musicUrlReducer = (state='', action) => {
+export const musicUrlReducer = (state={
+    data: '',
+    proto: 0
+}, action) => {
     switch(action.type) {
         case MUSIC_URL:
-            return action.data
+            return {
+                data: action.data,
+                proto: action.proto
+            }
         default:
             return state
     }
@@ -120,7 +126,7 @@ export const musicDetailReducer = (state={}, action) => {
 }
 
 //歌曲位置
-export const musicPlayPosReducer = (state=[], action) => {
+export const musicPlayPosReducer = (state=null, action) => {
     switch(action.type) {
         case MUSIC_PLAY_POS:
             return action.num

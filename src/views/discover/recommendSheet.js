@@ -25,7 +25,6 @@ class RecommendSheet extends Component {
                 this.props.onCurrMusic(response.data.recommend[1].id)
             }
         })
-        this.props.onSendMusicPos(0)
     }
     handleSendSheet(id, type){
         this.id = id

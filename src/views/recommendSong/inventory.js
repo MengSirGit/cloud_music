@@ -1,15 +1,15 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {getMusicDetail} from '../../store/actions'
+import { getMusicDetail, musicUrlAction} from '../../store/actions'
 
 class Inventory extends Component {
     constructor(props){
         super(props)
         this.handleSendId = this.handleSendId.bind(this)
     }
-    handleSendId(id){
+    handleSendId(id, proto){
         // console.log(id)
-        this.props.onHandleSendId(id)
+        this.props.onHandleSendId(id, proto)
     }
     render(){
         let data = this.props.props
@@ -27,7 +27,7 @@ class Inventory extends Component {
                             data.map((e, i) => {
                                 return (
                                     <li className="clearfix" key={i} onClick={ () => {
-                                        this.handleSendId(e.id)
+                                        this.handleSendId(e.id, 1)
                                     }}>
                                         <div className="index">{i + 1}</div>
                                         <div className="inventory-box">
@@ -55,8 +55,9 @@ class Inventory extends Component {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onHandleSendId: (id) => {
+        onHandleSendId: (id, proto) => {
             dispatch(getMusicDetail(id))
+            dispatch(musicUrlAction(id, proto))
         }
     }
 }

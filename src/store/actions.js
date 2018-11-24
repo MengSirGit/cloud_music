@@ -47,12 +47,11 @@ export const playMusic = (id) => {
 }
 
 //切换歌曲
-export const changeCurrMusic = (data, index, mark) => {
+export const changeCurrMusic = (data, index) => {
     return {
         type: CHANGE_CURR_LIST,
         data: data,
-        index: index,
-        mark: mark
+        index: index
     }
 }
 
@@ -180,18 +179,19 @@ export const getDiscussDetail = (model, intro) => {
 }
 
 //获取歌曲url 
-export const getMusicUrl = (data) => {
+export const getMusicUrl = (data, proto) => {
     return {
         type: MUSIC_URL,
-        data: data
+        data: data,
+        proto: proto || 0
     }
 }
 
-export const musicUrlAction = (id) => {
+export const musicUrlAction = (id, proto) => {
     return (dispatch) => {
         api.getMusicUrl(id).then(res => {
             if (res.data.code === 200) {
-                dispatch(getMusicUrl(res.data.data[0].url))
+                dispatch(getMusicUrl(res.data.data[0].url, proto))
             }
         })
     }

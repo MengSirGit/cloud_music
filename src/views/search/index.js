@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { getMusicDetail } from '../../store/actions'
+import { getMusicDetail, musicUrlAction } from '../../store/actions'
 import * as api from '../../api'
 
 import Back from '../../components/Back'
@@ -25,8 +25,8 @@ class Search extends Component {
         this.handleComposition = this.handleComposition.bind(this)
         this.handleSendSongId = this.handleSendSongId.bind(this)
     }
-    handleSendSongId(id) {
-        this.props.onHandleSendSongId(id)
+    handleSendSongId(id, proto) {
+        this.props.onHandleSendSongId(id, proto)
         //清空搜索结果
         this.setState({
             data: []
@@ -67,7 +67,7 @@ class Search extends Component {
             searchResult = data['result']['songs'].map((e, i) => {
                 return (
                     <li key={i} className="result-list" onClick={() => {
-                        this.handleSendSongId(e.id)
+                        this.handleSendSongId(e.id, 1)
                     }
                     }><i className="iconfont">&#xe607;</i><span>{e.name}</span>-<span>{e.artists[0].name}</span></li>
                 )
@@ -96,8 +96,9 @@ class Search extends Component {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onHandleSendSongId: (id) => {
+        onHandleSendSongId: (id, proto) => {
             dispatch(getMusicDetail(id))
+            dispatch(musicUrlAction(id, proto))
         }
     }
 }
