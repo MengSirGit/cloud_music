@@ -46,6 +46,7 @@ class PlayPage extends PureComponent {
         this.handleMusicUrl = this.handleMusicUrl.bind(this)
         this.handleSendPlayMusicID = this.handleSendPlayMusicID.bind(this)
         this.handleGetMusicDetail = this.handleGetMusicDetail.bind(this)
+        this.handleCutPlay = this.handleCutPlay.bind(this)
     }
     
     //时间轴动画
@@ -96,6 +97,18 @@ class PlayPage extends PureComponent {
         }
     }
 
+    //切歌自动播放
+    handleCutPlay() {
+        setTimeout(() => {
+            let audio = document.querySelector('#audio')
+            console.log(audio.paused)
+            if (audio.paused) {
+                audio.play()
+                console.log('start')
+            }
+        }, 500)
+    }
+
     handleMusicUrl(id, proto) {
         this.props.onHandleMusicUrl(id, proto)
     } 
@@ -109,7 +122,6 @@ class PlayPage extends PureComponent {
     }
 
     handleGetMusicDetail(id) {
-        console.log('k')
         api.getSongDetail(id).then(res => {
             if (res.data.code === 200) {
                 this.setState({
@@ -217,18 +229,22 @@ class PlayPage extends PureComponent {
                                 if (_index > 0) {
                                     this.handleMusicUrl(songSheet[_index - 1].id, 0)
                                     this.handleGetMusicDetail(songSheet[_index - 1].id)
+                                    this.handleCutPlay()
                                 }
                             }
                         }>&#xe61f;</i>
                         <i className="iconfont play"
                             onClick={this.handlePlayStatus}
-                        >{!this.state.playStatus ? '\ue605' : '\ue602'}</i>
+                        >
+                            { !this.state.playStatus ? '\ue605' : '\ue602' }
+                        </i>
                         <i className="iconfont next" onClick={
                             () => {
                                 this.handleMusicPos(_index, songSheet.length, true)
                                 if (_index < songSheet.length) {
                                     this.handleMusicUrl(songSheet[_index + 1].id, 0)
                                     this.handleGetMusicDetail(songSheet[_index + 1].id)
+                                    this.handleCutPlay()
                                 }
                             }
                         }>&#xe61f;</i>
