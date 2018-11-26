@@ -44,8 +44,8 @@ class PlayBar extends Component {
         this.props.onHandleMusicUrl(id, proto)
     } 
 
-    handleMusicPos(num, max, ctrl, id) {
-        this.props.onHandleMusicPos(num, max, ctrl, id)
+    handleMusicPos(num, max, ctrl) {
+        this.props.onHandleMusicPos(num, max, ctrl)
     }
 
     handleSendPlayMusicID(id) {
@@ -81,7 +81,7 @@ class PlayBar extends Component {
         let musicUrl = this.props.musicUrl.data,
             proto = this.props.musicUrl.proto,
             singleSong = this.props.singleSong
-        console.log(singleSong)
+        // console.log(singleSong)
 
         return (
             <React.Fragment>

@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import { getDiscussArray, getDiscussDetail } from '../../store/actions'
+import { getDiscussArray, getDiscussDetail, musicUrlAction, getMusicPos } from '../../store/actions'
 
 import * as api from '../../api'
 import TabHead from './head'
@@ -42,12 +42,18 @@ class PlayPage extends PureComponent {
         this.handlePlayStatus = this.handlePlayStatus.bind(this)
         this.songClock = this.songClock.bind(this)
         this.animationTimeBase = this.animationTimeBase.bind(this)
+        this.handleMusicPos = this.handleMusicPos.bind(this)
+        this.handleMusicUrl = this.handleMusicUrl.bind(this)
+        this.handleSendPlayMusicID = this.handleSendPlayMusicID.bind(this)
+        this.handleGetMusicDetail = this.handleGetMusicDetail.bind(this)
     }
+    
     //时间轴动画
     animationTimeBase = () => {
         let _init = this.init.toFixed(2) * 1
         if (_init < 100) this.init = _init + this.DISTANCE
     }
+    
     //歌曲时间进度
     songClock = (time) => {
         if (time > 0) {
@@ -66,6 +72,7 @@ class PlayPage extends PureComponent {
             this.second >= 10 ? this.setState({Sclock: this.second.toString()}) : this.setState({Sclock: `0${this.second}`})
         }
     }
+
     //切换播放状态
     handlePlayStatus() {
         this.state.playStatus ? this.setState({playStatus: false}) : this.setState({playStatus: true})
@@ -89,9 +96,20 @@ class PlayPage extends PureComponent {
         }
     }
 
-    componentDidMount() {
-        let id = this.props.data
-        //获取歌曲详情
+    handleMusicUrl(id, proto) {
+        this.props.onHandleMusicUrl(id, proto)
+    } 
+
+    handleMusicPos(num, max, ctrl) {
+        this.props.onHandleMusicPos(num, max, ctrl)
+    }
+
+    handleSendPlayMusicID(id) {
+        this.props.onSendPlayMusicID(id)
+    }
+
+    handleGetMusicDetail(id) {
+        console.log('k')
         api.getSongDetail(id).then(res => {
             if (res.data.code === 200) {
                 this.setState({
@@ -135,6 +153,12 @@ class PlayPage extends PureComponent {
         })
     }
 
+    componentDidMount() {
+        let id = this.props.data
+        //获取歌曲详情
+        this.handleGetMusicDetail(id)
+    }
+
     //路由跳转清除播放计时器
     componentWillUnmount() {
         clearInterval(this.timerID)
@@ -154,6 +178,10 @@ class PlayPage extends PureComponent {
         else {
             return null
         }
+
+        let songSheet = this.props.songSheet.sheet,
+            _index = this.props.musicPos || 0
+
         return (
             <article className="page-box">
                 {/* 标签 */}
@@ -183,11 +211,27 @@ class PlayPage extends PureComponent {
                     </div>
                     <div className="song-contrl">
                         <i className="iconfont">&#xeaac;</i>
-                        <i className="iconfont prev">&#xe61f;</i>
+                        <i className="iconfont prev" onClick={
+                            () => {
+                                this.handleMusicPos(_index, songSheet.length, false)
+                                if (_index > 0) {
+                                    this.handleMusicUrl(songSheet[_index - 1].id, 0)
+                                    this.handleGetMusicDetail(songSheet[_index - 1].id)
+                                }
+                            }
+                        }>&#xe61f;</i>
                         <i className="iconfont play"
                             onClick={this.handlePlayStatus}
                         >{!this.state.playStatus ? '\ue605' : '\ue602'}</i>
-                        <i className="iconfont next">&#xe61f;</i>
+                        <i className="iconfont next" onClick={
+                            () => {
+                                this.handleMusicPos(_index, songSheet.length, true)
+                                if (_index < songSheet.length) {
+                                    this.handleMusicUrl(songSheet[_index + 1].id, 0)
+                                    this.handleGetMusicDetail(songSheet[_index + 1].id)
+                                }
+                            }
+                        }>&#xe61f;</i>
                         <i className="iconfont list">&#xe610;</i>
                     </div>
                 </div>
@@ -197,9 +241,12 @@ class PlayPage extends PureComponent {
 }
 
 const mapStateToProps = (state) => {
-    // console.log(state)
+    console.log(state.playMusicReducer)
     return {
-        data: state.playMusicReducer
+        data: state.playMusicReducer,
+        musicPos: state.musicPlayPosReducer,
+        singleSong: state.musicDetailReducer,
+        songSheet: state.currMusicReducer,
     }
 }
 
@@ -208,6 +255,12 @@ const mapDispatchToProps = (dispatch) => {
         onSendSongDiscuss: (id, type, intro) => {
             dispatch(getDiscussArray(id, type))
             dispatch(getDiscussDetail(type, intro))
+        },
+        onHandleMusicUrl: (id, proto) => {
+            dispatch(musicUrlAction(id, proto))
+        },
+        onHandleMusicPos: (num, max, ctrl) => {
+            dispatch(getMusicPos(num, max, ctrl))
         }
     }
 }
