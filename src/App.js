@@ -13,7 +13,6 @@ class App extends Component {
         return (
             <div>
                 <SideNav />
-                {/* <Header /> */}
                 {/* 页面路由切换 */}
                 <div className="main">
                     {
