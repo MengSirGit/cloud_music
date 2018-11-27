@@ -22,8 +22,8 @@ class WorldList extends Component {
                     {
                         _list.slice(4).map((e, i) => {
                             return (
-                                <Link to="/songsheet" onClick={() => this.handleSendID(e.id)}>
-                                    <li className="rank-node" key={i}>
+                                <Link to="/songsheet" onClick={() => this.handleSendID(e.id)} key={i}>
+                                    <li className="rank-node">
                                         <div className="world-rank-thum">
                                             <div className="intro">{e.updateFrequency}</div>
                                             <img src={e.coverImgUrl} alt="" />

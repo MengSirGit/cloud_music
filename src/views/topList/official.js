@@ -26,8 +26,8 @@ class OfficialList extends Component {
                         _list.map((e, i) => {
                             if (i < 4) {
                                 return (
-                                    <Link to="/songsheet" onClick={() => {this.handleSendID(e.id)}}>
-                                        <li className="rank-node clearfix" key={i}>
+                                    <Link to="/songsheet" onClick={() => {this.handleSendID(e.id)}} key={i}>
+                                        <li className="rank-node clearfix">
                                             <div className="rank-thum">
                                                 <div className="intro">{e.updateFrequency}</div>
                                                 <img src={e.coverImgUrl} alt="" />

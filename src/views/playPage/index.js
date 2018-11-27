@@ -122,6 +122,7 @@ class PlayPage extends PureComponent {
     }
 
     handleGetMusicDetail(id) {
+        this.init = 0
         api.getSongDetail(id).then(res => {
             if (res.data.code === 200) {
                 this.setState({
@@ -136,7 +137,7 @@ class PlayPage extends PureComponent {
                 this.duration = _duration
                 this.DISTANCE = (100 / _duration).toFixed(2) * 1
                 this.init =  (this.DISTANCE * Math.round(this.audio.currentTime))
-
+                
                 if (!this.audio.paused) {
                     this.sumTime = parseInt(_duration, 10) / 60
                     this.min = Math.floor(this.sumTime)
@@ -156,7 +157,7 @@ class PlayPage extends PureComponent {
                         }
                         else {
                             clearInterval(this.timerID)
-                            this.setState({playStatus: false})
+                            // this.setState({playStatus: false})
                         }
                     }, 1000)
                 }

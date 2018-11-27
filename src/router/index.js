@@ -29,7 +29,7 @@ const AlbumSheet = lazy(() => import('../views/albumsheet'))
 
 function LoginComponent() {
     return (
-        <Suspense fallback={<div>loading...</div>}>
+        <Suspense fallback={<div id="loading"></div>}>
             <Login />
         </Suspense>
     )
@@ -37,7 +37,7 @@ function LoginComponent() {
 
 function DayRecommendSongComponent() {
     return (
-        <Suspense fallback={<div>loading...</div>}>
+        <Suspense fallback={<div id="loading">loading...</div>}>
             <DayRecommendSong />
         </Suspense>
     )
@@ -45,7 +45,7 @@ function DayRecommendSongComponent() {
 
 function RecommendComponent() {
     return (
-        <Suspense fallback={<div>loading...</div>}>
+        <Suspense fallback={<div id="loading">loading...</div>}>
             <Recommend />
         </Suspense>
     )
@@ -53,7 +53,7 @@ function RecommendComponent() {
 
 function HomeComponent() {
     return (
-        <Suspense fallback={<div>loading...</div>}>
+        <Suspense fallback={<div id="loading">loading...</div>}>
             <Home />
         </Suspense>
     )
@@ -61,7 +61,7 @@ function HomeComponent() {
 
 function VideoComponent() {
     return (
-        <Suspense fallback={<div>loading...</div>}>
+        <Suspense fallback={<div id="loading">loading...</div>}>
             <Video />
         </Suspense>
     )
@@ -69,7 +69,7 @@ function VideoComponent() {
 
 function SearchComponent() {
     return (
-        <Suspense fallback={<div>loading...</div>}>
+        <Suspense fallback={<div id="loading">loading...</div>}>
             <Search />
         </Suspense>
     )
@@ -77,7 +77,7 @@ function SearchComponent() {
 
 function PlayPageComponent() {
     return (
-        <Suspense fallback={<div>loading...</div>}>
+        <Suspense fallback={<div id="loading">loading...</div>}>
             <PlayPage />
         </Suspense>
     )
@@ -85,7 +85,7 @@ function PlayPageComponent() {
 
 function SongSheetComponent() {
     return (
-        <Suspense fallback={<div>loading...</div>}>
+        <Suspense fallback={<div id="loading">loading...</div>}>
             <SongSheet />
         </Suspense>
     )
@@ -93,7 +93,7 @@ function SongSheetComponent() {
 
 function DiscussComponent() {
     return (
-        <Suspense fallback={<div>loading...</div>}>
+        <Suspense fallback={<div id="loading">loading...</div>}>
             <Discuss />
         </Suspense>
     )
@@ -101,7 +101,7 @@ function DiscussComponent() {
 
 function TopListComponent() {
     return (
-        <Suspense fallback={<div>loading...</div>}>
+        <Suspense fallback={<div id="loading">loading...</div>}>
             <TopList />
         </Suspense>
     )
@@ -109,7 +109,7 @@ function TopListComponent() {
 
 function AlbumSheetComponent() {
     return (
-        <Suspense fallback={<div>loading...</div>}>
+        <Suspense fallback={<div id="loading">loading...</div>}>
             <AlbumSheet />
         </Suspense>
     )
