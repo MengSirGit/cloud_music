@@ -25,6 +25,7 @@ class Search extends Component {
         this.handleComposition = this.handleComposition.bind(this)
         this.handleSendSongId = this.handleSendSongId.bind(this)
     }
+
     handleSendSongId(id, proto) {
         this.props.onHandleSendSongId(id, proto)
         //清空搜索结果
@@ -33,6 +34,7 @@ class Search extends Component {
         })
         this.refs.search.value = ''
     }
+
     handleComposition(e) {
         //中文输入结束，改变state
         if (e.type === 'compositionend') {
@@ -45,6 +47,7 @@ class Search extends Component {
             isOnComposition = true
         }
     }
+
     changeEvent() {
 
         !isOnComposition ? this.inputValue = this.refs.search.value : 
@@ -54,16 +57,20 @@ class Search extends Component {
 
         if (inputValue != null && inputValue !== '') {
             api.searchAdvise(inputValue).then(res => {
-                this.setState({
-                    data: res['data']
-                })
+                if (res.data.code === 200) {
+                    this.setState({
+                        data: res['data']
+                    })
+                }
             })
         }
     }
+
     render() {
         let searchResult = null,
             data = this.state.data
-        if (data['code'] === 200) {
+
+        if (data['code'] === 200 && Object.keys(data.result).length > 0) {
             searchResult = data['result']['songs'].map((e, i) => {
                 return (
                     <li key={i} className="result-list" onClick={() => {
@@ -73,6 +80,10 @@ class Search extends Component {
                 )
             })
         }
+        else if (data['code'] === 200 && Object.keys(data.result).length === 0) {
+            searchResult = [<p className="no-search" key="noSearch">"未找到相关歌曲信息"</p>]
+        }
+
         return (
             <React.Fragment>
                 <div className="search-input">

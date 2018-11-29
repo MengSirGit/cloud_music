@@ -80,6 +80,9 @@ export const searchAdvise = (keywords, offset=0, limit=30, type=1) => axios.get(
     }
 })
 
+//检测歌曲是否可用
+export const isCheckMusic = (id) => axios.get(`check/music?id=${id}`)
+
 //新碟上架(专辑)
 export const newPlate = (id, offset=0, limit=6) => axios.get('top/album', {
     params: {

@@ -16,39 +16,39 @@ class Inventory extends Component {
         if(data.length === 0) return false
         return (
             <article className="inventory">
-                    <div className="inventory-detail clearfix">
-                        <div className="detail-left">
-                            <i className="iconfont">&#xe605;</i>
-                            <em><span>播放全部</span></em>
-                        </div>
+                <div className="inventory-detail clearfix">
+                    <div className="detail-left">
+                        <i className="iconfont">&#xe605;</i>
+                        <em><span>播放全部</span></em>
                     </div>
-                    <ul className="inventory-list">
-                        {
-                            data.map((e, i) => {
-                                return (
-                                    <li className="clearfix" key={i} onClick={ () => {
-                                        this.handleSendId(e.id, 1)
-                                    }}>
-                                        <div className="index">{i + 1}</div>
-                                        <div className="inventory-box">
-                                            <div className="inventory-caption">
-                                                <div className="caption-line">
-                                                    <p className="inventory-name">{e.name}
-                                                        {
-                                                            e.alias.length > 0 ? <span>({e.alias[0]})</span> : false
-                                                        }
-                                                    </p>
-                                                    <p className="inventory-artist">{e.artists[0].name}-{e.album.name}</p>
-                                                </div>
-                                                <i className="iconfont">&#xe783;</i>
+                </div>
+                <ul className="inventory-list">
+                    {
+                        data.map((e, i) => {
+                            return (
+                                <li className="clearfix" key={i} onClick={ () => {
+                                    this.handleSendId(e.id, 1)
+                                }}>
+                                    <div className="index">{i + 1}</div>
+                                    <div className="inventory-box">
+                                        <div className="inventory-caption">
+                                            <div className="caption-line">
+                                                <p className="inventory-name">{e.name}
+                                                    {
+                                                        e.alias.length > 0 ? <span>({e.alias[0]})</span> : false
+                                                    }
+                                                </p>
+                                                <p className="inventory-artist">{e.artists[0].name}-{e.album.name}</p>
                                             </div>
+                                            <i className="iconfont">&#xe783;</i>
                                         </div>
-                                    </li>
-                                )
-                            })
-                        }
-                    </ul>
-                </article>
+                                    </div>
+                                </li>
+                            )
+                        })
+                    }
+                </ul>
+            </article>
         )
     }
 }
