@@ -26,6 +26,14 @@ export const loginStatus = () => axios.get(`login/status`, {
     withCredentials: true
 })
 
+//签到  type   0为安卓端， 1为web或pc端
+export const dailySigin = (type=0) => axios.get('daily_signin', {
+    withCredentials: true,
+    params: {
+        type
+    }
+})
+
 //banner
 export const getBanner = () => axios.get(`banner`) 
 
@@ -107,17 +115,19 @@ export const getAlbumDiscuss = (id, limit=20, offset=1) => axios.get(`comment/al
 export const djRecommend = () => axios.get('dj/recommend')
 
 //歌单评论
-export const getSheetDiscuss = (id, limit=20) => axios.get(`comment/playlist?id=${id}`, {
+export const getSheetDiscuss = (id, limit=20) => axios.get(`comment/playlist?id=${id}&timestamp=${new Date().getTime()}`, {
     params: {
         limit
-    }
+    },
+    withCredentials: true
 })
 
 //歌曲评论
-export const getSongDiscuss = (id, limit=20) => axios.get(`comment/music?id=${id}`, {
+export const getSongDiscuss = (id, limit=20) => axios.get(`comment/music?id=${id}&timestamp=${new Date().getTime()}`, {
     params: {
         limit
-    }
+    },
+    withCredentials: true
 })
 
 //热门评论
@@ -179,5 +189,22 @@ export const getTopListDetail = () => axios.get('toplist/detail')
  * 5: 视频
  */
 export const sendComment = (type=0, id, content) => axios.get(`comment?t=1&type=${type}&id=${id}&content=${content}`, {
+    withCredentials: true
+})
+
+/**
+ * 评论点赞功能
+ * id 为资源id
+ * cid 为评论id
+ * t: 是否点赞  1确定 0取消
+ * type 类型
+ * 0: 歌曲
+ * 1: mv
+ * 2: 歌单
+ * 3: 专辑
+ * 4: 电台
+ * 5: 视频
+ */
+export const isCommentLike = (id, cid, t=1, _type=0) => axios.get(`comment/like?id=${id}&cid=${cid}&t=${t}&type=${_type}`, {
     withCredentials: true
 })

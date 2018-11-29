@@ -16,12 +16,12 @@ class Banner extends Component{
         this.handleTouchEnd = this.handleTouchEnd.bind(this)
     }
 
-    handleTouchStart(e){
+    handleTouchStart(e) {
         this.startPos = e.touches[0].pageX
         clearInterval(this.timerID)
     }
 
-    handleTouchEnd(e, len){
+    handleTouchEnd(e, len) {
         let endPos = e.changedTouches[0].pageX,
             _that = this
 
@@ -79,7 +79,7 @@ class Banner extends Component{
 
         this.autoPlay()
     }
-    
+
     render() {
         const {banners} = this.state
         let bannerList = null

@@ -5,7 +5,7 @@ import * as api from '../../api'
 import {getSongSheet, currMusic, getMusicPos} from '../../store/actions'
 
 class RecommendSheet extends Component {
-    constructor(props){
+    constructor(props) {
         super(props)
         this.id = null
         this.type = null
@@ -14,24 +14,43 @@ class RecommendSheet extends Component {
         }
         this.handleSendSheet = this.handleSendSheet.bind(this)
     }
-    componentDidMount(){
+
+    componentDidMount() {
+
         //获取推荐歌单
-        api.getDayRecommonSheet().then(response => {
-            if(response.data.code === 200){
-                this.setState({
-                    recommondSong: response.data.recommend
-                })
-                //底部默认播放推荐歌单第一个
-                this.props.onCurrMusic(response.data.recommend[1].id)
-            }
-        })
+        if (this.props.loginCode === 200) {
+            //登录状态下
+            api.getDayRecommonSheet().then(response => {
+                if(response.data.code === 200){
+                    this.setState({
+                        recommondSong: response.data.recommend
+                    })
+                    //底部默认播放推荐歌单第一个
+                    this.props.onCurrMusic(response.data.recommend[1].id)
+                }
+            })
+        }
+        else if (this.props.loginCode === 0) {
+            //非登录状态下
+            api.getRecommonSong().then(res => {
+                if (res.data.code === 200) {
+                    this.setState({
+                        recommondSong: res.data.result
+                    })
+
+                     this.props.onCurrMusic(res.data.result[1].id)
+                }
+            })
+        }
     }
-    handleSendSheet(id, type){
+
+    handleSendSheet(id, type) {
         this.id = id
         this.type = type
         this.props.onSendRecommendSheet(this.id, this.type)
     }
-    render(){
+
+    render() {
         const {title} = this.props
         const {recommondSong} = this.state
         return (
@@ -64,6 +83,12 @@ class RecommendSheet extends Component {
     }
 }
 
+const mapStateToProps = (state) => {
+    return {
+        loginCode: state.loginValueReducer.code
+    }
+}
+
 const mapDispatchToProps = (dispatch) => {
     return {
         onSendRecommendSheet: (id, type) => {
@@ -78,4 +103,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(null, mapDispatchToProps)(RecommendSheet)
+export default connect(mapStateToProps, mapDispatchToProps)(RecommendSheet)

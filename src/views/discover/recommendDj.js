@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 import * as api from '../../api'
 
 class RecommendDj extends Component {
-    constructor(props){
+    constructor(props) {
         super(props)
         this.id = null
         this.type = null
@@ -11,7 +11,8 @@ class RecommendDj extends Component {
             anchorRadio: []
         }
     }
-    componentDidMount(){
+
+    componentDidMount() {
         //获取主播电台
         api.djRecommend().then(response => {
             if(response.data.code === 200){
@@ -21,7 +22,8 @@ class RecommendDj extends Component {
             }
         })
     }
-    render(){
+
+    render() {
         const {title} = this.props
         const {anchorRadio} = this.state
         return (

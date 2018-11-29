@@ -6,19 +6,34 @@ import { getLoginValue } from '../store/actions'
 
 //登录
 class Login extends Component {
-    render(){
+    constructor(props) {
+        super(props)
+        this.handleSigin = this.handleSigin.bind(this)
+    }
+
+    handleSigin() {
+        api.dailySigin().then(res => {
+            console.log(res.status)
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
+
+    render() {
         let _props = this.props.user,
             code = _props.code
         // console.log(this.props.user)
+
         return (
             <div className="left-login">
                 {
                     code === 200 ?
                         <div className="user-infor">
                             <div className="user-appear"><img src={_props.profile.avatarUrl} alt="" /></div>
-                            <p className="user-name">{_props.profile.nickname}</p>
+                            <div className="user-name"><span>{_props.profile.nickname}</span><span className="sign" onClick={ this.handleSigin }>签到</span></div>
                         </div>
-                        :
+                    :
                         <React.Fragment>
                             <p>登录网易云音乐</p>
                             <p>320k高音质无限下载，手机电脑多端同步</p>
@@ -32,7 +47,7 @@ class Login extends Component {
 
 //推送
 class PushNew extends Component {
-    render(){
+    render() {
         return (
             <ul className="push-new">
                 <li><i className="iconfont news">&#xe6b3;</i><span>我的消息</span></li>
@@ -47,7 +62,7 @@ class PushNew extends Component {
 
 //社交
 class Social extends Component {
-    render(){
+    render() {
         return (
             <ul className="social">
                 <li><i className="iconfont bro">&#xe618;</i><span>我的好友</span></li>
@@ -59,7 +74,7 @@ class Social extends Component {
 
 //额外功能
 class Extra extends Component {
-    render(){
+    render() {
         return (
             <ul className="extra">
                 <li><i className="iconfont skin">&#xe668;</i><span>个性换肤</span></li>
@@ -77,18 +92,20 @@ class Extra extends Component {
 
 //app操作
 class Setting extends Component {
-    constructor(props){
+    constructor(props) {
         super(props)
         this.handleToLogout = this.handleToLogout.bind(this)
     }
-    handleToLogout(){
+
+    handleToLogout() {
         api.logout().then(res => {
             if(res.data.code === 200){
                 console.log('登出')
             }
         })
     }
-    render(){
+
+    render() {
         return (
             <ul className="setting">
                 <li><i className="iconfont">&#xe609;</i><span>夜间模式</span></li>
@@ -109,10 +126,11 @@ const contrlOpen2 = (obj) => {
 }
 
 class SideNav extends Component {
-    constructor(props){
+    constructor(props) {
         super(props)
         this.toggleNav = this.toggleNav.bind(this)
     }
+
     //导航控制
     toggleNav(e){
         let sideNav = document.querySelector('#side-nav')
@@ -126,13 +144,16 @@ class SideNav extends Component {
                 contrlOpen2(sideNav)
         }
     }
+
     componentDidMount(){
         this.props.onLoginValue()
         document.addEventListener('touchend', this.toggleNav)
     }
+
     componentWillUnmount(){
         document.removeEventListener('touchend', this.toggleNav)
     }
+
     render(){
         let user = this.props.value
         return (

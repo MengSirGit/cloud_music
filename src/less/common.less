@@ -291,6 +291,17 @@ textarea {
             font-size: @one;
             color: @tab-color;
             margin-top: @half;
+            @overflow();
+
+            .sign {
+                float: right;
+                border: 1px solid @tab-color;
+                text-align: center;
+                font-size: @half + .1;
+                border-radius: 15px;
+                padding: @half - .3 @one;
+                margin-right: @one;
+            }
         }
     }
 }

@@ -5,11 +5,12 @@ import * as api from '../../api'
 import logoImg from '../../static/img/logo.png'
 
 class Login extends Component {
-    constructor(props){
+    constructor(props) {
         super(props)
         this.handleToLogin = this.handleToLogin.bind(this)
     }
-    handleToLogin(phone, password){
+
+    handleToLogin(phone, password) {
         api.loginPhone(phone, password).then(res => {
             if(res.data.code === 200){
                 // console.log(res.data)
@@ -17,7 +18,8 @@ class Login extends Component {
             }
         })
     }
-    render(){
+
+    render() {
         return (
             <div className="login-main">
                 <div className="login-logo"><img src={logoImg} alt="" /></div>

@@ -5,15 +5,17 @@ import Back from '../../components/Back'
 
 //播放页顶部及背景
 class TabHead extends Component {
-    constructor(props){
+    constructor(props) {
         super(props)
         this.handleBack = this.handleBack.bind(this)
     }
+    
     //回退
-    handleBack(){
+    handleBack() {
         this.props.history.goBack()
     }
-    render(){
+
+    render() {
         let infor = this.props.infor
 
         return (

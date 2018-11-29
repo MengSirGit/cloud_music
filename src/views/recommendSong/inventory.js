@@ -3,15 +3,17 @@ import {connect} from 'react-redux'
 import { getMusicDetail, musicUrlAction} from '../../store/actions'
 
 class Inventory extends Component {
-    constructor(props){
+    constructor(props) {
         super(props)
         this.handleSendId = this.handleSendId.bind(this)
     }
-    handleSendId(id, proto){
+
+    handleSendId(id, proto) {
         // console.log(id)
         this.props.onHandleSendId(id, proto)
     }
-    render(){
+
+    render() {
         let data = this.props.props
         if(data.length === 0) return false
         return (
