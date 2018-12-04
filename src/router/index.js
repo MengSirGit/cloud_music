@@ -26,6 +26,8 @@ const Discuss = lazy(() => import('../views/discuss'))
 const TopList = lazy(() => import('../views/topList'))
 //专辑详情
 const AlbumSheet = lazy(() => import('../views/albumsheet'))
+//用户详情页
+const UserInfo = lazy(() => import('../views/userinfo'))
 
 function LoginComponent() {
     return (
@@ -115,6 +117,14 @@ function AlbumSheetComponent() {
     )
 }
 
+function UserInfoComponent() {
+    return (
+        <Suspense fallback={<div id="loading">loading...</div>}>
+            <UserInfo />
+        </Suspense>
+    )
+}
+
 //路由
 const routes = [
     //登录
@@ -172,6 +182,11 @@ const routes = [
     {
         path: '/albumsheet',
         component: AlbumSheetComponent
+    },
+    //用户详情页
+    {
+        path: '/userinfo',
+        component: UserInfoComponent
     },
 ]
 

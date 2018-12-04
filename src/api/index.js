@@ -208,3 +208,12 @@ export const sendComment = (type=0, id, content) => axios.get(`comment?t=1&type=
 export const isCommentLike = (id, cid, t=1, _type=0) => axios.get(`comment/like?id=${id}&cid=${cid}&t=${t}&type=${_type}`, {
     withCredentials: true
 })
+
+//用户详情
+export const getUserInfo = (id) => axios.get(`user/detail?uid=${id}`)
+
+//用户歌单
+export const getUserSongSheet = (id) => axios.get(`user/playlist?uid=${id}`)
+
+//用户播放记录  type=0  一周播放排行  type=1 全部播放排行
+export const getUserPlayBack = (id, type=0) => axios.get(`user/record?uid=${id}&type=${type}`)

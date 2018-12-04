@@ -1,6 +1,18 @@
 import React, {Component} from 'react'
+import { connect } from 'react-redux'
+import { currAlbumMusic, getMusicPos, musicUrlAction } from '../../store/actions'
 
 class Inventory extends Component {
+    constructor(props) {
+        super(props)
+        this.handleSendId = this.handleSendId.bind(this)
+    }
+
+    handleSendId(id, index, posID) {
+        console.log(id, index, posID)
+        this.props.onHandleSendId(id, index, posID)
+    }
+
     render() {
         const songs = this.props.data
 
@@ -18,8 +30,11 @@ class Inventory extends Component {
                 <ul className="inventory-list">
                     {
                         songs.map((e, i) => {
+
                             return (
-                                <li className="clearfix" key={i}>
+                                <li className="clearfix" key={i} onClick={
+                                    () => this.handleSendId(this.props.ID, i, e.id)
+                                }>
                                     <div className="index">{i + 1}</div>
                                     <div className="inventory-box">
                                         <div className="inventory-caption">
@@ -44,4 +59,14 @@ class Inventory extends Component {
     }
 }
 
-export default Inventory
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onHandleSendId: (id, index, posID) => {
+            dispatch(currAlbumMusic(id, index))
+            dispatch(getMusicPos(index))
+            dispatch(musicUrlAction(posID))
+        }
+    }
+}
+
+export default connect(null, mapDispatchToProps)(Inventory)

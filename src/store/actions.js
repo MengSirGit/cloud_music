@@ -9,7 +9,8 @@ import {
     DISCUSS_ARRAY,
     DISCUSS_DETAIL,
     MUSIC_URL,
-    MUSIC_PLAY_POS
+    MUSIC_PLAY_POS,
+    USER_ALL_INFO
 } from './actionTypes'
 import * as api from '../api'
 
@@ -61,6 +62,17 @@ export const currMusic = (id, index, mark) => {
         api.getSongSheetDetail(id).then(res => {
             if(res.data.code === 200){
                 dispatch(changeCurrMusic(res.data.playlist.tracks, index, mark))
+            }
+        })
+    }
+}
+
+//切换专辑歌曲
+export const currAlbumMusic = (id, index, mark) => {
+    return (dispatch) => {
+        api.getAlbumCon(id).then(res => {
+            if (res.data.code === 200) {
+                dispatch(changeCurrMusic(res.data.songs, index, mark))
             }
         })
     }
@@ -217,4 +229,31 @@ export const getMusicPos =(num, max, ctrl) => {
         _num = num
     }
     return musicPos(_num)
+}
+
+//用户信息
+export const userAllInfo = (data) => {
+    console.log(data)
+    return {
+        type: USER_ALL_INFO,
+        data: data
+    }
+}
+
+export const getUserAllInfo = (id) => {
+    return (dispatch) => {
+        let userInfoData = {}
+        api.getUserInfo(id).then(res => {
+            if (res.data.code === 200) {
+                userInfoData.detail = res.data
+
+                api.getUserSongSheet(id).then(res => {
+                    if (res.data.code === 200) {
+                        userInfoData.playList = res.data.playlist
+                        dispatch(userAllInfo(userInfoData))
+                    }
+                })
+            }
+        })
+    }
 }

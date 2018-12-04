@@ -34,7 +34,7 @@ class AlbumSheet extends Component {
             }}>
                 <Head />
                 <Summary data={this.state.list.album} />
-                <Inventory data={this.state.list.songs} />
+                <Inventory data={this.state.list.songs} ID={this.props._id} />
             </div>
         )
     }

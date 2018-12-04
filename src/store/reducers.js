@@ -8,7 +8,8 @@ import {
         DISCUSS_ARRAY,
         DISCUSS_DETAIL,
         MUSIC_URL,
-        MUSIC_PLAY_POS
+        MUSIC_PLAY_POS,
+        USER_ALL_INFO
     } from './actionTypes'
 
 //检测登录状态
@@ -131,6 +132,19 @@ export const musicPlayPosReducer = (state=null, action) => {
         case MUSIC_PLAY_POS:
             return action.num
         default: 
+            return state
+    }
+}
+
+//用户信息
+export const userAllInfoReducer = (state={
+    detail: {},
+    playList: []
+}, action) => {
+    switch(action.type) {
+        case USER_ALL_INFO:
+            return
+        default:
             return state
     }
 }

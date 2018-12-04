@@ -34,3 +34,6 @@ export const MUSIC_URL = 'MUSIC_URL'
 
 //播放歌曲所处位置
 export const MUSIC_PLAY_POS = 'MUSIC_PLAY_POS'
+
+//用户信息
+export const USER_ALL_INFO = 'USER_ALL_INFO'

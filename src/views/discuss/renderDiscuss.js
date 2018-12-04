@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { getUserAllInfo } from '../../store/actions'
 import * as api from '../../api'
 
 class RenderDiscuss extends Component {
     constructor(props) {
         super(props)
         this.handleClickLike = this.handleClickLike.bind(this)
+        this.handleUserAllInfo = this.handleUserAllInfo.bind(this)
     }
 
     handleClickLike(id, cid, t, _type) {
@@ -14,6 +16,10 @@ class RenderDiscuss extends Component {
                 console.log('点赞成功')
             }
         })
+    }
+
+    handleUserAllInfo(id) {
+        this.props.onHandleUserInfo(id)
     }
 
     render() {
@@ -30,7 +36,7 @@ class RenderDiscuss extends Component {
 
                         return (
                             <li key={i}>
-                                <div className="head-port"><img src={e.user.avatarUrl} alt="" /></div>
+                                <div className="head-port" onClick={() => this.handleUserAllInfo(e.user.userId)}><img src={e.user.avatarUrl} alt="" /></div>
                                 <div className="discuss-body">
                                     <div className="discuss-up">
                                         <div className="discuss-author">
@@ -81,4 +87,12 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(RenderDiscuss)
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onHandleUserInfo: (id) => {
+            dispatch(getUserAllInfo(id))
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(RenderDiscuss)

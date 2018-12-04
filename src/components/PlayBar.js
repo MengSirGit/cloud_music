@@ -96,12 +96,13 @@ class PlayBar extends Component {
                                 } }
                                 onTouchEnd={ (e) => {
                                     this.handleTouchEnd(e)
-                                    this.handleMusicPos(_index, songSheet.length, this.prevOrNext)
                                     //(歌曲id, 歌曲索引, 歌单长度, 上一首或下一首)
-                                    if (this.prevOrNext === true && _index < songSheet.length) {
+                                    if (this.prevOrNext === true && _index < songSheet.length - 1) {
+                                        this.handleMusicPos(_index, songSheet.length, this.prevOrNext)
                                         this.handleMusicUrl(songSheet[_index + 1].id, 0)
                                     }
                                     else if (this.prevOrNext === false && _index > 0) {
+                                        this.handleMusicPos(_index, songSheet.length, this.prevOrNext)
                                         this.handleMusicUrl(songSheet[_index - 1].id, 0)
                                     }
                                 } }
@@ -177,7 +178,7 @@ class PlayBar extends Component {
 }
 
 const mapStateToProps = (state) => {
-    // console.log(state.musicUrlReducer)
+    // console.log(state)
     return {
         songSheet: state.currMusicReducer,
         musicUrl: state.musicUrlReducer,
