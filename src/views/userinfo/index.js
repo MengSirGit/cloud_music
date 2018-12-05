@@ -1,11 +1,35 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+
+import Head from './head'
+import Summary from './summary'
+import Main from './main'
+import '../../less/userinfo.less'
 
 class UserInfo extends Component {
     render() {
+        let _userInfo = this.props._userInfo
+
+        if (!_userInfo.detail.profile) return null
+
         return (
-            <h1>hello</h1>
+            <div className="sheet-box info" style={{
+                background: `url(${_userInfo.detail.profile.backgroundUrl}) repeat-y center top / 100%`
+            }}>
+                <div className="user-shadown">
+                    <Head />
+                    <Summary data={_userInfo.detail} />
+                    <Main data={_userInfo.playList} userId={_userInfo.detail.profile['userId']} listenSongs={_userInfo.detail['listenSongs']} />
+                </div>
+            </div>
         )
     }
 }
 
-export default UserInfo
+const mapStateToProps = (state) => {
+    return {
+        _userInfo: state.userAllInfoReducer
+    }
+}
+
+export default connect(mapStateToProps)(UserInfo)

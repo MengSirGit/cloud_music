@@ -17,7 +17,7 @@ class OfficialList extends Component {
         const _list = this.props.data.list
         const _artist = this.props.data.artistToplist
         const _reward = this.props.data.rewardToplist
-        console.log(this.props)
+        // console.log(this.props)
         return (
             <div className="official-rank">
                 <h3>官方榜</h3>

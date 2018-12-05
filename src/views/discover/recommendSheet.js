@@ -64,7 +64,7 @@ class RecommendSheet extends Component {
                                     return (
                                         <li key={i}>
                                             <Link to="/songsheet" onClick={() => {
-                                                this.handleSendSheet(data.id, data.type)
+                                                this.handleSendSheet(data.id)
                                             }}>
                                                 <p className="thum"><img src={data.picUrl} alt="" /></p>
                                                 <p className="title">{data.name}</p>
@@ -91,8 +91,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onSendRecommendSheet: (id, type) => {
-            dispatch(getSongSheet(id, type))
+        onSendRecommendSheet: (id) => {
+            dispatch(getSongSheet(id))
         },
         onCurrMusic: (id) => {
             dispatch(currMusic(id))

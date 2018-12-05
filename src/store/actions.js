@@ -87,17 +87,16 @@ export const searchSongs = (result) => {
 }
 
 //歌单详情
-export const songSheet = (id, _type) => {
+export const songSheet = (id) => {
     return {
         type: SONG_SHEET_DETAIL,
-        id: id,
-        _type: _type
+        id: id
     }
 }
 
 //歌单详情
-export const getSongSheet = (id, type) => {
-    return songSheet(id, type)
+export const getSongSheet = (id) => {
+    return songSheet(id)
 }
 
 //歌曲详情
@@ -233,7 +232,6 @@ export const getMusicPos =(num, max, ctrl) => {
 
 //用户信息
 export const userAllInfo = (data) => {
-    console.log(data)
     return {
         type: USER_ALL_INFO,
         data: data

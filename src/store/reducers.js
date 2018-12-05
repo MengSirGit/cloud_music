@@ -143,7 +143,7 @@ export const userAllInfoReducer = (state={
 }, action) => {
     switch(action.type) {
         case USER_ALL_INFO:
-            return
+            return Object.assign({}, state, action.data)
         default:
             return state
     }

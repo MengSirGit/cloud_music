@@ -1,0 +1,148 @@
+@import (reference) './public.less';
+
+.info {
+    .user-shadown {
+        background-color: rgba(0,0,0,.3);
+
+        .sheet-head {
+            @all-width();
+            padding: 0 @one;
+    
+            .sheet-more {
+                float: right;
+                font-size: @one + .2;
+                line-height: 2;
+                color: @tab-color;
+            }
+        }
+    
+        .user-show {
+            padding: 0 @one @one + @half @one;
+    
+            .vision {
+                @overflow();
+                padding-top: @one * 3;
+                
+                .thum {
+                    float: left;
+                    width: @one * 6;
+                    height: @one * 6;
+                    border-radius: 50%;
+                    @overflow();
+    
+                    img {
+                        @all-width();
+                    }
+                }
+    
+                .follow {
+                    float: right;
+                    padding-top: @one;
+    
+                    span {
+                        display: inline-block;
+                        border-radius: 3px;
+                        padding: @half - .3 @half;
+                        background-color: #b3b3b3;
+                        color: @tab-color;
+                        font-size: @one - .2;
+                        cursor: pointer;
+                    }
+                }
+            }
+            
+            .nickname {
+                font-size: @one + .3;
+                color: @tab-color;
+                margin-top: @one;
+            }
+    
+            .fans {
+                color: #d4d4d4;
+                line-height: 2;
+                font-size: @half + .3;
+                margin-bottom: @half - .1;
+    
+                span {
+                    display: inline-block;
+                    margin-right: 1rem;
+                }
+            }
+    
+            .property {
+                color: @tab-color;
+                font-size: @half + .1;
+    
+                .level {
+                    display: inline-block;
+                    background-color: #9d9d9d;
+                    padding: @half - .4 @half + .2;
+                    border-radius: 10px;
+                }
+            }
+        }
+
+        .user-info-main {
+            background-color: @tab-color;
+            margin-top: -@half;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+
+            .tab-menu {
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                border-bottom: 1px solid #f5f5f5;
+
+                li {
+                    line-height: 3.2;
+                    font-size: @one - .2;
+                }
+            }
+
+            .user-songsheet {
+                h4 {
+                    padding: @half - .2 @half;
+                    background-color: #f9f9f9;
+                    font-size: @half + .3;
+                }
+            }
+
+            .songsheet-all {
+                padding: @half 0 @half @half;
+                @overflow();
+
+                .thum {
+                    float: left;
+                    width: 3rem;
+                    height: 3rem;
+                    border-radius: 3px;
+                    @overflow();
+
+                    img {
+                        width: 100%;
+                    }
+                }
+
+                .content {
+                    margin-left: @one * 3.5;
+                    border-bottom: 1px solid #f5f5f5;
+
+                    .name {
+                        width: 100%;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                        font-size: @one - .1;
+                    }
+
+                    .nature {
+                        font-size: .6rem;
+                        color: #9d9d9d;
+                        line-height: 2.2;
+                    }
+                }
+            }
+        }
+    }
+}

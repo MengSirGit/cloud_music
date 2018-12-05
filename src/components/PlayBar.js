@@ -81,7 +81,6 @@ class PlayBar extends Component {
         let musicUrl = this.props.musicUrl.data,
             proto = this.props.musicUrl.proto,
             singleSong = this.props.singleSong
-        // console.log(singleSong)
 
         return (
             <React.Fragment>
@@ -163,7 +162,7 @@ class PlayBar extends Component {
                                         playStatus: false
                                     })
                                 }
-                            } }>
+                            }}>
                                 {
                                     this.state.playStatus ? '\ue602' : '\ue605'
                                 }
@@ -171,7 +170,7 @@ class PlayBar extends Component {
                             <div className="collect"><i className="iconfont">&#xe610;</i></div>
                         </div>
                     </div>
-            }
+                }
             </React.Fragment> 
         )
     }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { getUserAllInfo } from '../../store/actions'
 import * as api from '../../api'
 
@@ -36,7 +37,7 @@ class RenderDiscuss extends Component {
 
                         return (
                             <li key={i}>
-                                <div className="head-port" onClick={() => this.handleUserAllInfo(e.user.userId)}><img src={e.user.avatarUrl} alt="" /></div>
+                                <div className="head-port" onClick={() => this.handleUserAllInfo(e.user.userId)}><Link to="/userinfo"><img src={e.user.avatarUrl} alt="" /></Link></div>
                                 <div className="discuss-body">
                                     <div className="discuss-up">
                                         <div className="discuss-author">
