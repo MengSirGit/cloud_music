@@ -4,30 +4,32 @@ import createBrowserHistory from 'history/createBrowserHistory'
 
 import App from '../App'
 
-//登录页
+// 登录页
 const Login = lazy(() => import('../views/login'))
-//每日推荐歌曲列表
+// 每日推荐歌曲列表
 const DayRecommendSong = lazy(() => import('../views/recommendSong'))
-//推荐页
+// 推荐页
 const Recommend = lazy(() => import('../views/discover'))
-//本地页
+// 本地页
 const Home = lazy(() => import('../views/home'))
-//短视频
+// 短视频
 const Video = lazy(() => import('../views/video'))
-//搜索
+// 搜索
 const Search = lazy(() => import('../views/search'))
-//歌曲播放
+// 歌曲播放
 const PlayPage = lazy(() => import('../views/playPage'))
-//歌单详情
+// 歌单详情
 const SongSheet = lazy(() => import('../views/songsheet'))
-//评论
+// 评论
 const Discuss = lazy(() => import('../views/discuss'))
-//排行榜
+// 排行榜
 const TopList = lazy(() => import('../views/topList'))
-//专辑详情
+// 专辑详情
 const AlbumSheet = lazy(() => import('../views/albumsheet'))
-//用户详情页
+// 用户详情页
 const UserInfo = lazy(() => import('../views/userinfo'))
+// 歌单分类页
+const ClassifyofPlaylist = lazy(() => import('../views/classifyofplaylist'))
 
 function LoginComponent() {
     return (
@@ -125,68 +127,81 @@ function UserInfoComponent() {
     )
 }
 
-//路由
+function ClassifyofPlaylistComponent() {
+    return (
+        <Suspense fallback={<div id="loading">loading...</div>}>
+            <ClassifyofPlaylist />
+        </Suspense>
+    )
+}
+
+// 路由
 const routes = [
-    //登录
+    // 登录
     {
         path: '/login',
         component: LoginComponent
     },
-    //每日推荐歌曲
+    // 每日推荐歌曲
     {
         path: '/recommendsong',
         component: DayRecommendSongComponent
     },
-    //推荐
+    // 推荐
     {
         path: '/',
         exact: true,
         component: RecommendComponent
     },
-    //本地
+    // 本地
     {
         path: '/home',
         component: HomeComponent
     },
-    //视频
+    // 视频
     {
         path: '/video',
         component: VideoComponent
     },
-    //搜索
+    // 搜索
     {
         path: '/search',
         component: SearchComponent
     },
-    //歌曲播放页
+    // 歌曲播放页
     {
         path: '/playpage',
         component: PlayPageComponent
     },
-    //歌单详情页
+    // 歌单详情页
     {
         path: '/songsheet',
         component: SongSheetComponent
     },
-    //评论
+    // 评论
     {
         path: '/discuss',
         component: DiscussComponent
     },
-    //排行榜
+    // 排行榜
     {
         path: '/toplist',
         component: TopListComponent
     },
-    //专辑详情
+    // 专辑详情
     {
         path: '/albumsheet',
         component: AlbumSheetComponent
     },
-    //用户详情页
+    // 用户详情页
     {
         path: '/userinfo',
         component: UserInfoComponent
+    },
+    // 歌单分类
+    {
+        path: '/classifyofplaylist',
+        component: ClassifyofPlaylistComponent
     },
 ]
 

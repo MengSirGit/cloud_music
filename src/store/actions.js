@@ -10,11 +10,12 @@ import {
     DISCUSS_DETAIL,
     MUSIC_URL,
     MUSIC_PLAY_POS,
-    USER_ALL_INFO
+    USER_ALL_INFO,
+    HOT_PLAY_LIST
 } from './actionTypes'
 import * as api from '../api'
 
-//登录信息
+// 登录信息
 export const loginValue = (data) => {
     return {
         type: LOGIN_VALUE,
@@ -22,7 +23,7 @@ export const loginValue = (data) => {
     }
 }
 
-//登录信息
+// 登录信息
 export const getLoginValue = () => {
     return (dispatch) => {
         api.loginStatus().then(res => {
@@ -33,7 +34,7 @@ export const getLoginValue = () => {
     }
 }
 
-//播放歌曲
+// 播放歌曲
 export const playMusicList = (id) => {
     return {
         type: PLAY_MUSIC_LIST,
@@ -41,13 +42,13 @@ export const playMusicList = (id) => {
     }
 }
 
-//播放歌曲
+// 播放歌曲
 export const playMusic = (id) => {
     //获取基本信息
     return playMusicList(id)
 }
 
-//切换歌曲
+// 切换歌曲
 export const changeCurrMusic = (data, index) => {
     return {
         type: CHANGE_CURR_LIST,
@@ -56,7 +57,7 @@ export const changeCurrMusic = (data, index) => {
     }
 }
 
-//切换歌曲
+// 切换歌曲
 export const currMusic = (id, index, mark) => {
     return (dispatch) => {
         api.getSongSheetDetail(id).then(res => {
@@ -67,7 +68,7 @@ export const currMusic = (id, index, mark) => {
     }
 }
 
-//切换专辑歌曲
+// 切换专辑歌曲
 export const currAlbumMusic = (id, index, mark) => {
     return (dispatch) => {
         api.getAlbumCon(id).then(res => {
@@ -78,7 +79,7 @@ export const currAlbumMusic = (id, index, mark) => {
     }
 }
 
-//歌曲检索
+// 歌曲检索
 export const searchSongs = (result) => {
     return {
         type: SEARCH_SONGS,
@@ -86,7 +87,7 @@ export const searchSongs = (result) => {
     }
 }
 
-//歌单详情
+// 歌单详情
 export const songSheet = (id) => {
     return {
         type: SONG_SHEET_DETAIL,
@@ -94,12 +95,12 @@ export const songSheet = (id) => {
     }
 }
 
-//歌单详情
+// 歌单详情
 export const getSongSheet = (id) => {
     return songSheet(id)
 }
 
-//歌曲详情
+// 歌曲详情
 export const musicDetail = (data) => {
     return {
         type: MUSIC_DETAIL,
@@ -107,7 +108,7 @@ export const musicDetail = (data) => {
     }
 }
 
-//歌曲详情
+// 歌曲详情
 export const getMusicDetail = (id) => {
     return (dispatch) => {
         api.getSongDetail(id).then(res => {
@@ -118,7 +119,7 @@ export const getMusicDetail = (id) => {
     }
 }
 
-//每日推荐歌曲
+// 每日推荐歌曲
 export const dayRecommendSong = (data) => {
     return {
         type: DAY_RECOMMEND_SONG,
@@ -126,7 +127,7 @@ export const dayRecommendSong = (data) => {
     }
 }
 
-//每日推荐歌曲
+// 每日推荐歌曲
 export const getDayRecommendSong = () => {
     return (dispatch) => {
         api.getDayRecommonSong().then(res => {
@@ -137,7 +138,7 @@ export const getDayRecommendSong = () => {
     }
 }
 
-//评论
+// 评论
 export const discussArray = (data) => {
     return {
         type: DISCUSS_ARRAY,
@@ -145,7 +146,7 @@ export const discussArray = (data) => {
     }
 }
 
-//评论
+// 评论
 export const getDiscussArray = (id, _type) => {
     return (dispatch) => {
         if (_type === 0) {
@@ -175,7 +176,7 @@ export const getDiscussArray = (id, _type) => {
     }
 }
 
-//评论页详情
+// 评论页详情
 export const discussDetail = (model, intro) => {
     return {
         type: DISCUSS_DETAIL,
@@ -184,12 +185,12 @@ export const discussDetail = (model, intro) => {
     }
 }
 
-//评论页详情
+// 评论页详情
 export const getDiscussDetail = (model, intro) => {
     return discussDetail(model, intro)
 }
 
-//获取歌曲url 
+// 获取歌曲url 
 export const getMusicUrl = (data, proto) => {
     return {
         type: MUSIC_URL,
@@ -208,7 +209,7 @@ export const musicUrlAction = (id, proto) => {
     }
 }
 
-//歌曲当前位置
+// 歌曲当前位置
 export const musicPos = (num) => {
     return {
         type: MUSIC_PLAY_POS,
@@ -230,7 +231,7 @@ export const getMusicPos =(num, max, ctrl) => {
     return musicPos(_num)
 }
 
-//用户信息
+// 用户信息
 export const userAllInfo = (data) => {
     return {
         type: USER_ALL_INFO,
@@ -251,6 +252,24 @@ export const getUserAllInfo = (id) => {
                         dispatch(userAllInfo(userInfoData))
                     }
                 })
+            }
+        })
+    }
+}
+
+// 歌单（网友推荐)
+export const hotPlaylist = (data) => {
+    return {
+        type: HOT_PLAY_LIST,
+        data: data
+    }
+}
+
+export const getHotPlaylist = () => {
+    return (dispatch) => {
+        api.getNetFriendPlayList().then(res => {
+            if (res.data.code === 200) {
+                dispatch(hotPlaylist(res.data.playlists))
             }
         })
     }

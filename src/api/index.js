@@ -2,7 +2,7 @@ import axios from 'axios'
 
 axios.defaults.baseURL = `http://localhost:3000`
 
-//手机号登录
+// 手机号登录
 export const loginPhone = (phone, password) => axios.get(`login/cellphone`, {
     params: {
         phone,
@@ -11,22 +11,22 @@ export const loginPhone = (phone, password) => axios.get(`login/cellphone`, {
     withCredentials: true
 })
 
-//刷新登录
+// 刷新登录
 export const loginRefresh = () => axios.get(`login/refresh`, {
     withCredentials: true
 })
 
-//退出登录
+// 退出登录
 export const logout = () => axios.get(`logout`, {
     withCredentials: true
 })
 
-//登录状态
+// 登录状态
 export const loginStatus = () => axios.get(`login/status`, {
     withCredentials: true
 })
 
-//签到  type   0为安卓端， 1为web或pc端
+// 签到  type   0为安卓端， 1为web或pc端
 export const dailySigin = (type=0) => axios.get('daily_signin', {
     withCredentials: true,
     params: {
@@ -34,41 +34,41 @@ export const dailySigin = (type=0) => axios.get('daily_signin', {
     }
 })
 
-//banner
+// banner
 export const getBanner = () => axios.get(`banner`) 
 
-//每日推荐歌单(登录)
+// 每日推荐歌单(登录)
 export const getDayRecommonSheet = () => axios.get(`recommend/resource`, {
     withCredentials: true
 })
 
-//每日推荐歌曲(登录)
+// 每日推荐歌曲(登录)
 export const getDayRecommonSong = () => axios.get(`recommend/songs`, {
     withCredentials: true
 })
 
-//推荐歌单
+// 推荐歌单
 export const getRecommonSong = () => axios.get(`personalized`)
 
-//获取音乐地址
+// 获取音乐地址
 export const getMusicUrl = (id) => axios.get(`song/url?id=${id}`)
 
-//获取歌单详情
+// 获取歌单详情
 export const getSongSheetDetail = (id) => axios.get(`playlist/detail?id=${id}`)
 
-//获取歌曲详情
+// 获取歌曲详情
 export const getSongDetail = (id) => axios.get(`song/detail?ids=${id}`) 
 
-//获取最新音乐
+// 获取最新音乐
 export const getNewMusic = () => axios.get(`personalized/newsong`)
 
-//获取主播电台
+// 获取主播电台
 export const getAnchorRadio = () => axios.get(`personalized/djprogram`)
 
-//获取独家放送
+// 获取独家放送
 export const getExclusive = () => axios.get('personalized/privatecontent')
 
-//歌曲搜索
+// 歌曲搜索
 export const getSearchCon = (keywords, offset=0, limit=30, type=1) => axios.get('search', {
     params: {
         keywords,
@@ -78,7 +78,7 @@ export const getSearchCon = (keywords, offset=0, limit=30, type=1) => axios.get(
     }
 })
 
-//搜索建议
+// 搜索建议
 export const searchAdvise = (keywords, offset=0, limit=30, type=1) => axios.get('search/suggest', {
     params: {
         keywords,
@@ -88,10 +88,10 @@ export const searchAdvise = (keywords, offset=0, limit=30, type=1) => axios.get(
     }
 })
 
-//检测歌曲是否可用
+// 检测歌曲是否可用
 export const isCheckMusic = (id) => axios.get(`check/music?id=${id}`)
 
-//新碟上架(专辑)
+// 新碟上架(专辑)
 export const newPlate = (id, offset=0, limit=6) => axios.get('top/album', {
     params: {
         id,
@@ -100,10 +100,10 @@ export const newPlate = (id, offset=0, limit=6) => axios.get('top/album', {
     }
 })
 
-//获取专辑内容
+// 获取专辑内容
 export const getAlbumCon = (id) => axios.get(`album?id=${id}`)
 
-//专辑评论
+// 专辑评论
 export const getAlbumDiscuss = (id, limit=20, offset=1) => axios.get(`comment/album?id=${id}`, {
     params: {
         limit: offset * limit,
@@ -111,10 +111,10 @@ export const getAlbumDiscuss = (id, limit=20, offset=1) => axios.get(`comment/al
     }
 })
 
-//电台推荐
+// 电台推荐
 export const djRecommend = () => axios.get('dj/recommend')
 
-//歌单评论
+// 歌单评论
 export const getSheetDiscuss = (id, limit=20) => axios.get(`comment/playlist?id=${id}&timestamp=${new Date().getTime()}`, {
     params: {
         limit
@@ -122,7 +122,7 @@ export const getSheetDiscuss = (id, limit=20) => axios.get(`comment/playlist?id=
     withCredentials: true
 })
 
-//歌曲评论
+// 歌曲评论
 export const getSongDiscuss = (id, limit=20) => axios.get(`comment/music?id=${id}&timestamp=${new Date().getTime()}`, {
     params: {
         limit
@@ -130,7 +130,7 @@ export const getSongDiscuss = (id, limit=20) => axios.get(`comment/music?id=${id
     withCredentials: true
 })
 
-//热门评论
+// 热门评论
 /**
  * 0 歌曲
  * 1 MV
@@ -145,7 +145,7 @@ export const getHotDiscuss = (id, type=0) => axios.get(`comment/hot?id=${id}`, {
     }
 })
 
-//排行榜
+// 排行榜
 /**
  * "0": 云音乐新歌榜
  * "1": 云音乐热歌榜
@@ -174,10 +174,10 @@ export const getHotDiscuss = (id, type=0) => axios.get(`comment/hot?id=${id}`, {
  */
 export const getTopList = (id) => axios.get(`top/list?idx=${id}`)
 
-//排行榜榜单摘要
+// 排行榜榜单摘要
 export const getTopListDetail = () => axios.get('toplist/detail')
 
-//发送评论
+// 发送评论
 /**
  * t:1 发送
  * tpye: 数字,资源类型,对应歌曲,mv,专辑,歌单,电台,视频对应以下类型
@@ -209,11 +209,26 @@ export const isCommentLike = (id, cid, t=1, _type=0) => axios.get(`comment/like?
     withCredentials: true
 })
 
-//用户详情
+// 用户详情
 export const getUserInfo = (id) => axios.get(`user/detail?uid=${id}`)
 
-//用户歌单
+// 用户歌单
 export const getUserSongSheet = (id) => axios.get(`user/playlist?uid=${id}`)
 
-//用户播放记录  type=0  一周播放排行  type=1 全部播放排行
+// 用户播放记录  type=0  一周播放排行  type=1 全部播放排行
 export const getUserPlayBack = (id, type=1) => axios.get(`user/record?uid=${id}&type=${type}`)
+
+// 歌单（网友精选碟片）
+// order: hot 最热, new 最新
+export const getNetFriendPlayList = (limit=20, order='hot') => axios.get('/top/playlist', {
+    params: {
+        limit,
+        order
+    }
+})
+
+// 热门歌单分类
+export const getHotClassifyofPlayList = () => axios.get('/playlist/hot')
+
+// 歌单全部分类
+export const getAllClassifyofPlayList = () => axios.get('/playlist/catlist')

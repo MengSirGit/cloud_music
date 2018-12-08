@@ -1,0 +1,79 @@
+@import (reference) './public.less';
+
+.classify-playlist {
+    .sheet-head {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 8;
+        @all-width();
+        background-color: rgba(0, 0, 0, 0.3);
+        padding:@half - .2 @one - .2;
+        @box-sizing();
+        color: @tab-color;
+    }
+    
+    .hot-list {
+        @flex-around();
+        flex-wrap: wrap;
+        padding: 0 @half - .2;
+
+        .hot-node { 
+            width: 49%;
+            margin-bottom: @one;
+
+            .hot-box {
+                position: relative;
+                top: 0;
+                left: 0;
+                @all-width();
+                border-radius: 5px;
+                margin-bottom: @half - .3;
+                @overflow();
+
+                .node-bg {
+                    @all-width();
+                }
+
+                .hot-cunk {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    @all-width();
+                    height: 100%;
+                    background-color: rgba(0,0,0,.3);
+                    z-index: 1;
+
+                    p {
+                        position: absolute;
+                        z-index: 5;
+                        color: @tab-color;
+                        font-size: @half + .2;
+
+                        .iconfont {
+                            color: @tab-color;
+                            font-size: @half + .2;
+                            margin-right: @half - .2;
+                        }
+                    }
+
+                    .play-count {
+                        top: @half;
+                        right: @half;
+                        
+                    }
+
+                    .play-creator {
+                        bottom: @half;
+                        left: @half;
+                    }
+                }
+            }
+
+            .play-caption {
+                font-size: @one - .1;
+                line-height: 1.5;
+            }
+        }
+    }
+}

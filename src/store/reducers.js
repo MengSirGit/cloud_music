@@ -9,10 +9,11 @@ import {
         DISCUSS_DETAIL,
         MUSIC_URL,
         MUSIC_PLAY_POS,
-        USER_ALL_INFO
+        USER_ALL_INFO,
+        HOT_PLAY_LIST
     } from './actionTypes'
 
-//检测登录状态
+// 检测登录状态
 export const loginValueReducer = (state={
     code: 0,
     profile: {},
@@ -26,7 +27,7 @@ export const loginValueReducer = (state={
     }
 }
 
-//切换音乐
+// 切换音乐
 export const currMusicReducer = (state={
     sheet: [],
     index: null,
@@ -44,7 +45,7 @@ export const currMusicReducer = (state={
     }
 }
 
-//播放音乐
+// 播放音乐
 export const playMusicReducer = (state=[], action) => {
     switch(action.type){
         case PLAY_MUSIC_LIST:
@@ -54,7 +55,7 @@ export const playMusicReducer = (state=[], action) => {
     }
 }
 
-//获取歌单
+// 获取歌单
 export const songSheetReducer= (state={}, action) => {
     switch(action.type){
         case SONG_SHEET_DETAIL:
@@ -64,7 +65,7 @@ export const songSheetReducer= (state={}, action) => {
     }
 }
 
-//每日推荐歌曲
+// 每日推荐歌曲
 export const dayRecommendReducer = (state=[], action) => {
     switch(action.type){
         case DAY_RECOMMEND_SONG:
@@ -74,7 +75,7 @@ export const dayRecommendReducer = (state=[], action) => {
     }
 }
 
-//评论 
+// 评论 
 export const discussReducer = (state=[], action) => {
     switch(action.type) {
         case DISCUSS_ARRAY:
@@ -84,7 +85,7 @@ export const discussReducer = (state=[], action) => {
     }
 }
 
-//评论页详情
+// 评论页详情
 export const discussDetailReducer = (state={}, action) => {
     switch(action.type) {
         case DISCUSS_DETAIL:
@@ -100,7 +101,7 @@ export const discussDetailReducer = (state={}, action) => {
     }
 }
 
-//歌曲url
+// 歌曲url
 export const musicUrlReducer = (state={
     data: '',
     proto: 0
@@ -116,7 +117,7 @@ export const musicUrlReducer = (state={
     }
 }
 
-//歌曲详情
+// 歌曲详情
 export const musicDetailReducer = (state={}, action) => {
     switch(action.type) {
         case MUSIC_DETAIL:
@@ -126,7 +127,7 @@ export const musicDetailReducer = (state={}, action) => {
     }
 }
 
-//歌曲位置
+// 歌曲位置
 export const musicPlayPosReducer = (state=null, action) => {
     switch(action.type) {
         case MUSIC_PLAY_POS:
@@ -136,7 +137,7 @@ export const musicPlayPosReducer = (state=null, action) => {
     }
 }
 
-//用户信息
+// 用户信息
 export const userAllInfoReducer = (state={
     detail: {},
     playList: []
@@ -144,6 +145,16 @@ export const userAllInfoReducer = (state={
     switch(action.type) {
         case USER_ALL_INFO:
             return Object.assign({}, state, action.data)
+        default:
+            return state
+    }
+}
+
+// 热门歌单
+export const hotPlaylistReducer = (state=[], action) => {
+    switch(action.type) {
+        case HOT_PLAY_LIST:
+            return [...action.data]
         default:
             return state
     }
