@@ -7,10 +7,79 @@
         left: 0;
         z-index: 8;
         @all-width();
-        background-color: rgba(0, 0, 0, 0.3);
+        background-color: #414141;
         padding:@half - .2 @one - .2;
         @box-sizing();
         color: @tab-color;
+    }
+
+    .high-quality {
+        background-color: @tab-color;
+        padding: @one * 4.5 @half @one * 2 @half;
+        box-shadow: 0 0px 6px rgba(0,0,0,.2);
+
+        .thum {
+            float: left;
+            width: @one * 6;
+            height: @one * 6;
+            border-radius: 5px;
+            @overflow();
+
+            img {
+                @all-width();
+            }
+        }
+
+        .intro {
+            margin-left: @one * 7;
+
+            h3 {
+                font-size: @one + .2;
+                color: #333;
+                line-height: 2.2;
+            }
+
+            .name {
+                margin-bottom: @half;
+                font-size: @one - .1;
+                color: #333;
+                @overflow();
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+            .copywriter {
+                font-size: @half + .1;
+                color: #9c9c9c;
+            }
+        }
+    }
+
+    .classify-label {
+        padding: @half * 2 @half - .1 @one @half - .1;
+        // background-color: @tab-color;
+
+        .all {
+            float: left;
+            font-size: @one + .1;
+        }
+
+        .tags {
+            float: right;
+            line-height: 1.5;
+
+            .tags-node {
+                display: inline-block;
+                padding: 0 @half;
+                border-right: 1px solid #f5f5f5;
+                font-size: @one - .1;
+                color: #666;
+            }
+
+            li:nth-of-type(3) {
+                border: 0; 
+            }
+        }
     }
     
     .hot-list {
@@ -19,8 +88,8 @@
         padding: 0 @half - .2;
 
         .hot-node { 
-            width: 49%;
-            margin-bottom: @one;
+            width: 48%;
+            margin-bottom: @one / 2;
 
             .hot-box {
                 position: relative;

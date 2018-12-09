@@ -220,10 +220,11 @@ export const getUserPlayBack = (id, type=1) => axios.get(`user/record?uid=${id}&
 
 // 歌单（网友精选碟片）
 // order: hot 最热, new 最新
-export const getNetFriendPlayList = (limit=20, order='hot') => axios.get('/top/playlist', {
+export const getNetFriendPlayList = (cat='all', order='hot', limit=20) => axios.get('/top/playlist', {
     params: {
         limit,
-        order
+        order,
+        cat
     }
 })
 
@@ -232,3 +233,11 @@ export const getHotClassifyofPlayList = () => axios.get('/playlist/hot')
 
 // 歌单全部分类
 export const getAllClassifyofPlayList = () => axios.get('/playlist/catlist')
+
+// 精品歌单
+export const getHighQualityList = (before, limit) => axios.get(`/top/playlist/highquality`, {
+    params: {
+        before,
+        limit
+    }
+})

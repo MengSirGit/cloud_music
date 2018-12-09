@@ -30,6 +30,8 @@ const AlbumSheet = lazy(() => import('../views/albumsheet'))
 const UserInfo = lazy(() => import('../views/userinfo'))
 // 歌单分类页
 const ClassifyofPlaylist = lazy(() => import('../views/classifyofplaylist'))
+// 分类列表
+const CatList = lazy(() => import('../views/catlist'))
 
 function LoginComponent() {
     return (
@@ -135,6 +137,14 @@ function ClassifyofPlaylistComponent() {
     )
 }
 
+function CatListComponent() {
+    return (
+        <Suspense fallback={<div id="loading">loading...</div>}>
+            <CatList />
+        </Suspense>
+    )
+}
+
 // 路由
 const routes = [
     // 登录
@@ -202,6 +212,11 @@ const routes = [
     {
         path: '/classifyofplaylist',
         component: ClassifyofPlaylistComponent
+    },
+    // 分类列表
+    {
+        path: '/catlist',
+        component: CatListComponent
     },
 ]
 

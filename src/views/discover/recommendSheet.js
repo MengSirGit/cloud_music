@@ -44,10 +44,8 @@ class RecommendSheet extends Component {
         }
     }
 
-    handleSendSheet(id, type) {
-        this.id = id
-        this.type = type
-        this.props.onSendRecommendSheet(this.id, this.type)
+    handleSendSheet(id) {
+        this.props.onSendRecommendSheet(id)
     }
 
     render() {

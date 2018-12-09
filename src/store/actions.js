@@ -265,9 +265,9 @@ export const hotPlaylist = (data) => {
     }
 }
 
-export const getHotPlaylist = () => {
+export const getHotPlaylist = (cat, order, limit) => {
     return (dispatch) => {
-        api.getNetFriendPlayList().then(res => {
+        api.getNetFriendPlayList(cat, order, limit).then(res => {
             if (res.data.code === 200) {
                 dispatch(hotPlaylist(res.data.playlists))
             }

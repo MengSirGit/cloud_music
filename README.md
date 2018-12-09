@@ -1,9 +1,9 @@
-### 网易云音乐React移动web
+### 网易云音乐React移动WebApp
 
-#### 使用的技术及数据
+#### 技术
 
-1. react + redux + router
-2. 网易云音乐API: NeteaseCloudMusicApi
+1. react + redux + router + axios
+2. 网易云音乐API: NeteaseCloudMusicApi (感谢Binaryify提供这么好的Api)
 
 #### 使用说明
 
