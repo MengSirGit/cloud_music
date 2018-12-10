@@ -40,3 +40,6 @@ export const USER_ALL_INFO = 'USER_ALL_INFO'
 
 // 热门歌单
 export const HOT_PLAY_LIST = 'HOT_PLAY_LIST'
+
+//歌曲播放状态
+export const MUSIC_PLAY_STATUS = 'MUSIC_PLAY_STATUS'

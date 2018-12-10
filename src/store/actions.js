@@ -11,7 +11,8 @@ import {
     MUSIC_URL,
     MUSIC_PLAY_POS,
     USER_ALL_INFO,
-    HOT_PLAY_LIST
+    HOT_PLAY_LIST,
+    MUSIC_PLAY_STATUS
 } from './actionTypes'
 import * as api from '../api'
 
@@ -167,7 +168,7 @@ export const getDiscussArray = (id, _type) => {
         }
         else if (_type === 3) {
             //专辑评论
-            api.getAlbumDiscuss(id).then(res => {
+            api.getAlbumDiscuss(id, 20, 0).then(res => {
                 if (res.data.code === 200) { 
                     dispatch(discussArray(res.data))
                 }
@@ -273,4 +274,16 @@ export const getHotPlaylist = (cat, order, limit) => {
             }
         })
     }
+}
+
+// 歌曲播放状态
+export const musicPlayStatus = (status) => {
+    return {
+        type: MUSIC_PLAY_STATUS,
+        status: status
+    }
+}
+
+export const setMusicPlayStatus = (s) => {
+    return musicPlayStatus(s)
 }

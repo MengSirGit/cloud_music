@@ -5,7 +5,7 @@ const Film = (props) => {
         // 唱片
         <div className="page-center">
             <div className="arc-back" style={{
-                animationPlayState: `${props.playStatus ? 'running' : 'paused'}`
+                animationPlayState: `${props.playStatus === 1 ? 'running' : 'paused'}`
             }}>
                 <div className="film">
                     <div className="song-thum"><img src={props.bg} alt="" /></div>

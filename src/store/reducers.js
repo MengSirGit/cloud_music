@@ -10,7 +10,8 @@ import {
         MUSIC_URL,
         MUSIC_PLAY_POS,
         USER_ALL_INFO,
-        HOT_PLAY_LIST
+        HOT_PLAY_LIST,
+        MUSIC_PLAY_STATUS
     } from './actionTypes'
 
 // 检测登录状态
@@ -155,6 +156,16 @@ export const hotPlaylistReducer = (state=[], action) => {
     switch(action.type) {
         case HOT_PLAY_LIST:
             return [...action.data]
+        default:
+            return state
+    }
+}
+
+// 歌曲播放状态
+export const musicPlayStatusReducer = (state=0, action) => {
+    switch(action.type) {
+        case MUSIC_PLAY_STATUS:
+            return action.status
         default:
             return state
     }

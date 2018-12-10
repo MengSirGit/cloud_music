@@ -12,13 +12,13 @@ class DiscussTarget extends Component {
   
         return (
             <div className="discuss-target clearfix">
-                <Link to="/songsheet">
+                {/* <Link to="/songsheet"> */}
                     <div className="discuss-thum"><img src={this.props.coverImgUrl} alt="" /></div>
                     <div className="discuss-line">
                         <p className="caption">{this.props.name}</p>
                         <p className="author">by <span>{this.props.creatorName}</span></p>
                     </div>
-                </Link>
+                {/* </Link> */}
             </div>
         )
     }

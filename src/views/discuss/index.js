@@ -14,7 +14,7 @@ class Discuss extends PureComponent {
         if (this.props._discuss_array.length === 0) return null
         const discuss = this.props._discuss_array.data
         const detail = this.props._discuss_detail
-        // console.log(detail)
+        console.log(discuss)
         return (
             <React.Fragment>
                 {/* 标签 */}

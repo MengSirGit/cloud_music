@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import { playMusic, musicUrlAction, getMusicPos } from '../store/actions'
+import { playMusic, musicUrlAction, getMusicPos, setMusicPlayStatus } from '../store/actions'
 
 class PlayBar extends Component {
     constructor(props) {
@@ -11,15 +11,15 @@ class PlayBar extends Component {
         //上一首、下一首
         this.prevOrNext = null
 
-        //播放状态
-        this.state = {
-            playStatus: false
-        }
-
-        this.handleTouchStart = this.handleTouchStart.bind(this)
         this.handleTouchEnd = this.handleTouchEnd.bind(this)
         this.handleMusicUrl = this.handleMusicUrl.bind(this)
+        this.handleTouchStart = this.handleTouchStart.bind(this)
         this.handleSendPlayMusicID = this.handleSendPlayMusicID.bind(this)
+        this.handleSetMusicPlayStatus = this.handleSetMusicPlayStatus.bind(this)
+    }
+
+    handleSetMusicPlayStatus(status) {
+        this.props.onSetMusicPlayStatus(status)
     }
 
     handleTouchStart(e){
@@ -56,12 +56,12 @@ class PlayBar extends Component {
         if (this.refs.audio) {
             let that = this
             this.refs.audio.onended = () => {
-                that.setState({ playStatus: false })
+                that.handleSetMusicPlayStatus(0)
 
                 if (true) {
                     setTimeout(() => {
                         that.refs.audio.play()
-                        that.setState({ playStatus: true })
+                        that.handleSetMusicPlayStatus(1)
                     }, 200);
                 }
             }
@@ -70,17 +70,18 @@ class PlayBar extends Component {
 
     render() {
         //选中歌曲所在歌单的基本信息
-        let songSheet = this.props.songSheet.sheet,
-            _mark = this.props.songSheet.mark
+        let songSheet = this.props.songSheet.sheet
 
         if (songSheet.length === 0) return null
 
         let _index = this.props.musicPos || 0
 
         if (this.props.musicUrl.data === '') this.handleMusicUrl(songSheet[_index].id, 0)
+
         let musicUrl = this.props.musicUrl.data,
             proto = this.props.musicUrl.proto,
             singleSong = this.props.singleSong
+        if (proto !== 0 && Object.keys(singleSong).length === 0) return null
 
         return (
             <React.Fragment>
@@ -118,19 +119,15 @@ class PlayBar extends Component {
                                 <div className="play-ctrl"><i className="iconfont" onClick={ () => {
                                     if (this.refs.audio.paused) {
                                         this.refs.audio.play()
-                                        this.setState({
-                                            playStatus: true
-                                        })
+                                        this.handleSetMusicPlayStatus(1)
                                     }
                                     else {
                                         this.refs.audio.pause()
-                                        this.setState({
-                                            playStatus: false
-                                        })
+                                        this.handleSetMusicPlayStatus(0)
                                     }
                                 } }>
                                     {
-                                        this.state.playStatus ? '\ue602' : '\ue605'
+                                        this.props.playStatus === 1 ? '\ue602' : '\ue605'
                                     }
                                 </i></div>
                                 <div className="collect"><i className="iconfont">&#xe610;</i></div>
@@ -152,19 +149,15 @@ class PlayBar extends Component {
                             <div className="play-ctrl"><i className="iconfont" onClick={ () => {
                                 if (this.refs.audio.paused) {
                                     this.refs.audio.play()
-                                    this.setState({
-                                        playStatus: true
-                                    })
+                                    this.handleSetMusicPlayStatus(1)
                                 }
                                 else {
                                     this.refs.audio.pause()
-                                    this.setState({
-                                        playStatus: false
-                                    })
+                                    this.handleSetMusicPlayStatus(0)
                                 }
                             }}>
                                 {
-                                    this.state.playStatus ? '\ue602' : '\ue605'
+                                    this.props.playStatus === 1 ? '\ue602' : '\ue605'
                                 }
                             </i></div>
                             <div className="collect"><i className="iconfont">&#xe610;</i></div>
@@ -182,7 +175,8 @@ const mapStateToProps = (state) => {
         songSheet: state.currMusicReducer,
         musicUrl: state.musicUrlReducer,
         musicPos: state.musicPlayPosReducer,
-        singleSong: state.musicDetailReducer
+        singleSong: state.musicDetailReducer,
+        playStatus: state.musicPlayStatusReducer
     }
 }
 
@@ -196,6 +190,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         onSendPlayMusicID: (id) => {
             dispatch(playMusic(id))
+        },
+        onSetMusicPlayStatus: (status) => {
+            dispatch(setMusicPlayStatus(status))
         }
     }
 }

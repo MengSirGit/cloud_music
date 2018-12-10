@@ -106,7 +106,7 @@ export const getAlbumCon = (id) => axios.get(`album?id=${id}`)
 // 专辑评论
 export const getAlbumDiscuss = (id, limit=20, offset=1) => axios.get(`comment/album?id=${id}`, {
     params: {
-        limit: offset * limit,
+        limit: limit,
         offset
     }
 })

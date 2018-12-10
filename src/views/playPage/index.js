@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import { getDiscussArray, getDiscussDetail, musicUrlAction, getMusicPos } from '../../store/actions'
+import { getDiscussArray, getDiscussDetail, musicUrlAction, getMusicPos, setMusicPlayStatus } from '../../store/actions'
 
 import * as api from '../../api'
 import TabHead from './head'
@@ -21,8 +21,6 @@ class PlayPage extends PureComponent {
             Mclock: '00',
             //当前时间秒
             Sclock: '00',
-            //当前播放状态
-            playStatus: false,
             auto: true
         }
         this.minute = 0
@@ -61,7 +59,7 @@ class PlayPage extends PureComponent {
             let _time = Math.round(time),
                 _floor = Math.floor(_time / 60),
                 _second = _time - _floor * 60
-            // time < 60 ? this.second = _second : (this.minute = _floor, this.second = _second)
+
             if (time < 60) {
                 this.second = _second
             }
@@ -69,6 +67,7 @@ class PlayPage extends PureComponent {
                 this.minute = _floor
                 this.second = _second
             }
+
             this.minute >= 10 ? this.setState({Mclock: this.minute.toString()}) : this.setState({Mclock: `0${this.minute}`})
             this.second >= 10 ? this.setState({Sclock: this.second.toString()}) : this.setState({Sclock: `0${this.second}`})
         }
@@ -76,8 +75,8 @@ class PlayPage extends PureComponent {
 
     //切换播放状态
     handlePlayStatus() {
-        this.state.playStatus ? this.setState({playStatus: false}) : this.setState({playStatus: true})
-        if (this.state.playStatus) {
+        this.props.playStatus === 1 ? this.props.onHandleSetMusicPlayStatus(0) : this.props.onHandleSetMusicPlayStatus(1)
+        if (this.props.playStatus === 1) {
             this.audio.pause()
             clearInterval(this.timerID)
             this.timerID = null
@@ -91,7 +90,7 @@ class PlayPage extends PureComponent {
                 }
                 else {
                     clearInterval(this.timerID)
-                    this.setState({playStatus: false})
+                    this.props.onHandleSetMusicPlayStatus(0)
                 }
             }, 1000)
         }
@@ -101,10 +100,9 @@ class PlayPage extends PureComponent {
     handleCutPlay() {
         setTimeout(() => {
             let audio = document.querySelector('#audio')
-            console.log(audio.paused)
             if (audio.paused) {
                 audio.play()
-                console.log('start')
+                this.minute = 0
             }
         }, 500)
     }
@@ -145,7 +143,7 @@ class PlayPage extends PureComponent {
                     //歌曲总时长
                     timeEnd.innerText = (this.min >= 10 ? this.min.toString() : `0${this.min}` )+ ':' + (this.sec >= 10 ? this.sec.toString() : `0${this.sec}`)
                     //更改播放状态
-                    this.setState({playStatus: true})
+                    this.props.onHandleSetMusicPlayStatus(1)
                     this.arcBack = document.querySelector('.arc-back')
 
                     if (this.arcBack.className.indexOf('active') <= -1) this.arcBack.className += ' active'
@@ -157,7 +155,6 @@ class PlayPage extends PureComponent {
                         }
                         else {
                             clearInterval(this.timerID)
-                            // this.setState({playStatus: false})
                         }
                     }, 1000)
                 }
@@ -200,7 +197,7 @@ class PlayPage extends PureComponent {
                 {/* 标签 */}
                 <TabHead bg={bg} infor={infor}/>
                 {/* 唱片 */}
-                <Film bg={bg} playStatus={this.state.playStatus}/>   
+                <Film bg={bg} playStatus={this.props.playStatus}/>   
                 {/* 操作按钮 */}
                 <div className="page-down">
                     <div className="song-handle">
@@ -237,7 +234,7 @@ class PlayPage extends PureComponent {
                         <i className="iconfont play"
                             onClick={this.handlePlayStatus}
                         >
-                            { !this.state.playStatus ? '\ue605' : '\ue602' }
+                            { !this.props.playStatus ? '\ue605' : '\ue602' }
                         </i>
                         <i className="iconfont next" onClick={
                             () => {
@@ -264,6 +261,7 @@ const mapStateToProps = (state) => {
         musicPos: state.musicPlayPosReducer,
         singleSong: state.musicDetailReducer,
         songSheet: state.currMusicReducer,
+        playStatus: state.musicPlayStatusReducer
     }
 }
 
@@ -278,6 +276,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         onHandleMusicPos: (num, max, ctrl) => {
             dispatch(getMusicPos(num, max, ctrl))
+        },
+        onHandleSetMusicPlayStatus: (status) => {
+            dispatch(setMusicPlayStatus(status))
         }
     }
 }
