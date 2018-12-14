@@ -17,21 +17,21 @@ class RecommendSheet extends Component {
 
     componentDidMount() {
 
-        //获取推荐歌单
+        // 获取推荐歌单
         if (this.props.loginCode === 200) {
-            //登录状态下
+            // 登录状态下
             api.getDayRecommonSheet().then(response => {
                 if(response.data.code === 200){
                     this.setState({
                         recommondSong: response.data.recommend
                     })
-                    //底部默认播放推荐歌单第一个
+                    // 底部默认播放推荐歌单第一个
                     this.props.onCurrMusic(response.data.recommend[1].id)
                 }
             })
         }
         else if (this.props.loginCode === 0) {
-            //非登录状态下
+            // 非登录状态下
             api.getRecommonSong().then(res => {
                 if (res.data.code === 200) {
                     this.setState({

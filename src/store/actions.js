@@ -12,7 +12,8 @@ import {
     MUSIC_PLAY_POS,
     USER_ALL_INFO,
     HOT_PLAY_LIST,
-    MUSIC_PLAY_STATUS
+    MUSIC_PLAY_STATUS,
+    USER_PLAY_RANK
 } from './actionTypes'
 import * as api from '../api'
 
@@ -151,7 +152,7 @@ export const discussArray = (data) => {
 export const getDiscussArray = (id, _type) => {
     return (dispatch) => {
         if (_type === 0) {
-            //歌曲评论
+            // 歌曲评论
             api.getSongDiscuss(id).then(res => {
                 if (res.data.code === 200) { 
                     dispatch(discussArray(res.data))
@@ -159,7 +160,7 @@ export const getDiscussArray = (id, _type) => {
             })
         }
         else if (_type === 2) {
-            //歌单评论
+            // 歌单评论
             api.getSheetDiscuss(id).then(res => {
                 if (res.data.code === 200) { 
                     dispatch(discussArray(res.data))
@@ -167,7 +168,7 @@ export const getDiscussArray = (id, _type) => {
             })
         }
         else if (_type === 3) {
-            //专辑评论
+            // 专辑评论
             api.getAlbumDiscuss(id, 20, 0).then(res => {
                 if (res.data.code === 200) { 
                     dispatch(discussArray(res.data))
@@ -286,4 +287,25 @@ export const musicPlayStatus = (status) => {
 
 export const setMusicPlayStatus = (s) => {
     return musicPlayStatus(s)
+}
+
+// 用户播放排行
+export const userPlayRank = (result) => {
+    return {
+        type: USER_PLAY_RANK,
+        result: result
+    }
+}
+
+export const getUserPlayRank = (id, _type) => {
+    return (dispatch) => {
+        api.getUserPlayBack(id, _type).then(res => {
+            if (res.data.code === 200) {
+                dispatch(userPlayRank({ID: id, data: res.data.allData}))
+            }
+            else {
+                dispatch(userPlayRank([{ msg: '没有访问权限，请确认是否登录！' }]))
+            }
+        })
+    }
 }

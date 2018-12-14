@@ -13,7 +13,7 @@ class RecommendDj extends Component {
     }
 
     componentDidMount() {
-        //获取主播电台
+        // 获取主播电台
         api.djRecommend().then(response => {
             if(response.data.code === 200){
                 this.setState({

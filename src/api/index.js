@@ -216,7 +216,9 @@ export const getUserInfo = (id) => axios.get(`user/detail?uid=${id}`)
 export const getUserSongSheet = (id) => axios.get(`user/playlist?uid=${id}`)
 
 // 用户播放记录  type=0  一周播放排行  type=1 全部播放排行
-export const getUserPlayBack = (id, type=1) => axios.get(`user/record?uid=${id}&type=${type}`)
+export const getUserPlayBack = (id, type=0) => axios.get(`user/record?uid=${id}&type=${type}`, {
+    withCredentials: true
+})
 
 // 歌单（网友精选碟片）
 // order: hot 最热, new 最新

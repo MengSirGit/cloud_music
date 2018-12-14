@@ -3,16 +3,21 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import RankPng from '../../static/img/rank.png'
-import { getSongSheet } from '../../store/actions'
+import { getSongSheet, getUserPlayRank } from '../../store/actions'
 
 class Main extends Component {
     constructor(props) {
         super(props)
         this.handleSendSheetId = this.handleSendSheetId.bind(this)
+        this.handleUserPlayBack= this.handleUserPlayBack.bind(this)
     }
 
     handleSendSheetId(id) {
         this.props.onHandleSendSheetId(id)
+    }
+
+    handleUserPlayBack(id, _type) {
+        this.props.onHandleUserPlayBack(id, _type)
     }
 
     render() {
@@ -20,7 +25,7 @@ class Main extends Component {
             userId = this.props.userId,
             selfSheet = [],
             collectSheet = []
-
+        console.log(userId)
         collect.map((e) => {
             if (e.userId === userId) {
                 selfSheet.push(e)
@@ -34,19 +39,21 @@ class Main extends Component {
         return (
             <div className="user-info-main">
                 <ul className="tab-menu">
-                    <li>音乐({collect.length})</li>
+                    <li className="active">音乐({collect.length})</li>
                     <li>动态</li>
                     <li>关于TA</li>
                 </ul>
                 <div className="user-songsheet">
                     <h4>歌单({selfSheet.length})</h4>
                     <ul className="normal-songsheet">
-                        <li className="songsheet-all">
-                            <div className="thum"><img src={RankPng} alt="" /></div>
-                            <div className="content">
-                                <p className="name">{selfSheet[0].name}的听歌排行</p>
-                                <p className="nature"><span>累计听歌{this.props.listenSongs}首</span></p>
-                            </div>
+                        <li className="songsheet-all" onClick={ () => this.handleUserPlayBack(userId, 0) }>
+                            <Link to="/userplayrank">
+                                <div className="thum"><img src={RankPng} alt="" /></div>
+                                <div className="content">
+                                    <p className="name">{selfSheet[0].name}的听歌排行</p>
+                                    <p className="nature"><span>累计听歌{this.props.listenSongs}首</span></p>
+                                </div>
+                            </Link>
                         </li>
                         {
                             selfSheet.map((e, i) => {
@@ -92,6 +99,9 @@ const mapDispatchToProps = (dispatch) => {
     return {
         onHandleSendSheetId: (id) => {
             dispatch(getSongSheet(id))
+        },
+        onHandleUserPlayBack: (id, _type) => {
+            dispatch(getUserPlayRank(id, _type))
         }
     }
 } 

@@ -20,7 +20,7 @@ class NewMusic extends Component {
     }
 
     componentDidMount() {
-        //获取最新音乐
+        // 获取最新音乐
         api.newPlate().then(response => {
             if (response.data.code === 200) {
                 this.setState({

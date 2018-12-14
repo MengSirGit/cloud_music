@@ -1,3 +1,20 @@
+/**
+ * 应用全部路由地址
+ * 
+ * 对页面组件进行懒加载
+ * @example 
+ * const example = lazy(() => import('example'))
+ * 
+ * function exampleComponent() {
+ *      return (
+ *          <Suspense><example /></Suspense>
+ *      )
+ * }
+ * 
+ * 路由定制  path 路由地址  component 加载组件
+ * { path: '..', component: example }
+ */
+
 import React, { lazy, Suspense } from 'react'
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 import createBrowserHistory from 'history/createBrowserHistory'
@@ -32,6 +49,8 @@ const UserInfo = lazy(() => import('../views/userinfo'))
 const ClassifyofPlaylist = lazy(() => import('../views/classifyofplaylist'))
 // 分类列表
 const CatList = lazy(() => import('../views/catlist'))
+// 用户听歌排行
+const UserPlayRank = lazy(() => import('../views/userRank'))
 
 function LoginComponent() {
     return (
@@ -145,6 +164,14 @@ function CatListComponent() {
     )
 }
 
+function UserPlayRankComponent() {
+    return (
+        <Suspense fallback={<div id="loading">loading...</div>}>
+            <UserPlayRank />
+        </Suspense>
+    )
+}
+
 // 路由
 const routes = [
     // 登录
@@ -217,6 +244,11 @@ const routes = [
     {
         path: '/catlist',
         component: CatListComponent
+    },
+    // 用户听歌排行
+    {
+        path: '/userplayrank',
+        component: UserPlayRankComponent
     },
 ]
 

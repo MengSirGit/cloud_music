@@ -1,3 +1,9 @@
+/**
+ * 歌单分类页
+ * 展示所有可选的歌单类型
+ * 选择相应的歌单类型，可对发现音乐歌单内容页进行内容更新
+ */
+
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
@@ -35,6 +41,7 @@ class CatList extends Component {
         if (Object.keys(_state.cat).length === 0) return null
 
         let  language = [], _color = [], scene = [], emotion = [], theme = []
+        
         _state.cat.sub.map((e, i) => {
             if (e.category === 0) {
                 language.push(e)
@@ -51,6 +58,7 @@ class CatList extends Component {
             else if (e.category === 4) {
                 theme.push(e)
             }
+            return true
         })
 
         return (

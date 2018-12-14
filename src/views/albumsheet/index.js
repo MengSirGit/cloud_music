@@ -1,3 +1,10 @@
+/**
+ * 专辑歌单详情页
+ * 可了解专辑内包含的所有歌曲，并进行播放操作（除收费歌曲之外）
+ * 展示专辑歌手、名称、专辑发行时间等信息
+ * 提供评论入口， 暂不支持下载、分享、多选操作
+ */
+
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import * as api from '../../api'
@@ -45,7 +52,7 @@ class AlbumSheet extends Component {
 
     render() {
         if (this.state.list.length === 0) return null
-        console.log(this.state.list)
+        // console.log(this.state.list)
         return (
             <div className="sheet-box album" style={{
                 background: `url(${this.state.list.album.picUrl}) no-repeat 50% 0`

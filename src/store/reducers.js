@@ -11,7 +11,8 @@ import {
         MUSIC_PLAY_POS,
         USER_ALL_INFO,
         HOT_PLAY_LIST,
-        MUSIC_PLAY_STATUS
+        MUSIC_PLAY_STATUS,
+        USER_PLAY_RANK
     } from './actionTypes'
 
 // 检测登录状态
@@ -166,6 +167,16 @@ export const musicPlayStatusReducer = (state=0, action) => {
     switch(action.type) {
         case MUSIC_PLAY_STATUS:
             return action.status
+        default:
+            return state
+    }
+}
+
+// 用户听歌排行
+export const userPlayRankReducer = (state=[], action) => {
+    switch(action.type) {
+        case USER_PLAY_RANK:
+            return action.result
         default:
             return state
     }

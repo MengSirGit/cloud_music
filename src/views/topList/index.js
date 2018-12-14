@@ -1,3 +1,10 @@
+/**
+ * 排行榜页面
+ * 目前包含官方榜、 全球榜的音乐排名信息
+ * 各榜单点击进入音乐列表页
+ * 歌手榜和赞赏榜暂时未开通
+ */
+
 import React, { Component } from 'react'
 
 import * as api from '../../api'

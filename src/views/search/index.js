@@ -1,3 +1,9 @@
+/**
+ * 音乐搜索页
+ * 通过输入歌曲名进行检索，智能提示信息显示条数为四条
+ * 目前仅支持歌曲名检索
+ */
+
 import React, {Component} from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
@@ -10,10 +16,10 @@ import '../../less/search.less'
 
 let isOnComposition = false
 
-//判断是否为chrome浏览器
+// 判断是否为chrome浏览器
 const isChrome = !!window.chrome && !!window.chrome.webstore
 
-//搜索框
+// 搜索框
 class Search extends Component {
     constructor(props) {
         super(props)
@@ -28,7 +34,7 @@ class Search extends Component {
 
     handleSendSongId(id, proto) {
         this.props.onHandleSendSongId(id, proto)
-        //清空搜索结果
+        // 清空搜索结果
         this.setState({
             data: []
         })
@@ -36,7 +42,7 @@ class Search extends Component {
     }
 
     handleComposition(e) {
-        //中文输入结束，改变state
+        // 中文输入结束，改变state
         if (e.type === 'compositionend') {
             isOnComposition = false
             if (!isOnComposition && isChrome) {

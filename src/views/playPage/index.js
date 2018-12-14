@@ -1,3 +1,13 @@
+/**
+ * 当前播放歌曲详情页
+ * 通过点击播放栏进入
+ * 通过此页面可以查看当前歌曲的时间进度和歌曲总长度，进入歌曲评论页
+ * 对歌曲进行上一首、下一首的操作，原理同播放栏的滑动切换
+ * 歌曲的循环模式切换，目前仅支持单曲循环播放
+ * 暂时不支持下载、分享、收藏的功能
+ * @example
+ */
+
 import React, { PureComponent } from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
@@ -13,20 +23,20 @@ class PlayPage extends PureComponent {
     constructor(props){
         super(props)
         this.state = {
-            //歌曲信息
+            // 歌曲信息
             infor: [],
-            //音频地址
+            // 音频地址
             url: [],
-            //当前时间分
+            // 当前时间分
             Mclock: '00',
-            //当前时间秒
+            // 当前时间秒
             Sclock: '00',
             auto: true
         }
         this.minute = 0
         this.second = 0
         this.timerID = null
-        //音频总时长
+        // 音频总时长
         this.sumTime = 0
         this.min = 0
         this.sec = 0
@@ -34,7 +44,7 @@ class PlayPage extends PureComponent {
         this.DISTANCE = 0
         this.arcBack = null
         this.audio = null
-        //初始化播放时间轴长度
+        // 初始化播放时间轴长度
         this.init = 0
 
         this.handlePlayStatus = this.handlePlayStatus.bind(this)
@@ -47,13 +57,13 @@ class PlayPage extends PureComponent {
         this.handleCutPlay = this.handleCutPlay.bind(this)
     }
     
-    //时间轴动画
+    // 时间轴动画
     animationTimeBase = () => {
         let _init = this.init.toFixed(2) * 1
         if (_init < 100) this.init = _init + this.DISTANCE
     }
     
-    //歌曲时间进度
+    // 歌曲时间进度
     songClock = (time) => {
         if (time > 0) {
             let _time = Math.round(time),
@@ -73,7 +83,7 @@ class PlayPage extends PureComponent {
         }
     }
 
-    //切换播放状态
+    // 切换播放状态
     handlePlayStatus() {
         this.props.playStatus === 1 ? this.props.onHandleSetMusicPlayStatus(0) : this.props.onHandleSetMusicPlayStatus(1)
         if (this.props.playStatus === 1) {
@@ -96,7 +106,7 @@ class PlayPage extends PureComponent {
         }
     }
 
-    //切歌自动播放
+    // 切歌自动播放
     handleCutPlay() {
         setTimeout(() => {
             let audio = document.querySelector('#audio')
@@ -127,7 +137,7 @@ class PlayPage extends PureComponent {
                     infor: res.data.songs
                 })
 
-                 //歌曲时长
+                 // 歌曲时长
                 this.audio = document.querySelector('#audio')
                 let timeEnd = document.querySelector('#time-end'),
                     _duration = this.audio.duration
@@ -140,9 +150,9 @@ class PlayPage extends PureComponent {
                     this.sumTime = parseInt(_duration, 10) / 60
                     this.min = Math.floor(this.sumTime)
                     this.sec = Math.floor((this.sumTime.toFixed(2) * 1 - this.min) * 60)
-                    //歌曲总时长
+                    // 歌曲总时长
                     timeEnd.innerText = (this.min >= 10 ? this.min.toString() : `0${this.min}` )+ ':' + (this.sec >= 10 ? this.sec.toString() : `0${this.sec}`)
-                    //更改播放状态
+                    // 更改播放状态
                     this.props.onHandleSetMusicPlayStatus(1)
                     this.arcBack = document.querySelector('.arc-back')
 
@@ -165,11 +175,11 @@ class PlayPage extends PureComponent {
 
     componentDidMount() {
         let id = this.props.data
-        //获取歌曲详情
+        // 获取歌曲详情
         this.handleGetMusicDetail(id)
     }
 
-    //路由跳转清除播放计时器
+    // 路由跳转清除播放计时器
     componentWillUnmount() {
         clearInterval(this.timerID)
     }

@@ -1,3 +1,9 @@
+/**
+ * 评论展示页
+ * 此页面为歌单、歌曲、专辑评论共用页面
+ * 通过 type 判断数据类型，展示响应的页面效果
+ */
+
 import React, {PureComponent} from 'react'
 import {connect} from 'react-redux'
 

@@ -1,3 +1,10 @@
+/**
+ * 项目应用主要的音乐播放功能区
+ * 包括音乐播放暂停和左右滑动切换歌曲的功能
+ * 选择歌单内歌曲进行播放时， 左右切换为已选择歌单的上一首或下一首
+ * 每日推荐或通过检索进行的音乐播放， 滑动则切换至默认的歌单上一首或下一首
+ */
+
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
@@ -6,9 +13,9 @@ import { playMusic, musicUrlAction, getMusicPos, setMusicPlayStatus } from '../s
 class PlayBar extends Component {
     constructor(props) {
         super(props)
-        //滑动起始位置
+        // 滑动起始位置
         this.startPos = 0
-        //上一首、下一首
+        // 上一首、下一首
         this.prevOrNext = null
 
         this.handleTouchEnd = this.handleTouchEnd.bind(this)
@@ -69,7 +76,7 @@ class PlayBar extends Component {
     }
 
     render() {
-        //选中歌曲所在歌单的基本信息
+        // 选中歌曲所在歌单的基本信息
         let songSheet = this.props.songSheet.sheet
 
         if (songSheet.length === 0) return null
@@ -96,7 +103,7 @@ class PlayBar extends Component {
                                 } }
                                 onTouchEnd={ (e) => {
                                     this.handleTouchEnd(e)
-                                    //(歌曲id, 歌曲索引, 歌单长度, 上一首或下一首)
+                                    // (歌曲id, 歌曲索引, 歌单长度, 上一首或下一首)
                                     if (this.prevOrNext === true && _index < songSheet.length - 1) {
                                         this.handleMusicPos(_index, songSheet.length, this.prevOrNext)
                                         this.handleMusicUrl(songSheet[_index + 1].id, 0)

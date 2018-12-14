@@ -8,7 +8,7 @@ import PlayBar from './components/PlayBar'
 
 class App extends Component {
     render(){
-        //返回顶部
+        // 返回顶部
         window.scrollTo(0, 0)
         return (
             <div>

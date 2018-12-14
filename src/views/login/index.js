@@ -1,3 +1,9 @@
+/**
+ * 用户登录页
+ * 目前仅支持用户通过手机号和密码的组合形式进行登录操作
+ * 可能登录会存在延迟的情况
+ */
+
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import * as api from '../../api'

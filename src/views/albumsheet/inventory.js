@@ -24,7 +24,7 @@ class Inventory extends Component {
                         <em><span>播放全部</span><span>(共{songs.length}首)</span></em>
                     </div>
                     <div className="detail-right">
-                        <p>+ 收藏(0)</p>
+                        <p>+ 收藏</p>
                     </div>
                 </div>
                 <ul className="inventory-list">

@@ -1,3 +1,9 @@
+/**
+ * 网易云音乐用户的个人主页
+ * 可提供用户音乐歌单、 动态、 个人信息的展示
+ * 目前此页面入口仅可通过评论点击用户头像进入
+ */
+
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 

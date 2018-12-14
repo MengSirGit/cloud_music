@@ -1,10 +1,16 @@
+/**
+ * 应用的侧导航页面
+ * 目前支持的功能仅有用户网易云音乐账号的手机号及密码组合的登录方式， 以及账号的登出功能
+ * 因部分原因登出功能可能有延迟
+ */
+
 import React, {Component} from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import * as api from '../api'
 import { getLoginValue } from '../store/actions'
 
-//登录
+// 登录
 class Login extends Component {
     constructor(props) {
         super(props)
@@ -45,7 +51,7 @@ class Login extends Component {
     }
 }
 
-//推送
+// 推送
 class PushNew extends Component {
     render() {
         return (
@@ -60,7 +66,7 @@ class PushNew extends Component {
     }
 }
 
-//社交
+// 社交
 class Social extends Component {
     render() {
         return (
@@ -72,7 +78,7 @@ class Social extends Component {
     }
 }
 
-//额外功能
+// 额外功能
 class Extra extends Component {
     render() {
         return (
@@ -90,7 +96,7 @@ class Extra extends Component {
     }
 }
 
-//app操作
+// app操作
 class Setting extends Component {
     constructor(props) {
         super(props)
@@ -116,7 +122,7 @@ class Setting extends Component {
     }
 }
 
-//侧导航
+// 侧导航
 const contrlOpen = (obj) => {
     if(obj.className.indexOf('active') <= -1) obj.className += ' active'
 }
@@ -131,7 +137,7 @@ class SideNav extends Component {
         this.toggleNav = this.toggleNav.bind(this)
     }
 
-    //导航控制
+    // 导航控制
     toggleNav(e){
         let sideNav = document.querySelector('#side-nav')
         switch(e.target.id){

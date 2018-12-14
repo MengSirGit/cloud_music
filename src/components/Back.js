@@ -1,7 +1,12 @@
+/**
+ * 路由回退功能组件
+ * 提供返回上次浏览页面的功能
+ */
+
 import React, {Component} from 'react'
 import {withRouter} from 'react-router-dom'
 
-//返回
+// 路由回退
 class GoBack extends Component {
     constructor(props){
         super(props)

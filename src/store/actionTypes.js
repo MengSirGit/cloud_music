@@ -8,7 +8,7 @@ export const LOGIN_VALUE = 'LOGIN_VALUE'
 // 播放歌单
 export const PLAY_MUSIC_LIST = 'PLAY_MUSIC_LIST'
 
- // 切换歌曲
+// 切换歌曲
 export const CHANGE_CURR_LIST = 'CHANGE_CURR_LIST'
 
 // 歌曲检索
@@ -41,5 +41,8 @@ export const USER_ALL_INFO = 'USER_ALL_INFO'
 // 热门歌单
 export const HOT_PLAY_LIST = 'HOT_PLAY_LIST'
 
-//歌曲播放状态
+// 歌曲播放状态
 export const MUSIC_PLAY_STATUS = 'MUSIC_PLAY_STATUS'
+
+// 用户播放排行
+export const USER_PLAY_RANK = 'USER_PLAY_RANK'

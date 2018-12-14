@@ -16,7 +16,7 @@ class Summary extends Component {
     render() {
         const album = this.props.data
         let publish = new Date(album.publishTime)
-        console.log(album)
+        // console.log(album)
         return (
             <div className="sheet-summary clearfix">
                 <div className="sheet-summary-show clearfix">
@@ -25,7 +25,7 @@ class Summary extends Component {
                     </div>
                     <div className="sheet-summary-news">
                         <p>{album.name}</p> 
-                        <p><span className="name">歌手:{album.artist.name}</span></p>
+                        <p><span className="name">歌手: {album.artist.name}</span></p>
                         <p><span className="name">发行时间：{publish.getFullYear()}.{publish.getMonth() + 1}.{publish.getDate()}</span></p>
                     </div>
                 </div>

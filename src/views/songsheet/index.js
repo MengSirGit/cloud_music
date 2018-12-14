@@ -1,3 +1,11 @@
+/**
+ * 歌单列表页
+ * 可查看播放歌单内所有歌曲，包含歌单评论页的入口
+ * 其他展示信息有歌单简介和创建者信息，歌单收藏量
+ * 暂不支持下载、全部播放、分享、收藏、播放全部、多选操作的功能
+ * @example
+ */
+
 import React, {PureComponent} from 'react'
 import {connect} from 'react-redux'
 import * as api from '../../api'

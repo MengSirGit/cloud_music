@@ -68,7 +68,7 @@ class Banner extends Component{
     }
 
     componentDidMount() {
-        //获取banner信息
+        // 获取banner信息
         api.getBanner().then(response => {
             if(response.data.code === 200){
                 this.setState({
