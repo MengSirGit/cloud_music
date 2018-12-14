@@ -173,7 +173,13 @@ export const musicPlayStatusReducer = (state=0, action) => {
 }
 
 // 用户听歌排行
-export const userPlayRankReducer = (state=[], action) => {
+export const userPlayRankReducer = (state={
+    ID: null,
+    data: {
+        musicArray: [],
+        isCall: true
+    }
+}, action) => {
     switch(action.type) {
         case USER_PLAY_RANK:
             return action.result

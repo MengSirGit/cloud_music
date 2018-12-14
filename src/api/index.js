@@ -215,8 +215,8 @@ export const getUserInfo = (id) => axios.get(`user/detail?uid=${id}`)
 // 用户歌单
 export const getUserSongSheet = (id) => axios.get(`user/playlist?uid=${id}`)
 
-// 用户播放记录  type=0  一周播放排行  type=1 全部播放排行
-export const getUserPlayBack = (id, type=0) => axios.get(`user/record?uid=${id}&type=${type}`, {
+// 用户播放记录  type=0 全部播放排行   type=1 一周播放排行
+export const getUserPlayBack = (id, type=1) => axios.get(`user/record?uid=${id}&type=${type}`, {
     withCredentials: true
 })
 

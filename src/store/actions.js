@@ -301,10 +301,17 @@ export const getUserPlayRank = (id, _type) => {
     return (dispatch) => {
         api.getUserPlayBack(id, _type).then(res => {
             if (res.data.code === 200) {
-                dispatch(userPlayRank({ID: id, data: res.data.allData}))
+                if (_type === 1) {
+                    console.log('week')
+                    dispatch(userPlayRank({ID: id, data: { musicArray: res.data.weekData, isCall: true }}))
+                }
+                // else if (_type === 0){
+                //     console.log('all')
+                //     dispatch(userPlayRank({ID: id, data: { musicArray: res.data.allData, isCall: true }}))
+                // }
             }
             else {
-                dispatch(userPlayRank([{ msg: '没有访问权限，请确认是否登录！' }]))
+                dispatch(userPlayRank({ data: { msg: '由于对方设置，你不能查看听歌排行', isCall: false }}))
             }
         })
     }

@@ -46,7 +46,7 @@ class Main extends Component {
                 <div className="user-songsheet">
                     <h4>歌单({selfSheet.length})</h4>
                     <ul className="normal-songsheet">
-                        <li className="songsheet-all" onClick={ () => this.handleUserPlayBack(userId, 0) }>
+                        <li className="songsheet-all" onClick={ () => this.handleUserPlayBack(userId, 1) }>
                             <Link to="/userplayrank">
                                 <div className="thum"><img src={RankPng} alt="" /></div>
                                 <div className="content">
