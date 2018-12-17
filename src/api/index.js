@@ -112,7 +112,26 @@ export const getAlbumDiscuss = (id, limit=20, offset=1) => axios.get(`comment/al
 })
 
 // 电台推荐
-export const djRecommend = () => axios.get('dj/recommend')
+export const djRecommend = () => axios.get('dj/recommend', {
+    withCredentials: true
+})
+
+// 电台详情
+export const getDJDetail = (rid) => axios.get('dj/detail', {
+    params: {
+        rid: rid
+    },
+    withCredentials: true
+})
+
+// 电台节目列表
+export const getDJProgram = (rid, limit=40) => axios.get('dj/program', {
+    params: {
+        rid: rid,
+        limit: limit
+    },
+    withCredentials: true
+})
 
 // 歌单评论
 export const getSheetDiscuss = (id, limit=20) => axios.get(`comment/playlist?id=${id}&timestamp=${new Date().getTime()}`, {
@@ -242,4 +261,12 @@ export const getHighQualityList = (before, limit) => axios.get(`/top/playlist/hi
         before,
         limit
     }
+})
+
+// 私人FM
+export const getPersonalFM = () => axios.get('personal_fm', {
+    params: {
+        t: new Date().getTime()
+    },
+    withCredentials: true
 })

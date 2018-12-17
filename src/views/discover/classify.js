@@ -1,22 +1,27 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { getHotPlaylist } from '../../store/actions'
+import { hotPlaylistAxios, personalFMAxios } from '../../store/actions'
 
 class Classify extends Component {
     constructor(props) {
         super(props)
         this.handleGetHotPlaylist = this.handleGetHotPlaylist.bind(this)
+        this.handleGetPersonalFM = this.handleGetPersonalFM.bind(this)
     }
 
     handleGetHotPlaylist() {
         this.props.onHandleGetHotPlaylist()
     }
 
+    handleGetPersonalFM() {
+        this.props.onHnadleGetPersonalFM()
+    }
+
     render() {
         return (
             <ul className="classify">
-                <li>
+                <li onClick={ () => this.handleGetPersonalFM() }>
                     <p className="arc-back"><i className="iconfont">&#xe663;</i></p>
                     <p className="caption">私人FM</p>
                 </li>
@@ -46,7 +51,10 @@ class Classify extends Component {
 const mapDispatchToProps = (dispatch) => {
     return {
         onHandleGetHotPlaylist: () => {
-            dispatch(getHotPlaylist())
+            dispatch(hotPlaylistAxios())
+        },
+        onHnadleGetPersonalFM: () => {
+            dispatch(personalFMAxios())
         }
     }
 }

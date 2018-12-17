@@ -12,7 +12,9 @@ import {
         USER_ALL_INFO,
         HOT_PLAY_LIST,
         MUSIC_PLAY_STATUS,
-        USER_PLAY_RANK
+        USER_PLAY_RANK,
+        PERSONAL_FM,
+        DJ_DETAIL
     } from './actionTypes'
 
 // 检测登录状态
@@ -183,6 +185,26 @@ export const userPlayRankReducer = (state={
     switch(action.type) {
         case USER_PLAY_RANK:
             return action.result
+        default:
+            return state
+    }
+}
+
+// 私人FM
+export const personalFMReducer = (state=[], action) => {
+    switch(action.type) {
+        case PERSONAL_FM:
+            return [...action.result.data, ...state]
+        default:
+            return state
+    }
+}
+
+// 主播电台
+export const DJDetailReducer = (state={}, action) => {
+    switch(action.type) {
+        case DJ_DETAIL:
+            return Object.assign({}, state, action.result)
         default:
             return state
     }

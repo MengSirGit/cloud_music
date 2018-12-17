@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { getSongSheet } from '../../store/actions'
+import { songSheetAxios } from '../../store/actions'
 
 class WorldList extends Component {
     constructor(props) {
@@ -43,7 +43,7 @@ class WorldList extends Component {
 const mapDispatchToProps = (dispatch) => {
     return {
         onHandleSendID: (id) => {
-            dispatch(getSongSheet(id))
+            dispatch(songSheetAxios(id))
         }
     }
 }

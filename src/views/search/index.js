@@ -7,7 +7,7 @@
 import React, {Component} from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { getMusicDetail, musicUrlAction } from '../../store/actions'
+import { musicDetailAxios, musicUrlActionAxios } from '../../store/actions'
 import * as api from '../../api'
 
 import Back from '../../components/Back'
@@ -114,8 +114,8 @@ class Search extends Component {
 const mapDispatchToProps = (dispatch) => {
     return {
         onHandleSendSongId: (id, proto) => {
-            dispatch(getMusicDetail(id))
-            dispatch(musicUrlAction(id, proto))
+            dispatch(musicDetailAxios(id))
+            dispatch(musicUrlActionAxios(id, proto))
         }
     }
 }

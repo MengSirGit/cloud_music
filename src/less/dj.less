@@ -1,0 +1,49 @@
+@import (reference) './public.less';
+
+.DJ {   
+    .sheet-head {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 20;
+        @all-width();
+        padding: 0 @one;
+
+        .share {
+            display: block;
+            float: right;
+            color: @tab-color;
+            line-height: 1.6;
+        }
+    }
+
+    .summary {
+        position: relative;
+
+        .shadown-box {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            @all-width();
+            height: 100%;
+            background-color: rgba(0,0,0,.2);
+
+            .headline {
+                position: absolute;
+                left: @one;
+                bottom: 0;
+                z-index: 20;
+            }
+
+            .sub-btn {
+                position: absolute;
+            }
+        }
+
+                    
+        img {
+            @all-width();
+        }
+    }
+}

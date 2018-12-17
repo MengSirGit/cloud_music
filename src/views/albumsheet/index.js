@@ -8,7 +8,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import * as api from '../../api'
-import { getDiscussDetail } from '../../store/actions'
+import { discussDetailAxios } from '../../store/actions'
 
 import Head from './head'
 import Summary from './summary'
@@ -74,7 +74,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onSendDiscussDetail: (model, intro) => {
-            dispatch(getDiscussDetail(model, intro))
+            dispatch(discussDetailAxios(model, intro))
         }
     }
 }

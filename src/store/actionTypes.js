@@ -46,3 +46,9 @@ export const MUSIC_PLAY_STATUS = 'MUSIC_PLAY_STATUS'
 
 // 用户播放排行
 export const USER_PLAY_RANK = 'USER_PLAY_RANK'
+
+// 私人FM
+export const PERSONAL_FM = 'PERSONAL_FM'
+
+// 主播电台
+export const DJ_DETAIL = 'DJ_DETAIL'

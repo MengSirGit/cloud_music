@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
-import { getDiscussArray } from '../../store/actions'
+import { discussArrayAxios } from '../../store/actions'
 
 class Summary extends Component {
     constructor(props) {
@@ -43,7 +43,7 @@ class Summary extends Component {
 const mapDispatchToProps = (dispatch) => {
     return {
         onHandleSendToId: (id, _type) => {
-            dispatch(getDiscussArray(id, _type))
+            dispatch(discussArrayAxios(id, _type))
         }
     }
 }

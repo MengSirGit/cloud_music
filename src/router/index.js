@@ -51,6 +51,10 @@ const ClassifyofPlaylist = lazy(() => import('../views/classifyofplaylist'))
 const CatList = lazy(() => import('../views/catlist'))
 // 用户听歌排行
 const UserPlayRank = lazy(() => import('../views/userRank'))
+// 私人FM
+const PersonalFM = lazy(() => import('../views/personalFM'))
+// 主播电台
+const DJ = lazy(() => import('../views/djsheet'))
 
 function LoginComponent() {
     return (
@@ -172,6 +176,22 @@ function UserPlayRankComponent() {
     )
 }
 
+function PersonalFMComponent() {
+    return (
+        <Suspense fallback={<div id="loading">loading...</div>}>
+            <PersonalFM />
+        </Suspense>
+    )
+}
+
+function DJComponent() {
+    return (
+        <Suspense fallback={<div id="loading">loading...</div>}>
+            <DJ />
+        </Suspense>
+    )
+}
+
 // 路由
 const routes = [
     // 登录
@@ -249,6 +269,16 @@ const routes = [
     {
         path: '/userplayrank',
         component: UserPlayRankComponent
+    },
+    // 私人FM
+    {
+        path: '/personalfm',
+        component: PersonalFMComponent
+    },
+    // 主播电台
+    {
+        path: '/dj',
+        component: DJComponent
     },
 ]
 

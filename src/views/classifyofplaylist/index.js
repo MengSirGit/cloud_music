@@ -28,7 +28,7 @@ class ClassifyofPlaylist extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state.hotPlaylistReducer)
+    // console.log(state.hotPlaylistReducer)
     return {
         hot: state.hotPlaylistReducer
     }

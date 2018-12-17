@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import * as api from '../../api'
-import {getSongSheet, currMusic, getMusicPos} from '../../store/actions'
+import {songSheetAxios, changeCurrMusicAxios, musicPosAction} from '../../store/actions'
 
 class RecommendSheet extends Component {
     constructor(props) {
@@ -26,7 +26,7 @@ class RecommendSheet extends Component {
                         recommondSong: response.data.recommend
                     })
                     // 底部默认播放推荐歌单第一个
-                    this.props.onCurrMusic(response.data.recommend[1].id)
+                    this.props.onCurrMusic(response.data.recommend[0].id)
                 }
             })
         }
@@ -38,7 +38,7 @@ class RecommendSheet extends Component {
                         recommondSong: res.data.result
                     })
 
-                     this.props.onCurrMusic(res.data.result[1].id)
+                     this.props.onCurrMusic(res.data.result[0].id)
                 }
             })
         }
@@ -90,13 +90,13 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onSendRecommendSheet: (id) => {
-            dispatch(getSongSheet(id))
+            dispatch(songSheetAxios(id))
         },
         onCurrMusic: (id) => {
-            dispatch(currMusic(id))
+            dispatch(changeCurrMusicAxios(id))
         },
         onSendMusicPos: (num) => {
-            dispatch(getMusicPos(num))
+            dispatch(musicPosAction(num))
         }
     }
 }

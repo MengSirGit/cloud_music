@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import * as api from '../../api'
-import { getHotPlaylist } from '../../store/actions'
+import { hotPlaylistAxios } from '../../store/actions'
 
 class Label extends Component {
     constructor(props) {
@@ -51,7 +51,7 @@ class Label extends Component {
 const mapDispatchToProps = (dispatch) => {
     return {
         onHandleCutPlaylist: (cat) => {
-            dispatch(getHotPlaylist(cat))
+            dispatch(hotPlaylistAxios(cat))
         }
     }
 }

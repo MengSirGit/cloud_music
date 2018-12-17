@@ -8,7 +8,7 @@ import React, {Component} from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import * as api from '../api'
-import { getLoginValue } from '../store/actions'
+import { loginValueAxios } from '../store/actions'
 
 // 登录
 class Login extends Component {
@@ -188,7 +188,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onLoginValue: () => {
-            dispatch(getLoginValue())
+            dispatch(loginValueAxios())
         }
     }
 }

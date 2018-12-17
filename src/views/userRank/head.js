@@ -8,6 +8,7 @@ const TabHead = () => {
         <div className="sheet-head clearfix">
             <Back />
             <i className="iconfont sheet-more">&#xe783;</i>
+            <span>听歌排行</span>
         </div>
     )
 }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { getUserAllInfo } from '../../store/actions'
+import { userAllInfoAxios } from '../../store/actions'
 import * as api from '../../api'
 
 class RenderDiscuss extends Component {
@@ -91,7 +91,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onHandleUserInfo: (id) => {
-            dispatch(getUserAllInfo(id))
+            dispatch(userAllInfoAxios(id))
         }
     }
 }

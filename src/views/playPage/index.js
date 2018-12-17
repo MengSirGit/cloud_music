@@ -11,7 +11,7 @@
 import React, { PureComponent } from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import { getDiscussArray, getDiscussDetail, musicUrlAction, getMusicPos, setMusicPlayStatus } from '../../store/actions'
+import { discussArrayAxios, discussDetailAxios, musicUrlActionAxios, musicPosAction, musicPlayStatusAction } from '../../store/actions'
 
 import * as api from '../../api'
 import TabHead from './head'
@@ -278,17 +278,17 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onSendSongDiscuss: (id, type, intro) => {
-            dispatch(getDiscussArray(id, type))
-            dispatch(getDiscussDetail(type, intro))
+            dispatch(discussArrayAxios(id, type))
+            dispatch(discussDetailAxios(type, intro))
         },
         onHandleMusicUrl: (id, proto) => {
-            dispatch(musicUrlAction(id, proto))
+            dispatch(musicUrlActionAxios(id, proto))
         },
         onHandleMusicPos: (num, max, ctrl) => {
-            dispatch(getMusicPos(num, max, ctrl))
+            dispatch(musicPosAction(num, max, ctrl))
         },
         onHandleSetMusicPlayStatus: (status) => {
-            dispatch(setMusicPlayStatus(status))
+            dispatch(musicPlayStatusAction(status))
         }
     }
 }

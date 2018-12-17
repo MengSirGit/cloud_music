@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import RankPng from '../../static/img/rank.png'
-import { getSongSheet, getUserPlayRank } from '../../store/actions'
+import { songSheetAxios, userPlayRankAxios } from '../../store/actions'
 
 class Main extends Component {
     constructor(props) {
@@ -98,10 +98,10 @@ class Main extends Component {
 const mapDispatchToProps = (dispatch) => {
     return {
         onHandleSendSheetId: (id) => {
-            dispatch(getSongSheet(id))
+            dispatch(songSheetAxios(id))
         },
         onHandleUserPlayBack: (id, _type) => {
-            dispatch(getUserPlayRank(id, _type))
+            dispatch(userPlayRankAxios(id, _type))
         }
     }
 } 

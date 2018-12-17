@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { getMusicDetail, musicUrlAction } from '../../store/actions'
+import { musicDetailAxios, musicUrlActionAxios } from '../../store/actions'
 
 class RankList extends Component {
     constructor(props) {
@@ -46,8 +46,8 @@ class RankList extends Component {
 const mapDispatchToProps = (dispatch) => {
     return {
         onHandleSendSongId: (id, proto) => {
-            dispatch(getMusicDetail(id))
-            dispatch(musicUrlAction(id, proto))
+            dispatch(musicDetailAxios(id))
+            dispatch(musicUrlActionAxios(id, proto))
         }
     }
 }

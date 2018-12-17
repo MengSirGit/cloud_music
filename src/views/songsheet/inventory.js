@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import { currMusic, getMusicPos, musicUrlAction } from '../../store/actions'
+import { changeCurrMusicAxios, musicPosAction, musicUrlActionAxios } from '../../store/actions'
 
 class Inventory extends Component{
     constructor(props) {
@@ -61,9 +61,9 @@ class Inventory extends Component{
 const mapDispatchToProps = (dispatch) => {
     return {
         onHandleSendId: (id, index, posID) => {
-            dispatch(currMusic(id, index))
-            dispatch(getMusicPos(index))
-            dispatch(musicUrlAction(posID))
+            dispatch(changeCurrMusicAxios(id, index))
+            dispatch(musicPosAction(index))
+            dispatch(musicUrlActionAxios(posID))
         }
     }
 }

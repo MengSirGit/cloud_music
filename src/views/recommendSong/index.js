@@ -6,7 +6,7 @@
 
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { getDayRecommendSong } from '../../store/actions'
+import { dayRecommendSongAxios } from '../../store/actions'
 
 import Head from './head'
 import Summary from './summary'
@@ -40,7 +40,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onDayRecommendSong: () => {
-            dispatch(getDayRecommendSong())
+            dispatch(dayRecommendSongAxios())
         }
     }
 }

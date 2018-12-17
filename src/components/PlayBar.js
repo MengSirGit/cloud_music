@@ -8,7 +8,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import { playMusic, musicUrlAction, getMusicPos, setMusicPlayStatus } from '../store/actions'
+import { playMusicAxios, musicUrlActionAxios, musicPosAction, musicPlayStatusAction } from '../store/actions'
 
 class PlayBar extends Component {
     constructor(props) {
@@ -190,16 +190,16 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onHandleMusicUrl: (id, proto) => {
-            dispatch(musicUrlAction(id, proto))
+            dispatch(musicUrlActionAxios(id, proto))
         },
         onHandleMusicPos: (num, max, ctrl) => {
-            dispatch(getMusicPos(num, max, ctrl))
+            dispatch(musicPosAction(num, max, ctrl))
         },
         onSendPlayMusicID: (id) => {
-            dispatch(playMusic(id))
+            dispatch(playMusicAxios(id))
         },
         onSetMusicPlayStatus: (status) => {
-            dispatch(setMusicPlayStatus(status))
+            dispatch(musicPlayStatusAction(status))
         }
     }
 }

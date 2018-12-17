@@ -8,7 +8,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import * as api from '../../api'
-import { getHotPlaylist } from '../../store/actions'
+import { hotPlaylistAxios } from '../../store/actions'
 
 import Head from './head'
 import '../../less/catlist.less'
@@ -125,7 +125,7 @@ class CatList extends Component {
 const mapDispatchToProps = (dispatch) => {
     return {
         onHanleToPlaylist: (cat) => {
-            dispatch(getHotPlaylist(cat))
+            dispatch(hotPlaylistAxios(cat))
         }
     }
 }

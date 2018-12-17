@@ -7,7 +7,7 @@
 
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { getUserPlayRank } from '../../store/actions'
+import { userPlayRankAxios } from '../../store/actions'
 import * as api from '../../api'
  
 import Head from './head'
@@ -87,7 +87,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onHandleUserPlayRank: (id, _type) => {
-            dispatch(getUserPlayRank(id, _type))
+            dispatch(userPlayRankAxios(id, _type))
         }
     }
 }

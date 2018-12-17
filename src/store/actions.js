@@ -13,7 +13,9 @@ import {
     USER_ALL_INFO,
     HOT_PLAY_LIST,
     MUSIC_PLAY_STATUS,
-    USER_PLAY_RANK
+    USER_PLAY_RANK,
+    PERSONAL_FM,
+    DJ_DETAIL
 } from './actionTypes'
 import * as api from '../api'
 
@@ -26,7 +28,7 @@ export const loginValue = (data) => {
 }
 
 // 登录信息
-export const getLoginValue = () => {
+export const loginValueAxios = () => {
     return (dispatch) => {
         api.loginStatus().then(res => {
             if(res.data.code === 200){
@@ -45,7 +47,7 @@ export const playMusicList = (id) => {
 }
 
 // 播放歌曲
-export const playMusic = (id) => {
+export const playMusicAxios = (id) => {
     //获取基本信息
     return playMusicList(id)
 }
@@ -60,7 +62,7 @@ export const changeCurrMusic = (data, index) => {
 }
 
 // 切换歌曲
-export const currMusic = (id, index, mark) => {
+export const changeCurrMusicAxios = (id, index, mark) => {
     return (dispatch) => {
         api.getSongSheetDetail(id).then(res => {
             if(res.data.code === 200){
@@ -71,7 +73,7 @@ export const currMusic = (id, index, mark) => {
 }
 
 // 切换专辑歌曲
-export const currAlbumMusic = (id, index, mark) => {
+export const currAlbumMusicAxios = (id, index, mark) => {
     return (dispatch) => {
         api.getAlbumCon(id).then(res => {
             if (res.data.code === 200) {
@@ -98,7 +100,7 @@ export const songSheet = (id) => {
 }
 
 // 歌单详情
-export const getSongSheet = (id) => {
+export const songSheetAxios = (id) => {
     return songSheet(id)
 }
 
@@ -111,7 +113,7 @@ export const musicDetail = (data) => {
 }
 
 // 歌曲详情
-export const getMusicDetail = (id) => {
+export const musicDetailAxios = (id) => {
     return (dispatch) => {
         api.getSongDetail(id).then(res => {
             if(res.data.code === 200){
@@ -130,7 +132,7 @@ export const dayRecommendSong = (data) => {
 }
 
 // 每日推荐歌曲
-export const getDayRecommendSong = () => {
+export const dayRecommendSongAxios = () => {
     return (dispatch) => {
         api.getDayRecommonSong().then(res => {
             if(res.data.code === 200){
@@ -149,7 +151,7 @@ export const discussArray = (data) => {
 }
 
 // 评论
-export const getDiscussArray = (id, _type) => {
+export const discussArrayAxios = (id, _type) => {
     return (dispatch) => {
         if (_type === 0) {
             // 歌曲评论
@@ -188,7 +190,7 @@ export const discussDetail = (model, intro) => {
 }
 
 // 评论页详情
-export const getDiscussDetail = (model, intro) => {
+export const discussDetailAxios = (model, intro) => {
     return discussDetail(model, intro)
 }
 
@@ -201,7 +203,7 @@ export const getMusicUrl = (data, proto) => {
     }
 }
 
-export const musicUrlAction = (id, proto) => {
+export const musicUrlActionAxios = (id, proto) => {
     return (dispatch) => {
         api.getMusicUrl(id).then(res => {
             if (res.data.code === 200) {
@@ -219,7 +221,7 @@ export const musicPos = (num) => {
     }
 }
 
-export const getMusicPos =(num, max, ctrl) => {
+export const musicPosAction =(num, max, ctrl) => {
     let _num 
     if (ctrl === true && num < max) {
         _num = num + 1
@@ -241,7 +243,7 @@ export const userAllInfo = (data) => {
     }
 }
 
-export const getUserAllInfo = (id) => {
+export const userAllInfoAxios = (id) => {
     return (dispatch) => {
         let userInfoData = {}
         api.getUserInfo(id).then(res => {
@@ -267,7 +269,7 @@ export const hotPlaylist = (data) => {
     }
 }
 
-export const getHotPlaylist = (cat, order, limit) => {
+export const hotPlaylistAxios = (cat, order, limit) => {
     return (dispatch) => {
         api.getNetFriendPlayList(cat, order, limit).then(res => {
             if (res.data.code === 200) {
@@ -285,7 +287,7 @@ export const musicPlayStatus = (status) => {
     }
 }
 
-export const setMusicPlayStatus = (s) => {
+export const musicPlayStatusAction = (s) => {
     return musicPlayStatus(s)
 }
 
@@ -297,7 +299,7 @@ export const userPlayRank = (result) => {
     }
 }
 
-export const getUserPlayRank = (id, _type) => {
+export const userPlayRankAxios = (id, _type) => {
     return (dispatch) => {
         api.getUserPlayBack(id, _type).then(res => {
             if (res.data.code === 200) {
@@ -305,13 +307,54 @@ export const getUserPlayRank = (id, _type) => {
                     console.log('week')
                     dispatch(userPlayRank({ID: id, data: { musicArray: res.data.weekData, isCall: true }}))
                 }
-                // else if (_type === 0){
-                //     console.log('all')
-                //     dispatch(userPlayRank({ID: id, data: { musicArray: res.data.allData, isCall: true }}))
-                // }
             }
             else {
                 dispatch(userPlayRank({ data: { msg: '由于对方设置，你不能查看听歌排行', isCall: false }}))
+            }
+        })
+    }
+}
+
+// 私人FM
+export const personalFM = (result) => {
+    return {
+        type: PERSONAL_FM,
+        result: result
+    }
+}
+
+export const personalFMAxios = () => {
+    return (dispatch) => {
+        api.getPersonalFM().then(res => {
+            if (res.data.code === 200) {
+                dispatch(personalFM(res.data))
+                console.log(res.data)
+            }
+        })
+    }
+}
+
+// 主播电台
+export const DJSheetContent = (result) => {
+    return {
+        type: DJ_DETAIL,
+        result: result
+    }
+}
+
+export const DJDetailAxios = (id, limit) => {
+    return (dispatch) => {
+        let _result = {}
+        api.getDJDetail(id).then(res => {
+            if (res.data.code === 200) {
+                _result['djRadio'] = res.data.djRadio
+
+                api.getDJProgram(id, limit).then(resp => {
+                    if (resp.data.code === 200) {
+                        _result['program'] = resp.data
+                        dispatch(DJSheetContent(_result)) 
+                    }
+                })
             }
         })
     }
