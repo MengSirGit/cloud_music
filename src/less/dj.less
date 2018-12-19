@@ -13,12 +13,13 @@
             display: block;
             float: right;
             color: @tab-color;
-            line-height: 1.6;
+            line-height: 1.7;
         }
     }
 
     .summary {
         position: relative;
+        z-index: -1;
 
         .shadown-box {
             position: absolute;
@@ -32,18 +33,59 @@
             .headline {
                 position: absolute;
                 left: @one;
-                bottom: 0;
+                bottom: @one * 4;
                 z-index: 20;
+
+                .dj-name {
+                    color: @tab-color;
+                    font-weight: bold;
+                    font-size: @one + .1;
+                    line-height: 2;
+                }
+
+                .sub-count {
+                    font-size: @half + .2;
+                    color: #e8e8e8;
+                }
             }
 
             .sub-btn {
                 position: absolute;
+                bottom: @one * 4.5;
+                right: @one;
+                padding: @half - .2 @one;
+                background-color: #d82c01;
+                border-radius: 15px;
+                color: @tab-color;
+                font-size: @one - .2;
+                z-index: 20;
             }
         }
 
                     
         img {
             @all-width();
+        }
+    }
+
+    .DJ-tab {
+        background-color: @tab-color;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        margin-top: -@one * 3;
+        @overflow();
+
+        .DJ-tab-menu {
+            @flex-around();
+            padding: @half 0;
+            font-size: @one - .2;
+            color: #8d8d8d;
+            line-height: 1.8;
+
+            .active {
+                color: #d82c01;
+                border-bottom: 2px solid #d82c01;
+            }
         }
     }
 }

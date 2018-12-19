@@ -1,7 +1,7 @@
 import React from 'react'
 
 const Summary = (props) => {
-    console.log(props)
+    // console.log(props)
     return (
         <div className="summary">
             <div className="shadown-box">
