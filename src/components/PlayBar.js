@@ -98,9 +98,6 @@ class PlayBar extends Component {
                             <audio id="audio" src={musicUrl} ref="audio"></audio>  
                             <div className="music-news clearfix"
                                 onTouchStart={ this.handleTouchStart }
-                                onTouchMove={ () => {
-                                    if (this.state.playStatus) { this.setState({ playStatus: false }) }
-                                } }
                                 onTouchEnd={ (e) => {
                                     this.handleTouchEnd(e)
                                     // (歌曲id, 歌曲索引, 歌单长度, 上一首或下一首)

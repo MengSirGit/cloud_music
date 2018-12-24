@@ -58,7 +58,7 @@ class Main extends Component {
                         {
                             selfSheet.map((e, i) => {
                                 return (
-                                    <li className="songsheet-all" key={i} onClick={ () => this.handleSendSheetId(e.id)}>
+                                    <li className="songsheet-all" key={i} onClick={ () => this.handleSendSheetId(e.id) }>
                                         <Link to="/songsheet">
                                             <div className="thum"><img src={e.coverImgUrl} alt="" /></div>
                                             <div className="content">
