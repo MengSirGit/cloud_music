@@ -87,5 +87,55 @@
                 border-bottom: 2px solid #d82c01;
             }
         }
+
+        .sum {
+            padding: @half - .2 @half;
+            font-size: @half + .3;
+            background-color: #f5f5f5;
+        }
+
+        .DJ-content {
+            padding: 0 @half;
+            box-sizing: border-box;
+
+            .program-list {
+
+                .program {
+                    border-bottom: 1px solid #f5f5f5;
+
+                    .index {
+                        float: left;
+                        width: @one * 2;
+                        line-height: 4.3;
+                        text-align: center;
+                        color: #8d8d8d;
+                        font-size: @half + .3;
+                    }
+
+                    .caption {
+                        margin-left: @one * 2.5;
+                        padding-top: .4rem;
+                        padding-bottom: .4rem;
+
+                        .title {
+                            font-size: @one - .1;
+                            line-height: 1.8;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            white-space: nowrap;
+                        }
+
+                        .info {
+                            font-size: @one - .2;
+
+                            span {
+                                margin-right: @half;
+                                color: #8d8d8d;
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }

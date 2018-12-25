@@ -17,7 +17,7 @@ import '../../less/search.less'
 let isOnComposition = false
 
 // 判断是否为chrome浏览器
-const isChrome = !!window.chrome && !!window.chrome.webstore
+const isChrome = !!window.chrome
 
 // 搜索框
 class Search extends Component {
@@ -55,7 +55,7 @@ class Search extends Component {
     }
 
     changeEvent() {
-
+        
         !isOnComposition ? this.inputValue = this.refs.search.value : 
                            this.inputValue = null
 

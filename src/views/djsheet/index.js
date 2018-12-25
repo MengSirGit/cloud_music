@@ -19,10 +19,9 @@ class DJSheet extends Component {
                         <span className="detail">详情</span>
                         <span className="program active">节目</span>
                     </li>
+                    <p className="sum">共{_result.program.count}期</p>
                     <li className="DJ-content">
-                        <div className="program-box">
-                            <Program program={_result.program} />
-                        </div>
+                        <Program program={_result.program} />
                     </li>
                 </ul>
             </div>
