@@ -37,7 +37,7 @@ class UserRank extends Component {
         // 只在第一次点击时请求一次
         if (Object.keys(this.state.allData).length === 0) {
             api.getUserPlayBack(id, 0).then(res => {
-                console.log('all')
+                // console.log('all')
                 if (res.data.code === 200) {
                     this.setState({
                         allData: {ID: id, data: { musicArray: res.data.allData, isCall: true }}

@@ -96,7 +96,7 @@ class Search extends Component {
                     <div className="search-back">
                         <Back />
                     </div>
-                    <input type="text" name="k" ref='search' autoFocus placeholder="请输入歌名/歌手/歌单名"
+                    <input type="text" name="k" ref='search' autoFocus autoComplete="off" placeholder="请输入歌名/歌手/歌单名"
                         onChange={this.changeEvent}
                         onCompositionStart={this.handleComposition}
                         onCompositionUpdate={this.handleComposition}
