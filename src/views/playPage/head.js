@@ -1,16 +1,16 @@
-import React, {Component} from 'react'
-import {withRouter} from 'react-router-dom'
+import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom'
 
 import Back from '../../components/Back'
 
-//播放页顶部及背景
+// 播放页顶部及背景
 class TabHead extends Component {
     constructor(props) {
         super(props)
         this.handleBack = this.handleBack.bind(this)
     }
     
-    //回退
+    // 回退
     handleBack() {
         this.props.history.goBack()
     }

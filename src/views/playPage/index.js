@@ -9,8 +9,8 @@
  */
 
 import React, { PureComponent } from 'react'
-import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { discussArrayAxios, discussDetailAxios, musicUrlActionAxios, musicPosAction, musicPlayStatusAction } from '../../store/actions'
 
 import * as api from '../../api'

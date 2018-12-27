@@ -3,8 +3,8 @@
  * 提供返回上次浏览页面的功能
  */
 
-import React, {Component} from 'react'
-import {withRouter} from 'react-router-dom'
+import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom'
 
 // 路由回退
 class GoBack extends Component {

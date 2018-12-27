@@ -4,7 +4,7 @@
  * 此页面需要用户先进行登录操作
  */
 
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 
 import Header from '../../components/Header'
 import LocalFun from './localFun'

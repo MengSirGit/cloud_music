@@ -1,5 +1,5 @@
-import React, {Component} from 'react'
-import {connect} from 'react-redux'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { changeCurrMusicAxios, musicPosAction, musicUrlActionAxios } from '../../store/actions'
 
 class Inventory extends Component{

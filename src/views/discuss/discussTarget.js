@@ -1,7 +1,7 @@
-import React, {Component} from 'react'
-import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
-import {songSheetAxios} from '../../store/actions'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { songSheetAxios } from '../../store/actions'
 
 class DiscussTarget extends Component {
     handleSendToSheet(id) {

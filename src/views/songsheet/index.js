@@ -6,8 +6,8 @@
  * @example
  */
 
-import React, {PureComponent} from 'react'
-import {connect} from 'react-redux'
+import React, { PureComponent } from 'react'
+import { connect } from 'react-redux'
 import * as api from '../../api'
 import { discussDetailAxios } from '../../store/actions'
 

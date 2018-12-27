@@ -5,9 +5,9 @@
  * 每日推荐或通过检索进行的音乐播放， 滑动则切换至默认的歌单上一首或下一首
  */
 
-import React, {Component} from 'react'
-import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { playMusicAxios, musicUrlActionAxios, musicPosAction, musicPlayStatusAction } from '../store/actions'
 
 class PlayBar extends Component {

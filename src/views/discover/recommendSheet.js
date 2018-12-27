@@ -1,8 +1,8 @@
-import React, {Component} from 'react'
-import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import * as api from '../../api'
-import {songSheetAxios, changeCurrMusicAxios, musicPosAction} from '../../store/actions'
+import { songSheetAxios, changeCurrMusicAxios, musicPosAction } from '../../store/actions'
 
 class RecommendSheet extends Component {
     constructor(props) {

@@ -4,7 +4,7 @@
  * 目前仅支持歌曲名检索
  */
 
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { musicDetailAxios, musicUrlActionAxios } from '../../store/actions'

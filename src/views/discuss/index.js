@@ -4,8 +4,8 @@
  * 通过 type 判断数据类型，展示响应的页面效果
  */
 
-import React, {PureComponent} from 'react'
-import {connect} from 'react-redux'
+import React, { PureComponent } from 'react'
+import { connect } from 'react-redux'
 
 import TabHead from './head'
 import DiscussTarget from './discussTarget'

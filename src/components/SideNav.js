@@ -4,7 +4,7 @@
  * 因部分原因登出功能可能有延迟
  */
 
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import * as api from '../api'

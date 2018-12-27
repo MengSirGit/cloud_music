@@ -1,6 +1,6 @@
-import React, {Component} from 'react'
-import {Link} from 'react-router-dom'
-import {connect} from 'react-redux'
+import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
 import { discussArrayAxios } from '../../store/actions'
 
 class Summary extends Component {

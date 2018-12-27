@@ -4,7 +4,7 @@
  * 每日推荐和推荐音乐会根据用户的登录情况提供不同的内容展示
  */
 
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import { Redirect, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 
